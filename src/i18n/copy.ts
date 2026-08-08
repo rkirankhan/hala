@@ -163,7 +163,7 @@ export const en: HalaCopy = {
   hero: {
     badge: 'An AI Employee for your business',
     h1: 'Turn Every Conversation Into a Lead',
-    sub: 'Hala answers your calls and messages across every channel, books customers in, chases the ones who go quiet, and hands over to your team the moment someone needs a person.',
+    sub: 'Every call, message and enquiry becomes an opportunity. Hala answers on the first ring, books customers in, and follows up with the ones who go quiet — so your team never misses the chance to connect.',
     ctaPrimary: 'Book a demo',
     ctaSecondary: 'Hear it answer',
     callLabel: 'Call in progress',

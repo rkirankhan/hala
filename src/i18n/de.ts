@@ -42,7 +42,7 @@ export const de: HalaCopy = {
   hero: {
     badge: 'Ein KI-Mitarbeiter für Ihr Unternehmen',
     h1: 'Machen Sie aus jedem Gespräch einen Kunden',
-    sub: 'Hala nimmt Ihre Anrufe und Nachrichten auf allen Kanälen entgegen, bucht Kunden ein, fasst bei denen nach, die sich nicht mehr melden, und übergibt an Ihr Team, sobald jemand einen Menschen braucht.',
+    sub: 'Jeder Anruf, jede Nachricht und jede Anfrage wird zur Chance. Hala antwortet beim ersten Klingeln, bucht Kunden ein und fasst bei denen nach, die sich nicht mehr melden — damit Ihrem Team kein Kunde entgeht.',
     ctaPrimary: 'Demo vereinbaren',
     ctaSecondary: 'Live anhören',
     callLabel: 'Laufendes Gespräch',
