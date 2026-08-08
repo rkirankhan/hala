@@ -1,13 +1,17 @@
 /**
  * Every user-visible string on the Hala page, in one place per language.
  *
- * Deliberately NOT typed with `as const`. The agency's src/i18n/en.ts does that
- * and derives `Translations = typeof en`, which makes each English string its own
- * literal type — so the German file can never satisfy it. That is the entire
- * cause of the 369 type errors sitting in src/i18n/de.ts today. Here the shape is
- * declared once as an interface with plain `string`, and both languages check
- * against it: a missing or misspelled key is a build error, and translating a
- * value is not.
+ * Deliberately NOT typed with `as const`. Typing an English source that way
+ * makes each string its own literal type, so a translation can never satisfy
+ * it — the mistake that left 369 type errors in the agency site's German file.
+ * Here the shape is declared once with plain `string`, and both languages check
+ * against it: a missing or misspelled key is a build error, a translated value
+ * is not.
+ *
+ * POSITIONING: the spine of this page is industry-neutral — customers,
+ * enquiries, appointments. Anything sector-specific belongs in `showcase`,
+ * which is the one section that speaks a given trade's language. Adding an
+ * industry should never require touching the rest of the copy.
  */
 
 export interface Message {
@@ -44,30 +48,9 @@ export interface HalaCopy {
 
   bands: {
     heading: string;
-    voice: {
-      eyebrow: string;
-      title: string;
-      body: string;
-      metaTop: string;
-      metaBottom: string;
-      messages: string[];
-    };
-    chat: {
-      eyebrow: string;
-      title: string;
-      body: string;
-      metaTop: string;
-      metaBottom: string;
-      messages: string[];
-    };
-    automations: {
-      eyebrow: string;
-      title: string;
-      body: string;
-      metaTop: string;
-      metaBottom: string;
-      rows: string[][];
-    };
+    voice: BandCopy;
+    chat: BandCopy;
+    automations: Omit<BandCopy, 'messages'> & { rows: string[][] };
   };
 
   why: {
@@ -76,28 +59,26 @@ export interface HalaCopy {
     items: { title: string; body: string }[];
   };
 
-  journey: {
+  /** The one sector-specific section. Everything else stays neutral. */
+  showcase: {
+    eyebrow: string;
     heading: string;
-    liveLabel: string;
-    scopedLabel: string;
-    intents: {
+    sub: string;
+    handlesLabel: string;
+    items: {
+      /** Stable key — the component maps it to an icon. Never translated. */
       key: string;
       label: string;
       line: string;
-      steps: string[];
+      reply: string;
+      handles: string[];
       outcome: string;
-      note?: string;
     }[];
   };
 
   steps: {
     heading: string;
     items: { t: string; b: string }[];
-  };
-
-  industries: {
-    heading: string;
-    items: string[];
   };
 
   pricing: {
@@ -149,11 +130,20 @@ export interface HalaCopy {
   };
 }
 
+interface BandCopy {
+  eyebrow: string;
+  title: string;
+  body: string;
+  metaTop: string;
+  metaBottom: string;
+  messages: string[];
+}
+
 export const en: HalaCopy = {
   meta: {
     /* Keep in step with index.html — that file carries these as the static
-       defaults for crawlers that do not run JavaScript, and this hook overwrites
-       them at runtime. If they drift, the two tell different stories. */
+       defaults for crawlers that do not run JavaScript, and useHalaMeta
+       overwrites them at runtime. If they drift, the two tell different stories. */
     title: 'Hala | AI Employee for customer conversations',
     description:
       'Hala answers every call, message and enquiry on the first ring, books customers in, follows up, and hands over to your team when someone needs a person.',
@@ -163,81 +153,81 @@ export const en: HalaCopy = {
     byline: 'by Khaas Hub',
     links: [
       { label: 'Why', href: '#why' },
+      { label: 'Industries', href: '#industries' },
       { label: 'Channels', href: '#channels' },
       { label: 'Pricing', href: '#pricing' },
-      { label: 'FAQ', href: '#faq' },
     ],
     cta: 'Book a demo',
   },
 
   hero: {
-    badge: 'AI agents for restaurants',
-    h1: 'Answer every call. Fill every table.',
-    sub: 'Hala takes the phone, the DMs and the follow-up off your team — so nobody is left on hold and no booking walks out the door.',
+    badge: 'An AI Employee for your business',
+    h1: 'Never miss another customer.',
+    sub: 'Hala answers your calls and messages across every channel, books customers in, chases the ones who go quiet, and hands over to your team the moment someone needs a person.',
     ctaPrimary: 'Book a demo',
     ctaSecondary: 'Hear it answer',
     callLabel: 'Call in progress',
     messages: [
-      { who: 'guest', t: 'Hi — table for four this Friday, around eight?' },
-      { who: 'agent', t: 'I have 8:15 or 8:45. Which suits you better?' },
-      { who: 'guest', t: '8:15. One of us has a nut allergy.' },
+      { who: 'guest', t: 'Hi — do you have anything Thursday afternoon?' },
+      { who: 'agent', t: 'I have 2:15 or 4:30 on Thursday. Which suits you better?' },
+      { who: 'guest', t: '2:15 please. Can I pay on the day?' },
     ],
     cards: [
-      { label: 'Booking created', value: 'Fri · 8:15 PM · 4 guests' },
-      { label: 'Kitchen notified', value: 'Nut allergy flagged' },
+      { label: 'Appointment booked', value: 'Thu · 2:15 PM' },
+      { label: 'Team notified', value: 'Reminder scheduled' },
     ],
   },
 
   stat: {
-    line1: '1 agent.',
+    line1: '1 employee.',
     line2: '6 channels.',
     line3: 'Every hour of the day.',
     cards: [
       {
         k: 'Never the answerphone',
-        v: 'Guests reach a real conversation on the first ring, including the hours you are closed.',
+        v: 'Customers reach a real conversation on the first ring, including the hours you are closed.',
       },
       {
         k: 'One memory, every channel',
-        v: 'A guest who called yesterday and messages today is the same guest, not two strangers.',
+        v: 'Someone who called yesterday and messages today is the same customer, not two strangers.',
       },
       {
-        k: 'Your team stays on the floor',
-        v: 'Nobody leaves a table to answer a phone, and nothing is written down twice.',
+        k: 'Your team stays on the job',
+        v: 'Nobody stops what they are doing to answer a phone, and nothing is written down twice.',
       },
     ],
   },
 
   bands: {
-    heading: 'Everything a busy restaurant needs. Nothing it doesn’t.',
+    heading: 'Everything a busy business needs. Nothing it doesn’t.',
     voice: {
-      eyebrow: 'Voice agent',
-      title: 'It answers the phone like your best host would.',
-      body: 'Bookings, allergens, opening hours and large groups — handled to the end, in English or German, without pulling anyone off the floor.',
+      eyebrow: 'On the phone',
+      title: 'It answers the phone like your best team member would.',
+      body: 'Bookings, prices, opening hours and awkward questions — handled to the end, in English or German, without pulling anyone off the job.',
       metaTop: 'Incoming · 19:42',
-      metaBottom: 'Booking written · kitchen notified',
+      metaBottom: 'Booking written · team notified',
       messages: [
-        'Table for four this Friday, around eight?',
-        'I have 8:15 or 8:45. Which suits you better?',
-        '8:15. One of us has a nut allergy.',
+        'Do you have anything Thursday afternoon?',
+        'I have 2:15 or 4:30. Which suits you better?',
+        '2:15 please. Can I pay on the day?',
       ],
     },
     chat: {
-      eyebrow: 'Chat agent',
-      title: 'It replies before they book somewhere else.',
-      body: 'WhatsApp and Instagram answered in seconds, with the booking link in the thread — while your guest is still deciding.',
+      eyebrow: 'In the inbox',
+      title: 'It replies before they go somewhere else.',
+      body: 'WhatsApp, Instagram and website chat answered in seconds, with the booking link in the thread — while your customer is still deciding.',
       metaTop: 'WhatsApp · 21:48',
       metaBottom: 'Replied in 4 seconds',
       messages: [
-        'Are you still open? Table for 2?',
-        'Kitchen closes at 22:30 — I can seat you at 21:15.',
+        'Are you open tomorrow? Need an appointment.',
+        'We open at 9:00 — I can book you in for 9:30.',
         'Yes please',
       ],
     },
     automations: {
-      eyebrow: 'Automations',
+      eyebrow: 'In the background',
       title: 'The follow-up nobody ever gets round to.',
-      body: 'A text back within a minute of every missed call. A nudge when an enquiry goes quiet. A review request while the evening is still fresh.',
+      body: 'A text back within a minute of every missed call. A nudge when an enquiry goes quiet. A review request while the visit is still fresh.',
       metaTop: 'Missed call · Friday 19:42',
       metaBottom: '3 sequences running',
       rows: [
@@ -248,7 +238,7 @@ export const en: HalaCopy = {
   },
 
   why: {
-    eyebrow: 'Why an AI agent',
+    eyebrow: 'Why an AI Employee',
     heading: 'Four reasons the phone stops costing you money.',
     items: [
       {
@@ -256,67 +246,65 @@ export const en: HalaCopy = {
         body: 'Every call answered on the first ring — at seven on a Friday, on a bank holiday, at midnight when you are closed.',
       },
       {
-        title: 'It knows your restaurant.',
-        body: 'Your hours, your menu, your allergens, your last sitting. Not a generic bot reading a script.',
+        title: 'It knows your business.',
+        body: 'Your hours, your services, your prices, your policies. Not a generic bot reading a script.',
       },
       {
-        title: 'It writes to your diary.',
-        body: 'Bookings land where your team already looks. Nobody retypes anything.',
+        title: 'It writes to your systems.',
+        body: 'Bookings land in the calendar your team already uses. Nobody retypes anything.',
       },
       {
-        title: 'It hands over cleanly.',
-        body: 'When a guest needs a person, your team picks up already knowing who is calling and why.',
+        title: 'It works alongside your team.',
+        body: 'When a customer needs a person, your team picks up already knowing who is calling and why.',
       },
     ],
   },
 
-  journey: {
-    heading: 'One number. Every kind of call.',
-    liveLabel: 'Running today',
-    scopedLabel: 'Scoped with you',
-    intents: [
+  showcase: {
+    eyebrow: 'Built around your industry',
+    heading: 'One employee. Every kind of business.',
+    sub: 'Hala learns your services, your prices and your rules. Here is what that sounds like in practice.',
+    handlesLabel: 'What it handles here',
+    items: [
       {
-        key: 'book',
-        label: 'Book a table',
-        line: '“Table for four on Friday, around eight?”',
-        steps: ['Check the diary', 'Offer real times', 'Flag allergens', 'Confirm by text'],
-        outcome: 'Booking in your diary. Kitchen already has the allergy note.',
+        key: 'restaurants',
+        label: 'Restaurants & takeaways',
+        line: 'Table for four this Friday, around eight?',
+        reply: 'I have 8:15 or 8:45. Which suits you better?',
+        handles: ['Bookings & covers', 'Menu & allergens', 'Opening hours', 'Large groups'],
+        outcome: 'Booking in your diary, allergy noted, and the kitchen already told.',
       },
       {
-        key: 'menu',
-        label: 'Menu & allergens',
-        line: '“Is the risotto gluten free?”',
-        steps: ['Match to your menu', 'Answer in your words', 'Offer to book'],
-        outcome: 'Answered from your actual menu. Nobody pulled off the floor.',
+        key: 'clinics',
+        label: 'Cosmetic clinics',
+        line: 'How much is a consultation for filler?',
+        reply: 'Consultations are £50, redeemable against treatment. I have Thursday at 2:15.',
+        handles: ['Treatment prices', 'Consultations', 'Aftercare questions', 'Deposits & reminders'],
+        outcome: 'Consultation booked, deposit taken, and the reminder already scheduled.',
       },
       {
-        key: 'hours',
-        label: 'Hours & directions',
-        line: '“What time do you close on a Sunday?”',
-        steps: ['Answer from your hours', 'Handle exceptions', 'Text directions'],
-        outcome: 'Text sent with address, parking and opening times.',
+        key: 'property',
+        label: 'Estate agents',
+        line: 'Is the flat on Mill Street still available?',
+        reply: 'It is — viewings are Thursday and Saturday. Shall I book you in?',
+        handles: ['Viewing requests', 'Property questions', 'Buyer qualification', 'Landlord callbacks'],
+        outcome: 'Viewing booked and the buyer qualified before anyone picks up the phone.',
       },
       {
-        key: 'groups',
-        label: 'Large groups',
-        line: '“We’re twelve for a birthday — set menu?”',
-        steps: ['Qualify party size', 'Collect date & budget', 'Brief your team'],
-        outcome: 'Your team gets a briefed enquiry, not a cold callback.',
+        key: 'salons',
+        label: 'Salons & barbers',
+        line: 'Any chance of a cut and colour on Saturday?',
+        reply: 'Saturday is full, but I have Friday at 4:30 or Sunday at 11:00.',
+        handles: ['Appointments', 'Stylist requests', 'Price lists', 'No-show reminders'],
+        outcome: 'A chair filled that would have sat empty, with a reminder sent the day before.',
       },
       {
-        key: 'other',
-        label: 'Anything else',
-        line: '“I left my jacket there last night…”',
-        steps: ['Recognise it needs a person', 'Summarise', 'Transfer with context'],
-        outcome: 'Staff pick up already knowing why the guest is calling.',
-      },
-      {
-        key: 'order',
-        label: 'Take an order',
-        line: '“Two large pepperoni for collection at seven?”',
-        steps: ['Take the items', 'Confirm the total', 'Send to kitchen'],
-        outcome: 'Order on the pass, guest told when it will be ready.',
-        note: 'Needs a till or kitchen system to write into — scoped with you at onboarding.',
+        key: 'trades',
+        label: 'Trades & home services',
+        line: 'Boiler is leaking — can someone come out today?',
+        reply: 'I can get an engineer to you between 2 and 4 today. What is the postcode?',
+        handles: ['Emergency callouts', 'Quote requests', 'Job scheduling', 'Missed-call text-backs'],
+        outcome: 'Job booked with the address and the fault captured, while you were under a sink.',
       },
     ],
   },
@@ -326,15 +314,15 @@ export const en: HalaCopy = {
     items: [
       {
         t: 'A 15-minute call',
-        b: 'We learn your hours, your menu, your booking rules and how you like guests spoken to.',
+        b: 'We learn your hours, your services, your booking rules and how you like customers spoken to.',
       },
       {
-        t: 'We build your agent',
-        b: 'Voice and tone configured to your restaurant, in English and German if you need both.',
+        t: 'We build your employee',
+        b: 'Voice and tone configured to your business, in English and German if you need both.',
       },
       {
         t: 'Connect your number',
-        b: 'Keep the number you have. Calls divert to the agent whenever nobody picks up — or always.',
+        b: 'Keep the number you have. Calls divert to Hala whenever nobody picks up — or always.',
       },
       {
         t: 'Live in 48 hours',
@@ -343,21 +331,9 @@ export const en: HalaCopy = {
     ],
   },
 
-  industries: {
-    heading: 'If your phone rings while you’re serving, this is for you.',
-    items: [
-      'Restaurants & bistros',
-      'Takeaways & delivery',
-      'Cafés & bakeries',
-      'Event venues',
-      'Hotel restaurants',
-      'Salons & clinics',
-    ],
-  },
-
   pricing: {
     heading: 'No surprises. No hidden fees.',
-    sub: 'One setup, then a monthly fee with your minutes included. Voice pricing is proposed and still to be confirmed.',
+    sub: 'One setup, then a monthly fee with your minutes included. Pricing is proposed and still to be confirmed.',
     currency: '£',
     perMonth: ' /month',
     setupSuffix: 'setup',
@@ -368,70 +344,82 @@ export const en: HalaCopy = {
         price: '249',
         setup: '1,195',
         mins: '500 minutes',
-        features: ['Every call answered, 24/7', 'Bookings to your diary', 'Menu & allergen questions'],
+        features: [
+          'Every call answered, 24/7',
+          'Bookings to your calendar',
+          'Answers from your own information',
+        ],
       },
       {
         name: 'Professional',
         price: '459',
         setup: '2,195',
         mins: '1,200 minutes',
-        features: ['Everything in Essential', 'Groups & events qualified', 'Warm transfer with context'],
+        features: [
+          'Everything in Essential',
+          'Enquiries qualified and routed',
+          'Warm transfer with context',
+        ],
       },
       {
         name: 'Premium',
         price: '795',
         setup: '3,750',
         mins: '3,000 minutes',
-        features: ['Everything in Professional', 'Both languages, your tone', 'Multi-site, one account'],
+        features: [
+          'Everything in Professional',
+          'Both languages, your tone',
+          'Multi-site, one account',
+        ],
       },
     ],
   },
 
   proof: {
     eyebrow: 'Reserved — real customer proof',
-    heading: 'Real restaurants. Real numbers.',
-    body: 'Reserved for a named restaurant: calls answered, covers booked, and what changed for the team. This is the single biggest gap on the page — one real customer willing to be quoted will do more than any other section here.',
+    heading: 'Real businesses. Real numbers.',
+    body: 'Reserved for a named customer: calls answered, appointments booked, and what changed for the team. This is the single biggest gap on the page — one real business willing to be quoted will do more than any other section here.',
   },
 
   channels: {
     eyebrow: 'Every channel',
-    heading: 'One agent. Everywhere your guests reach you.',
-    body: 'Phone, WhatsApp, Instagram, Messenger, website chat, email and SMS — answered by the same agent, with one memory of every guest.',
+    heading: 'One employee. Everywhere your customers reach you.',
+    body: 'Phone, WhatsApp, Instagram, Messenger, website chat, email and SMS — answered by the same employee, with one memory of every customer.',
     nodes: ['Phone calls', 'WhatsApp', 'Instagram', 'Messenger', 'Website chat', 'Email & SMS'],
-    coreLabel: 'One agent',
+    coreLabel: 'One employee',
     liveLabel: 'Live',
   },
 
   faq: {
     heading: 'Got questions?',
-    headingSub: 'Ask the agent yourself.',
-    body: 'The same agent that answers your guests can answer you. No form, no waiting.',
-    askCta: 'Ask the agent',
+    headingSub: 'Ask Hala yourself.',
+    body: 'The same employee that answers your customers can answer you. No form, no waiting.',
+    askCta: 'Ask Hala',
     askNote:
       'In production this opens the live agent. Wire it to the existing GoHighLevel chat widget, or to the voice agent for a spoken answer.',
     items: [
       {
-        q: 'Will it sound like a robot to my guests?',
-        a: 'No. It is trained on your restaurant’s own tone and answers in natural speech, in English or German. Most callers never ask.',
+        q: 'Will it sound like a robot to my customers?',
+        a: 'No. It is trained on your own tone and answers in natural speech, in English or German. Most callers never ask.',
       },
       {
-        q: 'What happens if it cannot help?',
-        a: 'It transfers to your team with the whole conversation already summarised — so nobody has to start again.',
+        q: 'Is this replacing my staff?',
+        a: 'No. It takes the repetitive interactions off them — the calls at closing time, the same five questions, the follow-ups nobody gets round to — so they can spend their time on the work that needs a person.',
       },
       {
-        q: 'How long until it is answering calls?',
-        a: '48 hours. We configure your hours, menu and booking rules, and keep your existing phone number.',
+        q: 'My business is not on your list. Will it work?',
+        a: 'Almost certainly. Hala is configured around your services, prices and rules rather than a fixed industry template — the examples above are just the sectors we have built for most.',
       },
       {
         q: 'Do I have to change my booking system?',
-        a: 'No. It writes into the diary you already use. We confirm which one during onboarding.',
+        a: 'No. It writes into the calendar you already use. We confirm which one during onboarding.',
       },
     ],
   },
 
   closing: {
     heading: 'Get started with Hala today.',
-    body: 'Fifteen minutes. We ring your number with the agent live and you throw whatever you like at it.',
+    body: 'Fifteen minutes. We ring your number with Hala live and you throw whatever you like at it.',
     cta: 'Book a demo',
   },
 

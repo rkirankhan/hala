@@ -5,16 +5,19 @@ import type { HalaCopy } from './copy';
  *
  * Decisions baked in here, so they stay consistent if someone edits one string:
  *
- *  - Register is SIE throughout. Restaurateurs and venue owners are the buyer,
- *    and du would read as presumptuous to a large part of that market. If the
- *    brand ever moves to du, it has to move in every string at once.
- *  - Times are 24-hour (20:15, not 8:15 PM) and thousands use a dot (1.200).
+ *  - Register is SIE throughout. Business owners are the buyer, and du would
+ *    read as presumptuous to a large part of that market. If the brand ever
+ *    moves to du, it has to move in every string at once.
+ *  - Hala is named as the subject wherever a pronoun would otherwise be needed.
+ *    German forces a gender choice — sie for the name, er for "der
+ *    KI-Mitarbeiter" — and naming her sidesteps a decision the English never
+ *    has to make.
+ *  - Times are 24-hour (14:15, not 2:15 PM) and thousands use a dot (1.200).
  *  - Prices are quoted in euros. The numbers are carried over from the pound
- *    figures as a placeholder — they are a commercial decision, not a
- *    translation one, so confirm them before this page goes live.
- *  - "Diary" is Reservierungsbuch, the word a German restaurant actually uses.
+ *    figures as a placeholder — a commercial decision, not a translation one,
+ *    so confirm them before this page goes live.
  *
- * Written to be idiomatic rather than faithful, then still worth a native
+ * Written to be idiomatic rather than faithful, and still worth a native
  * speaker's pass before launch — particularly the headlines, where the English
  * relies on rhythm that does not survive word-for-word.
  */
@@ -29,165 +32,173 @@ export const de: HalaCopy = {
     byline: 'von Khaas Hub',
     links: [
       { label: 'Warum', href: '#why' },
+      { label: 'Branchen', href: '#industries' },
       { label: 'Kanäle', href: '#channels' },
       { label: 'Preise', href: '#pricing' },
-      { label: 'FAQ', href: '#faq' },
     ],
     cta: 'Demo vereinbaren',
   },
 
   hero: {
-    badge: 'KI-Agenten für Restaurants',
-    h1: 'Jeder Anruf beantwortet. Jeder Tisch besetzt.',
-    sub: 'Hala übernimmt Telefon, Nachrichten und Nachfassen für Ihr Team — niemand landet in der Warteschleife, und keine Reservierung geht verloren.',
+    badge: 'Ein KI-Mitarbeiter für Ihr Unternehmen',
+    h1: 'Nie wieder einen Kunden verpassen.',
+    sub: 'Hala nimmt Ihre Anrufe und Nachrichten auf allen Kanälen entgegen, bucht Kunden ein, fasst bei denen nach, die sich nicht mehr melden, und übergibt an Ihr Team, sobald jemand einen Menschen braucht.',
     ctaPrimary: 'Demo vereinbaren',
     ctaSecondary: 'Live anhören',
     callLabel: 'Laufendes Gespräch',
     messages: [
-      { who: 'guest', t: 'Hallo — ein Tisch für vier am Freitag, so gegen acht?' },
-      { who: 'agent', t: 'Ich hätte 20:15 oder 20:45. Was passt Ihnen besser?' },
-      { who: 'guest', t: '20:15. Einer von uns hat eine Nussallergie.' },
+      { who: 'guest', t: 'Hallo — haben Sie am Donnerstagnachmittag noch etwas frei?' },
+      { who: 'agent', t: 'Ich hätte Donnerstag 14:15 oder 16:30. Was passt Ihnen besser?' },
+      { who: 'guest', t: '14:15, bitte. Kann ich vor Ort bezahlen?' },
     ],
     cards: [
-      { label: 'Reservierung erstellt', value: 'Fr · 20:15 · 4 Gäste' },
-      { label: 'Küche informiert', value: 'Nussallergie vermerkt' },
+      { label: 'Termin gebucht', value: 'Do · 14:15' },
+      { label: 'Team informiert', value: 'Erinnerung geplant' },
     ],
   },
 
   stat: {
-    line1: '1 Agent.',
+    line1: '1 Mitarbeiter.',
     line2: '6 Kanäle.',
     line3: 'Rund um die Uhr.',
     cards: [
       {
         k: 'Nie wieder Anrufbeantworter',
-        v: 'Gäste erreichen beim ersten Klingeln ein echtes Gespräch — auch außerhalb Ihrer Öffnungszeiten.',
+        v: 'Kunden erreichen beim ersten Klingeln ein echtes Gespräch — auch außerhalb Ihrer Öffnungszeiten.',
       },
       {
         k: 'Ein Gedächtnis, alle Kanäle',
-        v: 'Wer gestern angerufen und heute geschrieben hat, ist derselbe Gast — nicht zwei Fremde.',
+        v: 'Wer gestern angerufen und heute geschrieben hat, ist derselbe Kunde — nicht zwei Fremde.',
       },
       {
-        k: 'Ihr Team bleibt im Service',
-        v: 'Niemand verlässt den Tisch, um ans Telefon zu gehen, und nichts wird doppelt notiert.',
+        k: 'Ihr Team bleibt bei der Arbeit',
+        v: 'Niemand unterbricht seine Arbeit, um ans Telefon zu gehen, und nichts wird doppelt notiert.',
       },
     ],
   },
 
   bands: {
-    heading: 'Alles, was ein volles Restaurant braucht. Nichts, was es nicht braucht.',
+    heading: 'Alles, was ein vielbeschäftigtes Unternehmen braucht. Nichts darüber hinaus.',
     voice: {
-      eyebrow: 'Sprach-Agent',
-      title: 'Er geht ans Telefon wie Ihr bester Gastgeber.',
-      body: 'Reservierungen, Allergene, Öffnungszeiten und große Gruppen — vollständig erledigt, auf Deutsch oder Englisch, ohne dass jemand den Service verlassen muss.',
+      eyebrow: 'Am Telefon',
+      title: 'Hala geht ans Telefon wie Ihr bester Mitarbeiter.',
+      body: 'Termine, Preise, Öffnungszeiten und knifflige Fragen — vollständig erledigt, auf Deutsch oder Englisch, ohne dass jemand seine Arbeit unterbrechen muss.',
       metaTop: 'Eingehend · 19:42',
-      metaBottom: 'Reservierung eingetragen · Küche informiert',
+      metaBottom: 'Termin eingetragen · Team informiert',
       messages: [
-        'Ein Tisch für vier am Freitag, so gegen acht?',
-        'Ich hätte 20:15 oder 20:45. Was passt Ihnen besser?',
-        '20:15. Einer von uns hat eine Nussallergie.',
+        'Haben Sie am Donnerstagnachmittag noch etwas frei?',
+        'Ich hätte 14:15 oder 16:30. Was passt Ihnen besser?',
+        '14:15, bitte. Kann ich vor Ort bezahlen?',
       ],
     },
     chat: {
-      eyebrow: 'Chat-Agent',
-      title: 'Er antwortet, bevor woanders reserviert wird.',
-      body: 'WhatsApp und Instagram in Sekunden beantwortet, mit dem Reservierungslink direkt im Chat — während Ihr Gast noch überlegt.',
+      eyebrow: 'Im Posteingang',
+      title: 'Hala antwortet, bevor woanders gebucht wird.',
+      body: 'WhatsApp, Instagram und Website-Chat in Sekunden beantwortet, mit dem Buchungslink direkt im Chat — während Ihr Kunde noch überlegt.',
       metaTop: 'WhatsApp · 21:48',
       metaBottom: 'In 4 Sekunden geantwortet',
       messages: [
-        'Haben Sie noch offen? Tisch für 2?',
-        'Die Küche schließt um 22:30 — ich kann Sie um 21:15 setzen.',
+        'Haben Sie morgen offen? Ich bräuchte einen Termin.',
+        'Wir öffnen um 9:00 — ich kann Sie für 9:30 eintragen.',
         'Ja, gerne',
       ],
     },
     automations: {
-      eyebrow: 'Automatisierungen',
+      eyebrow: 'Im Hintergrund',
       title: 'Das Nachfassen, zu dem nie jemand kommt.',
-      body: 'Eine SMS innerhalb einer Minute nach jedem verpassten Anruf. Eine Erinnerung, wenn eine Anfrage liegen bleibt. Eine Bitte um Bewertung, solange der Abend noch frisch ist.',
+      body: 'Eine SMS innerhalb einer Minute nach jedem verpassten Anruf. Eine Erinnerung, wenn eine Anfrage liegen bleibt. Eine Bitte um Bewertung, solange der Besuch noch frisch ist.',
       metaTop: 'Verpasster Anruf · Freitag 19:42',
       metaBottom: '3 Sequenzen aktiv',
       rows: [
-        ['Anruf verpasst', 'SMS in 60 Sek.', 'Reservierungslink'],
-        ['24 h keine Antwort', 'WhatsApp-Erinnerung', 'Neu reservieren'],
+        ['Anruf verpasst', 'SMS in 60 Sek.', 'Buchungslink'],
+        ['24 h keine Antwort', 'WhatsApp-Erinnerung', 'Neu buchen'],
       ],
     },
   },
 
   why: {
-    eyebrow: 'Warum ein KI-Agent',
+    eyebrow: 'Warum ein KI-Mitarbeiter',
     heading: 'Vier Gründe, warum das Telefon Sie kein Geld mehr kostet.',
     items: [
       {
-        title: 'Er lässt niemanden warten.',
+        title: 'Hala lässt niemanden warten.',
         body: 'Jeder Anruf beim ersten Klingeln beantwortet — freitags um sieben, am Feiertag, um Mitternacht, wenn Sie geschlossen haben.',
       },
       {
-        title: 'Er kennt Ihr Restaurant.',
-        body: 'Ihre Öffnungszeiten, Ihre Karte, Ihre Allergene, Ihre letzte Sitzung. Kein generischer Bot, der ein Skript abliest.',
+        title: 'Hala kennt Ihr Unternehmen.',
+        body: 'Ihre Öffnungszeiten, Ihre Leistungen, Ihre Preise, Ihre Regeln. Kein generischer Bot, der ein Skript abliest.',
       },
       {
-        title: 'Er trägt ins Reservierungsbuch ein.',
-        body: 'Reservierungen landen dort, wo Ihr Team ohnehin nachsieht. Niemand tippt etwas doppelt.',
+        title: 'Hala schreibt in Ihre Systeme.',
+        body: 'Termine landen in dem Kalender, den Ihr Team ohnehin nutzt. Niemand tippt etwas doppelt.',
       },
       {
-        title: 'Er übergibt sauber.',
-        body: 'Wenn ein Gast einen Menschen braucht, übernimmt Ihr Team und weiß bereits, wer anruft und warum.',
+        title: 'Hala arbeitet neben Ihrem Team.',
+        body: 'Wenn ein Kunde einen Menschen braucht, übernimmt Ihr Team und weiß bereits, wer anruft und warum.',
       },
     ],
   },
 
-  journey: {
-    heading: 'Eine Nummer. Jede Art von Anruf.',
-    liveLabel: 'Heute im Einsatz',
-    scopedLabel: 'Gemeinsam geplant',
-    intents: [
+  showcase: {
+    eyebrow: 'Auf Ihre Branche zugeschnitten',
+    heading: 'Ein Mitarbeiter. Jede Art von Unternehmen.',
+    sub: 'Hala lernt Ihre Leistungen, Ihre Preise und Ihre Regeln. So klingt das in der Praxis.',
+    handlesLabel: 'Was Hala hier übernimmt',
+    items: [
       {
-        key: 'book',
-        label: 'Tisch reservieren',
-        line: '„Ein Tisch für vier am Freitag, gegen acht?“',
-        steps: [
-          'Reservierungsbuch prüfen',
-          'Echte Zeiten anbieten',
-          'Allergene vermerken',
-          'Per SMS bestätigen',
+        key: 'restaurants',
+        label: 'Restaurants & Lieferdienste',
+        line: 'Ein Tisch für vier am Freitag, so gegen acht?',
+        reply: 'Ich hätte 20:15 oder 20:45. Was passt Ihnen besser?',
+        handles: ['Reservierungen', 'Karte & Allergene', 'Öffnungszeiten', 'Große Gruppen'],
+        outcome: 'Reservierung im Buch, Allergie vermerkt, Küche bereits informiert.',
+      },
+      {
+        key: 'clinics',
+        label: 'Kosmetikkliniken',
+        line: 'Was kostet eine Beratung für Filler?',
+        reply: 'Die Beratung kostet 50 €, anrechenbar auf die Behandlung. Ich hätte Donnerstag um 14:15.',
+        handles: [
+          'Behandlungspreise',
+          'Beratungstermine',
+          'Fragen zur Nachsorge',
+          'Anzahlungen & Erinnerungen',
         ],
-        outcome: 'Reservierung im Buch. Die Küche hat den Allergie-Hinweis bereits.',
+        outcome: 'Beratung gebucht, Anzahlung erhalten, Erinnerung bereits geplant.',
       },
       {
-        key: 'menu',
-        label: 'Karte & Allergene',
-        line: '„Ist das Risotto glutenfrei?“',
-        steps: ['Mit Ihrer Karte abgleichen', 'In Ihren Worten antworten', 'Reservierung anbieten'],
-        outcome: 'Beantwortet aus Ihrer echten Karte. Niemand wurde aus dem Service geholt.',
+        key: 'property',
+        label: 'Immobilienmakler',
+        line: 'Ist die Wohnung in der Mühlenstraße noch frei?',
+        reply: 'Ja — Besichtigungen sind Donnerstag und Samstag. Soll ich Sie eintragen?',
+        handles: [
+          'Besichtigungsanfragen',
+          'Fragen zum Objekt',
+          'Interessenten qualifizieren',
+          'Rückrufe für Eigentümer',
+        ],
+        outcome: 'Besichtigung gebucht und der Interessent qualifiziert, bevor jemand zum Hörer greift.',
       },
       {
-        key: 'hours',
-        label: 'Zeiten & Anfahrt',
-        line: '„Wann schließen Sie sonntags?“',
-        steps: ['Aus Ihren Zeiten antworten', 'Ausnahmen berücksichtigen', 'Anfahrt per SMS'],
-        outcome: 'SMS mit Adresse, Parkmöglichkeiten und Öffnungszeiten verschickt.',
+        key: 'salons',
+        label: 'Salons & Barbiere',
+        line: 'Wäre Samstag noch etwas für Schnitt und Farbe frei?',
+        reply: 'Samstag ist voll, aber ich hätte Freitag um 16:30 oder Sonntag um 11:00.',
+        handles: ['Termine', 'Wunsch-Stylist', 'Preislisten', 'Erinnerungen gegen No-Shows'],
+        outcome: 'Ein Stuhl belegt, der sonst leer geblieben wäre — mit Erinnerung am Vortag.',
       },
       {
-        key: 'groups',
-        label: 'Große Gruppen',
-        line: '„Wir sind zwölf für einen Geburtstag — gibt es ein Menü?“',
-        steps: ['Gruppengröße klären', 'Datum & Budget erfassen', 'Team briefen'],
-        outcome: 'Ihr Team bekommt eine vorbereitete Anfrage statt eines kalten Rückrufs.',
-      },
-      {
-        key: 'other',
-        label: 'Alles andere',
-        line: '„Ich habe gestern Abend meine Jacke bei Ihnen liegen lassen…“',
-        steps: ['Erkennen, dass ein Mensch nötig ist', 'Zusammenfassen', 'Mit Kontext weiterleiten'],
-        outcome: 'Ihr Team nimmt ab und weiß bereits, warum der Gast anruft.',
-      },
-      {
-        key: 'order',
-        label: 'Bestellung aufnehmen',
-        line: '„Zwei große Pepperoni zum Abholen um sieben?“',
-        steps: ['Artikel aufnehmen', 'Summe bestätigen', 'An die Küche senden'],
-        outcome: 'Bestellung am Pass, der Gast weiß, wann sie fertig ist.',
-        note: 'Benötigt ein Kassen- oder Küchensystem zum Eintragen — wird beim Onboarding gemeinsam geklärt.',
+        key: 'trades',
+        label: 'Handwerk & Haustechnik',
+        line: 'Die Heizung ist undicht — kann heute noch jemand kommen?',
+        reply: 'Ich kann Ihnen heute zwischen 14 und 16 Uhr einen Techniker schicken. Wie ist die Postleitzahl?',
+        handles: [
+          'Notfalleinsätze',
+          'Angebotsanfragen',
+          'Terminplanung',
+          'Rückruf-SMS bei verpassten Anrufen',
+        ],
+        outcome: 'Auftrag gebucht, Adresse und Fehler erfasst — während Sie unter der Spüle lagen.',
       },
     ],
   },
@@ -197,38 +208,26 @@ export const de: HalaCopy = {
     items: [
       {
         t: 'Ein 15-Minuten-Gespräch',
-        b: 'Wir lernen Ihre Öffnungszeiten, Ihre Karte, Ihre Reservierungsregeln und wie Sie mit Ihren Gästen sprechen.',
+        b: 'Wir lernen Ihre Öffnungszeiten, Ihre Leistungen, Ihre Buchungsregeln und wie Sie mit Ihren Kunden sprechen.',
       },
       {
-        t: 'Wir bauen Ihren Agenten',
-        b: 'Stimme und Tonfall auf Ihr Restaurant abgestimmt, auf Deutsch und Englisch, wenn Sie beides brauchen.',
+        t: 'Wir bauen Ihren Mitarbeiter',
+        b: 'Stimme und Tonfall auf Ihr Unternehmen abgestimmt, auf Deutsch und Englisch, wenn Sie beides brauchen.',
       },
       {
         t: 'Nummer verbinden',
-        b: 'Sie behalten Ihre Rufnummer. Anrufe gehen an den Agenten, wenn niemand abnimmt — oder immer.',
+        b: 'Sie behalten Ihre Rufnummer. Anrufe gehen an Hala, wenn niemand abnimmt — oder immer.',
       },
       {
         t: 'In 48 Stunden live',
-        b: 'Er antwortet, reserviert und fasst nach, ab dem ersten Tag. In den ersten Wochen bleiben wir dran.',
+        b: 'Hala antwortet, bucht und fasst nach, ab dem ersten Tag. In den ersten Wochen bleiben wir dran.',
       },
-    ],
-  },
-
-  industries: {
-    heading: 'Wenn Ihr Telefon klingelt, während Sie im Service sind, ist das hier für Sie.',
-    items: [
-      'Restaurants & Bistros',
-      'Lieferdienste & Abholung',
-      'Cafés & Bäckereien',
-      'Eventlocations',
-      'Hotelrestaurants',
-      'Salons & Praxen',
     ],
   },
 
   pricing: {
     heading: 'Keine Überraschungen. Keine versteckten Kosten.',
-    sub: 'Einmalige Einrichtung, danach eine monatliche Gebühr inklusive Ihrer Minuten. Die Preise für Sprache sind vorgeschlagen und noch nicht final.',
+    sub: 'Einmalige Einrichtung, danach eine monatliche Gebühr inklusive Ihrer Minuten. Die Preise sind vorgeschlagen und noch nicht final.',
     currency: '€',
     perMonth: ' /Monat',
     setupSuffix: 'Einrichtung',
@@ -241,8 +240,8 @@ export const de: HalaCopy = {
         mins: '500 Minuten',
         features: [
           'Jeder Anruf beantwortet, rund um die Uhr',
-          'Reservierungen in Ihr Buch',
-          'Fragen zu Karte & Allergenen',
+          'Termine in Ihren Kalender',
+          'Antworten aus Ihren eigenen Informationen',
         ],
       },
       {
@@ -252,7 +251,7 @@ export const de: HalaCopy = {
         mins: '1.200 Minuten',
         features: [
           'Alles aus Essential',
-          'Gruppen & Events qualifiziert',
+          'Anfragen qualifiziert und weitergeleitet',
           'Warme Übergabe mit Kontext',
         ],
       },
@@ -272,49 +271,49 @@ export const de: HalaCopy = {
 
   proof: {
     eyebrow: 'Reserviert — echter Kundenbeleg',
-    heading: 'Echte Restaurants. Echte Zahlen.',
-    body: 'Reserviert für ein namentlich genanntes Restaurant: beantwortete Anrufe, gebuchte Gedecke und was sich für das Team verändert hat. Das ist die größte Lücke auf dieser Seite — ein echter Kunde, der sich zitieren lässt, wirkt mehr als jeder andere Abschnitt hier.',
+    heading: 'Echte Unternehmen. Echte Zahlen.',
+    body: 'Reserviert für einen namentlich genannten Kunden: beantwortete Anrufe, gebuchte Termine und was sich für das Team verändert hat. Das ist die größte Lücke auf dieser Seite — ein echter Kunde, der sich zitieren lässt, wirkt mehr als jeder andere Abschnitt hier.',
   },
 
   channels: {
     eyebrow: 'Alle Kanäle',
-    heading: 'Ein Agent. Überall, wo Ihre Gäste Sie erreichen.',
-    body: 'Telefon, WhatsApp, Instagram, Messenger, Website-Chat, E-Mail und SMS — beantwortet vom selben Agenten, mit einem Gedächtnis für jeden Gast.',
+    heading: 'Ein Mitarbeiter. Überall, wo Ihre Kunden Sie erreichen.',
+    body: 'Telefon, WhatsApp, Instagram, Messenger, Website-Chat, E-Mail und SMS — alles von Hala beantwortet, mit einem Gedächtnis für jeden Kunden.',
     nodes: ['Telefonanrufe', 'WhatsApp', 'Instagram', 'Messenger', 'Website-Chat', 'E-Mail & SMS'],
-    coreLabel: 'Ein Agent',
+    coreLabel: 'Ein Mitarbeiter',
     liveLabel: 'Live',
   },
 
   faq: {
     heading: 'Noch Fragen?',
-    headingSub: 'Fragen Sie den Agenten selbst.',
-    body: 'Derselbe Agent, der Ihre Gäste bedient, beantwortet auch Ihre Fragen. Kein Formular, kein Warten.',
-    askCta: 'Agenten fragen',
+    headingSub: 'Fragen Sie Hala selbst.',
+    body: 'Hala beantwortet Ihre Fragen genauso wie die Ihrer Kunden. Kein Formular, kein Warten.',
+    askCta: 'Hala fragen',
     askNote:
       'In der Live-Version öffnet dies den echten Agenten. Anzubinden an das bestehende GoHighLevel-Chat-Widget oder an den Sprach-Agenten für eine gesprochene Antwort.',
     items: [
       {
-        q: 'Klingt er für meine Gäste wie ein Roboter?',
-        a: 'Nein. Er wird auf den Tonfall Ihres Restaurants trainiert und antwortet in natürlicher Sprache, auf Deutsch oder Englisch. Die meisten Anrufer fragen gar nicht nach.',
+        q: 'Klingt Hala für meine Kunden wie ein Roboter?',
+        a: 'Nein. Hala wird auf Ihren Tonfall trainiert und antwortet in natürlicher Sprache, auf Deutsch oder Englisch. Die meisten Anrufer fragen gar nicht nach.',
       },
       {
-        q: 'Was passiert, wenn er nicht weiterhelfen kann?',
-        a: 'Er leitet an Ihr Team weiter — mit dem gesamten Gespräch bereits zusammengefasst, sodass niemand von vorn anfangen muss.',
+        q: 'Ersetzt das meine Mitarbeiter?',
+        a: 'Nein. Hala nimmt ihnen die wiederkehrenden Gespräche ab — die Anrufe kurz vor Feierabend, die immer gleichen fünf Fragen, das Nachfassen, zu dem niemand kommt — damit sie sich auf die Arbeit konzentrieren können, die einen Menschen braucht.',
       },
       {
-        q: 'Wie lange dauert es, bis er Anrufe annimmt?',
-        a: '48 Stunden. Wir richten Ihre Öffnungszeiten, Ihre Karte und Ihre Reservierungsregeln ein und behalten Ihre bestehende Rufnummer.',
+        q: 'Meine Branche steht nicht auf Ihrer Liste. Funktioniert das trotzdem?',
+        a: 'Mit hoher Wahrscheinlichkeit ja. Hala wird auf Ihre Leistungen, Preise und Regeln eingerichtet, nicht auf eine feste Branchenvorlage — die Beispiele oben sind lediglich die Bereiche, für die wir bisher am meisten gebaut haben.',
       },
       {
-        q: 'Muss ich mein Reservierungssystem wechseln?',
-        a: 'Nein. Er trägt in das Buch ein, das Sie bereits nutzen. Welches das ist, klären wir beim Onboarding.',
+        q: 'Muss ich mein Buchungssystem wechseln?',
+        a: 'Nein. Hala trägt in den Kalender ein, den Sie bereits nutzen. Welcher das ist, klären wir beim Onboarding.',
       },
     ],
   },
 
   closing: {
     heading: 'Starten Sie noch heute mit Hala.',
-    body: 'Fünfzehn Minuten. Wir rufen Ihre Nummer an, der Agent ist live, und Sie fragen ihn, was Sie wollen.',
+    body: 'Fünfzehn Minuten. Wir rufen Ihre Nummer an, Hala ist live, und Sie fragen sie, was Sie wollen.',
     cta: 'Demo vereinbaren',
   },
 

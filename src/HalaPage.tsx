@@ -10,8 +10,7 @@ import {
   ClosingCTA,
   FeatureBands,
   HowItWorks,
-  Industries,
-  Journey,
+  IndustryShowcase,
   Pricing,
   ProofSlot,
   StatBand,
@@ -456,7 +455,7 @@ export function HalaPage() {
 
       <StatBand />
       <FeatureBands />
-      <Journey />
+      <IndustryShowcase />
       <HowItWorks />
 
       {/* ── 4. Channels ── */}
@@ -484,7 +483,6 @@ export function HalaPage() {
         </div>
       </section>
 
-      <Industries />
       <Pricing />
       <ProofSlot />
 
