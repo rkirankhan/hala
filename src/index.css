@@ -1,0 +1,48 @@
+/**
+ * Minimal global CSS. Everything else on the page is inline styles or the
+ * scoped <style> block in HalaPage.tsx, so there is deliberately no framework
+ * and no design-token stylesheet here — tokens live in src/tokens.ts.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #08080a;
+  color: #ffffff;
+  /* overflow-x: clip rather than hidden. hidden makes html/body scroll
+     containers, which silently breaks position: sticky for every descendant —
+     that bug cost us the sticky nav once already inside the agency site. */
+  overflow-x: clip;
+  overflow-y: visible;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+/* Respect the OS setting. The hero float, the waveform and the channel-orbit
+   pulses are all decorative, so nothing is lost by stopping them. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

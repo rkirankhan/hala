@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary meta. These are the English defaults; src/useHalaMeta.ts swaps
+         them for the German set on /de and adds the hreflang pair. Unlike the
+         version inside the agency site, these are baked into the HTML — so link
+         previews on WhatsApp, Slack and iMessage, which never run JavaScript,
+         now show Hala rather than Khaas Hub. -->
+    <title>Hala | AI Employee for customer conversations</title>
+    <meta
+      name="description"
+      content="Hala answers every call, message and enquiry on the first ring, books customers in, follows up, and hands over to your team when someone needs a person."
+    />
+    <meta name="author" content="Khaas Hub" />
+
+    <!-- NOT INDEXABLE YET. The page still carries proposed pricing, a
+         placeholder proof section and copy written for restaurants rather than
+         the full AI Employee positioning. Change to "index, follow" when the
+         real launch copy lands. -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hala" />
+    <meta property="og:url" content="https://hala.khaashub.com/" />
+    <meta property="og:title" content="Hala | AI Employee for customer conversations" />
+    <meta
+      property="og:description"
+      content="Hala answers every call, message and enquiry on the first ring, books customers in, follows up, and hands over to your team when someone needs a person."
+    />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Hala | AI Employee for customer conversations" />
+    <meta
+      name="twitter:description"
+      content="Hala answers every call, message and enquiry on the first ring, books customers in, follows up, and hands over to your team when someone needs a person."
+    />
+
+    <!-- Fonts. Only the two faces Hala actually uses — the agency site also
+         loads Poppins and Fraunces, which nothing here references. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
