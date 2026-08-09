@@ -144,6 +144,20 @@ export function HalaPage() {
         .v4-plans { grid-template-columns: minmax(0,1fr); }
         @media (min-width: 900px) { .v4-plans { grid-template-columns: repeat(3, minmax(0,1fr)); align-items: start; } }
 
+        /* Five nodes across a phone is unreadable, so the diagram is desktop
+           only and the vertical rail covers everything below. */
+        .v4-map { display: none; }
+        .v4-map-list { display: block; }
+        @media (min-width: 1000px) {
+          .v4-map { display: block; }
+          .v4-map-list { display: none; }
+        }
+
+        /* Mirror the diagram for Arabic. Each tile un-mirrors itself inline —
+           see MapTile — because a stylesheet rule cannot override the inline
+           transform the tiles need for centering. */
+        [dir='rtl'] .v4-map-canvas { transform: scaleX(-1); }
+
         .v4-navlinks { display: none; }
         @media (min-width: 820px) { .v4-navlinks { display: flex; } }
       `}</style>

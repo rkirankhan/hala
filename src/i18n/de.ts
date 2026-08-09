@@ -182,6 +182,18 @@ export const de: HalaCopy = {
       { label: 'Bucht einen Termin', line: 'Echte Zeiten aus Ihrem Kalender, direkt in Ihr Buch eingetragen.' },
       { label: 'Beantwortet eine Frage', line: 'Öffnungszeiten, Preise oder Verfügbarkeit — mit Buchungslink in der Antwort.' },
     ],
+    map: {
+      contact: 'Kunde meldet sich',
+      answer: 'Hala nimmt an',
+      badge: 'Erkennt Stammkunden',
+      outcomes: [
+        { label: 'Bestellung aufgenommen', note: 'Weitergeleitet, Bon gedruckt' },
+        { label: 'Termin gebucht', note: 'In Ihr Buch eingetragen' },
+        { label: 'Frage beantwortet', note: 'Infos gesendet, mit Buchungslink' },
+      ],
+      follow: 'Nachfassen',
+      followNote: 'Bestätigung · Erinnerung · Feedback',
+    },
     footnote: 'Ihr Team hört nur von den Fällen, die einen Menschen brauchen.',
   },
 

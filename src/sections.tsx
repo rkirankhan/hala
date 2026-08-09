@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   ArrowRight,
+  CalendarCheck,
   Check,
   Facebook,
   Globe,
@@ -10,13 +11,14 @@ import {
   MessageCircle,
   Phone,
   Scissors,
+  ShoppingBag,
   Sparkles,
   UtensilsCrossed,
   Wrench,
   type LucideIcon,
 } from 'lucide-react';
 import { C, display, mono, sans, tracking, wrap } from './tokens';
-import { useHalaCopy } from './i18n';
+import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
 
 /**
  * The sections added after reviewing the reference site end to end.
@@ -883,6 +885,140 @@ export function ChannelList() {
   );
 }
 
+
+/* ── Flow map ─────────────────────────────────────────────────────────── */
+
+/**
+ * The journey as a diagram: one entry, a fork into three outcomes, one shared
+ * follow-up tail.
+ *
+ * Same construction as ChannelOrbit — an SVG for the connectors plus HTML tiles
+ * positioned by percentage — because tiles as HTML keep the text selectable,
+ * wrappable and translatable, which <text> nodes in SVG are not.
+ *
+ * Shown only from 1000px up. Below that the vertical rail takes over: five nodes
+ * across a phone screen is unreadable at any font size that fits.
+ *
+ * RTL: the canvas is mirrored with scaleX(-1) and each tile is counter-mirrored,
+ * so the diagram reads right-to-left in Arabic while the words stay the right
+ * way round. Centering with translate(-50%) is direction-agnostic, so the
+ * positions need no adjustment.
+ */
+const MAP_W = 1100;
+const MAP_H = 400;
+
+const MAP_PATHS = [
+  'M 160 200 L 232 200',
+  'M 372 200 C 470 200, 470 70, 543 70',
+  'M 372 200 L 533 200',
+  'M 372 200 C 470 200, 470 330, 543 330',
+  'M 697 70 C 790 70, 790 200, 862 200',
+  'M 707 200 L 862 200',
+  'M 697 330 C 790 330, 790 200, 862 200',
+];
+
+function MapTile({
+  x, y, width, icon: Icon, label, note, accent, rtl,
+}: {
+  x: number; y: number; width: number; icon: LucideIcon;
+  label: string; note?: string; accent?: boolean; rtl: boolean;
+}) {
+  return (
+    <div
+      className="v4-map-tile"
+      style={{
+        position: 'absolute',
+        left: `${(x / MAP_W) * 100}%`,
+        top: `${(y / MAP_H) * 100}%`,
+        /* Counter-mirror inline, not in CSS: the stylesheet cannot override an
+           inline transform, and this element needs one for centering anyway. */
+        transform: `translate(-50%, -50%)${rtl ? ' scaleX(-1)' : ''}`,
+        width,
+        padding: '13px 15px',
+        borderRadius: 14,
+        background: accent ? 'rgba(110,123,242,0.14)' : 'rgba(20,20,24,0.96)',
+        border: `1px solid ${accent ? 'rgba(110,123,242,0.42)' : C.line}`,
+        boxShadow: '0 18px 40px -24px rgba(0,0,0,0.9)',
+      }}
+    >
+      <span
+        style={{
+          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+          width: 26, height: 26, borderRadius: 8, marginBottom: 9,
+          background: accent ? C.accent : 'rgba(255,255,255,0.07)',
+          color: accent ? C.white : C.accent,
+        }}
+      >
+        <Icon size={14} strokeWidth={2} />
+      </span>
+      <div style={{ fontSize: 13.5, fontWeight: 600, lineHeight: 1.3 }}>{label}</div>
+      {note && (
+        <div style={{ fontSize: 11.5, lineHeight: 1.45, color: C.muted, marginTop: 5 }}>{note}</div>
+      )}
+    </div>
+  );
+}
+
+function FlowMap() {
+  const { flow } = useHalaCopy();
+  const rtl = dirOf(useHalaLocale()) === 'rtl';
+  const [a, b, cc] = flow.map.outcomes;
+
+  return (
+    <div
+      className="v4-map"
+      style={{ position: 'relative', width: '100%', maxWidth: MAP_W, margin: '0 auto' }}
+    >
+      <div className="v4-map-canvas" style={{ position: 'relative', aspectRatio: `${MAP_W} / ${MAP_H}` }}>
+        <svg
+          viewBox={`0 0 ${MAP_W} ${MAP_H}`}
+          width="100%" height="100%" aria-hidden
+          style={{ position: 'absolute', inset: 0 }}
+        >
+          {MAP_PATHS.map((d, i) => (
+            <g key={i}>
+              <path d={d} fill="none" stroke={C.line} strokeWidth={1.4} strokeDasharray="3 7" />
+              {/* A pulse per path, so the diagram shows traffic moving rather
+                  than a static wiring chart. */}
+              <circle r={3} fill={C.accent}>
+                <animateMotion dur="3.6s" begin={`${i * 0.45}s`} repeatCount="indefinite" path={d} />
+                <animate
+                  attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.8;1"
+                  dur="3.6s" begin={`${i * 0.45}s`} repeatCount="indefinite"
+                />
+              </circle>
+            </g>
+          ))}
+        </svg>
+
+        <MapTile x={90} y={200} width={140} icon={Phone} label={flow.map.contact} rtl={rtl} />
+        <MapTile x={302} y={200} width={140} icon={Sparkles} label={flow.map.answer} accent rtl={rtl} />
+        <MapTile x={620} y={70} width={172} icon={ShoppingBag} label={a.label} note={a.note} rtl={rtl} />
+        <MapTile x={620} y={200} width={172} icon={CalendarCheck} label={b.label} note={b.note} rtl={rtl} />
+        <MapTile x={620} y={330} width={172} icon={MessageCircle} label={cc.label} note={cc.note} rtl={rtl} />
+        <MapTile
+          x={952} y={200} width={168} icon={Check}
+          label={flow.map.follow} note={flow.map.followNote} accent rtl={rtl}
+        />
+
+        {/* Badge on the qualifying step — the memory claim, made concrete. */}
+        <div
+          className="v4-map-tile"
+          style={{
+            position: 'absolute', left: `${(302 / MAP_W) * 100}%`, top: `${(96 / MAP_H) * 100}%`,
+            transform: `translate(-50%, -50%)${rtl ? ' scaleX(-1)' : ''}`, whiteSpace: 'nowrap',
+            padding: '5px 10px', borderRadius: 99,
+            background: 'rgba(62,207,142,0.10)', border: '1px solid rgba(62,207,142,0.30)',
+            fontFamily: mono, fontSize: 10, letterSpacing: '0.06em', color: C.live,
+          }}
+        >
+          {flow.map.badge}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── End-to-end flow ──────────────────────────────────────────────────── */
 
 /**
@@ -939,7 +1075,9 @@ export function FlowSection() {
         </p>
       </div>
 
-      <div style={{ maxInlineSize: 780, marginInline: 'auto' }}>
+      <FlowMap />
+
+      <div className="v4-map-list" style={{ maxInlineSize: 780, marginInline: 'auto' }}>
         {c.flow.stages.map((stage, i) => {
           const Icon = FLOW_ICONS[stage.key];
           const last = i === c.flow.stages.length - 1;

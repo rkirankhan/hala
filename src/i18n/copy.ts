@@ -100,6 +100,15 @@ export interface HalaCopy {
     sub: string;
     stages: { key: string; title: string; body: string; chips: string[] }[];
     branches: { label: string; line: string }[];
+    /** Short labels for the diagram. Node tiles cannot carry a full sentence. */
+    map: {
+      contact: string;
+      answer: string;
+      badge: string;
+      outcomes: { label: string; note: string }[];
+      follow: string;
+      followNote: string;
+    };
     footnote: string;
   };
 
@@ -349,6 +358,18 @@ export const en: HalaCopy = {
       { label: 'Books them in', line: 'Real times from your calendar, written straight into your diary.' },
       { label: 'Answers a question', line: 'Hours, prices or availability — with a booking link in the reply.' },
     ],
+    map: {
+      contact: 'Customer gets in touch',
+      answer: 'Hala answers',
+      badge: 'Recognises returning customers',
+      outcomes: [
+        { label: 'Order taken', note: 'Sent through, receipt printed' },
+        { label: 'Booked in', note: 'Written into your diary' },
+        { label: 'Question answered', note: 'Details sent with a booking link' },
+      ],
+      follow: 'Follow-up',
+      followNote: 'Confirmation · reminder · feedback',
+    },
     footnote: 'Your team only hears about the ones that need a person.',
   },
 
