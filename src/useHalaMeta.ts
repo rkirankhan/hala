@@ -17,7 +17,7 @@ const ORIGIN = 'https://hala.khaashub.com';
 const ALTERNATES: { hreflang: string; href: string }[] = [
   { hreflang: 'en', href: `${ORIGIN}/` },
   { hreflang: 'de', href: `${ORIGIN}/de` },
-  { hreflang: 'ar', href: `${ORIGIN}/ar` },
+  // Arabic is translated but unpublished — see LOCALES in src/i18n/index.ts.
   { hreflang: 'x-default', href: `${ORIGIN}/` },
 ];
 

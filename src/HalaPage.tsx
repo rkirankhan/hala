@@ -12,9 +12,12 @@ import {
   FeatureBands,
   FlowSection,
   HowItWorks,
+  Integrations,
+  Languages,
   Pricing,
   ProofSlot,
   StatBand,
+  Versus,
 } from './sections';
 
 /**
@@ -191,6 +194,18 @@ export function HalaPage() {
            see MapTile — because a stylesheet rule cannot override the inline
            transform the tiles need for centering. */
         [dir='rtl'] .v4-map-canvas { transform: scaleX(-1); }
+
+        .v4-versus { grid-template-columns: minmax(0,1fr); }
+        @media (min-width: 900px) { .v4-versus { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+        .v4-versus-yes { grid-template-columns: minmax(0,1fr); }
+        @media (min-width: 760px) { .v4-versus-yes { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px 28px; } }
+
+        .v4-integrations { grid-template-columns: repeat(2, minmax(0,1fr)); }
+        @media (min-width: 700px) { .v4-integrations { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+        @media (min-width: 1040px) { .v4-integrations { grid-template-columns: repeat(6, minmax(0,1fr)); } }
+
+        .v4-langs { grid-template-columns: minmax(0,1fr); }
+        @media (min-width: 760px) { .v4-langs { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 
         .v4-navlinks { display: none; }
         @media (min-width: 820px) { .v4-navlinks { display: flex; } }
@@ -500,8 +515,11 @@ export function HalaPage() {
           ))}
         </div>
       </section>
+      <Versus />
       <FeatureBands />
       <HowItWorks />
+      <Integrations />
+      <Languages />
 
       {/* ── 4. Channels ── */}
       <section id="channels" style={{ ...wrap, padding: '0 clamp(20px, 5vw, 48px) clamp(72px, 10vw, 130px)' }}>

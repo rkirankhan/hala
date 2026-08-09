@@ -193,6 +193,73 @@ export const de: HalaCopy = {
     footnote: 'Ihr Team hört nur von den Fällen, die einen Menschen brauchen.',
   },
 
+  versus: {
+    eyebrow: 'Die Alternativen',
+    heading: 'Beim Telefon haben Sie derzeit drei schlechte Optionen.',
+    options: [
+      {
+        title: 'Sie gehen selbst ran',
+        points: [
+          'Unterbrochen mitten in der Arbeit, mitten im Termin',
+          'Werbeanrufe kosten Sie genauso viel Zeit wie echte',
+          'Was klingelt, während Sie beschäftigt sind, geht trotzdem verloren',
+        ],
+      },
+      {
+        title: 'Es landet auf der Mailbox',
+        points: [
+          'Die meisten hinterlassen keine Nachricht',
+          'Sie rufen stattdessen beim Nächsten auf Google an',
+          'Bis Sie zurückrufen, ist woanders gebucht',
+        ],
+      },
+      {
+        title: 'Sie zahlen einen Telefonservice',
+        points: [
+          'Abrechnung nach Minuten, egal wer anruft',
+          'Anrufer warten in der Schleife auf eine fremde Person',
+          'Dort wird ein Skript gelesen — Ihre Preise kennt niemand',
+        ],
+      },
+    ],
+    answer: {
+      title: 'Oder Hala geht ran',
+      points: [
+        'Jeder Anruf beim ersten Klingeln, Tag und Nacht',
+        'Kennt Ihre Zeiten, Leistungen, Preise und Regeln',
+        'Bucht ein und trägt es in Ihre Systeme ein',
+        'Übergibt an Ihr Team, sobald jemand einen Menschen braucht',
+      ],
+    },
+  },
+
+  integrations: {
+    eyebrow: 'Verbindet sich mit',
+    heading: 'Es schreibt in die Systeme, mit denen Sie ohnehin arbeiten.',
+    sub: 'Termine, Aufträge und Kontakte landen dort, wo Ihr Team ohnehin nachsieht — niemand tippt etwas doppelt, niemand lernt ein neues System.',
+    groups: [
+      { label: 'Kalender', items: ['Google Kalender', 'Outlook', 'Calendly'] },
+      { label: 'Restaurants', items: ['OpenTable', 'SevenRooms', 'ResDiary'] },
+      { label: 'Salons & Praxen', items: ['Fresha', 'Treatwell', 'Phorest'] },
+      { label: 'Handwerk', items: ['Jobber', 'ServiceM8', 'Tradify'] },
+      { label: 'CRM', items: ['GoHighLevel', 'HubSpot', 'Pipedrive'] },
+      { label: 'Messaging', items: ['WhatsApp Business', 'Instagram', 'Messenger'] },
+    ],
+    note: 'Sie nutzen etwas anderes? Wir binden es beim Onboarding an.',
+  },
+
+  languages: {
+    eyebrow: 'Sprachen',
+    heading: 'Es antwortet Ihren Kunden in deren Sprache.',
+    sub: 'Keine übersetzte Website — der Mitarbeiter selbst spricht alle drei. Dieselbe Nummer, dasselbe Gedächtnis, wer auch immer anruft.',
+    items: [
+      { name: 'Englisch', native: 'English', line: 'Internationale Anrufer' },
+      { name: 'Deutsch', native: 'Deutsch', line: 'Förmliches Sie, wie im Geschäftsleben erwartet' },
+      { name: 'Arabisch', native: 'العربية', line: 'Hocharabisch, verstanden vom Golf bis Marokko' },
+    ],
+    note: 'Die meisten KI-Telefondienste können nur Englisch. Ihrer muss das nicht.',
+  },
+
   showcase: {
     eyebrow: 'Auf Ihre Branche zugeschnitten',
     heading: 'Ein Mitarbeiter. Jede Art von Unternehmen.',

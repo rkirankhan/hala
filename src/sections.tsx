@@ -15,6 +15,7 @@ import {
   Sparkles,
   UtensilsCrossed,
   Wrench,
+  X,
   type LucideIcon,
 } from 'lucide-react';
 import { C, display, mono, sans, tracking, wrap } from './tokens';
@@ -1268,6 +1269,227 @@ export function FlowSection() {
       >
         {c.flow.footnote}
       </p>
+    </section>
+  );
+}
+
+/* ── Versus the alternatives ──────────────────────────────────────────── */
+
+/**
+ * Argues against what the owner is doing today rather than asserting outcomes.
+ *
+ * Every competitor leads with numbers — calls handled, hours saved, satisfaction
+ * scores. With no customers yet we have none of those, and inventing them is not
+ * an option. This section needs no proof at all: the reader recognises their own
+ * situation in one of the three columns, which does the same work.
+ */
+export function Versus() {
+  const c = useHalaCopy();
+
+  return (
+    <section style={{ ...wrap, padding: 'clamp(56px, 7vw, 100px) clamp(20px, 5vw, 48px)' }}>
+      <div style={{ textAlign: 'center', marginBottom: 'clamp(32px, 4vw, 52px)' }}>
+        <span
+          style={{
+            fontFamily: mono, fontSize: 11, letterSpacing: '0.18em',
+            textTransform: 'uppercase', color: C.faint,
+          }}
+        >
+          {c.versus.eyebrow}
+        </span>
+        <h2
+          style={{
+            fontFamily: display, fontWeight: 600,
+            fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
+            lineHeight: 1.06, letterSpacing: tracking.heading,
+            margin: '18px auto 0', maxInlineSize: '20ch',
+          }}
+        >
+          {c.versus.heading}
+        </h2>
+      </div>
+
+      <div className="v4-versus" style={{ display: 'grid', gap: 12 }}>
+        {c.versus.options.map((o) => (
+          <div
+            key={o.title}
+            style={{
+              background: C.panel, border: `1px solid ${C.line}`,
+              borderRadius: 16, padding: 'clamp(20px, 2.2vw, 26px)',
+            }}
+          >
+            <div style={{ fontFamily: display, fontWeight: 600, fontSize: 16.5, letterSpacing: tracking.ui }}>
+              {o.title}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginTop: 14 }}>
+              {o.points.map((pt) => (
+                <span key={pt} style={{ display: 'flex', gap: 9, alignItems: 'flex-start' }}>
+                  <X size={13} strokeWidth={2.6} style={{ marginTop: 3, flexShrink: 0, color: C.faint }} />
+                  <span style={{ fontSize: 13.5, lineHeight: 1.55, color: C.muted }}>{pt}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div
+        style={{
+          marginTop: 12, borderRadius: 18,
+          padding: 'clamp(22px, 2.6vw, 30px)',
+          background: 'rgba(110,123,242,0.10)',
+          border: `1px solid ${C.accent}`,
+          boxShadow: '0 40px 90px -60px rgba(110,123,242,0.75)',
+        }}
+      >
+        <div style={{ fontFamily: display, fontWeight: 600, fontSize: 19, letterSpacing: tracking.ui }}>
+          {c.versus.answer.title}
+        </div>
+        <div className="v4-versus-yes" style={{ display: 'grid', gap: 10, marginTop: 16 }}>
+          {c.versus.answer.points.map((pt) => (
+            <span key={pt} style={{ display: 'flex', gap: 9, alignItems: 'flex-start' }}>
+              <Check size={14} strokeWidth={2.6} style={{ marginTop: 3, flexShrink: 0, color: C.accent }} />
+              <span style={{ fontSize: 14, lineHeight: 1.55, color: 'rgba(255,255,255,0.88)' }}>{pt}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Integrations ─────────────────────────────────────────────────────── */
+
+export function Integrations() {
+  const c = useHalaCopy();
+
+  return (
+    <section style={{ ...wrap, padding: '0 clamp(20px, 5vw, 48px) clamp(56px, 7vw, 100px)' }}>
+      <div style={{ textAlign: 'center', marginBottom: 'clamp(28px, 3.4vw, 44px)' }}>
+        <span
+          style={{
+            fontFamily: mono, fontSize: 11, letterSpacing: '0.18em',
+            textTransform: 'uppercase', color: C.faint,
+          }}
+        >
+          {c.integrations.eyebrow}
+        </span>
+        <h2
+          style={{
+            fontFamily: display, fontWeight: 600,
+            fontSize: 'clamp(1.7rem, 3.6vw, 2.5rem)',
+            lineHeight: 1.08, letterSpacing: tracking.heading,
+            margin: '18px auto 0', maxInlineSize: '22ch',
+          }}
+        >
+          {c.integrations.heading}
+        </h2>
+        <p style={{ margin: '16px auto 0', fontSize: 15.5, color: C.muted, maxInlineSize: '52ch' }}>
+          {c.integrations.sub}
+        </p>
+      </div>
+
+      <div className="v4-integrations" style={{ display: 'grid', gap: 12 }}>
+        {c.integrations.groups.map((g) => (
+          <div
+            key={g.label}
+            style={{
+              background: C.panel, border: `1px solid ${C.line}`,
+              borderRadius: 14, padding: '16px 18px',
+            }}
+          >
+            <Meta>{g.label}</Meta>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 7, marginTop: 11 }}>
+              {g.items.map((i) => (
+                <span key={i} style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.86)' }}>
+                  {i}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p style={{ margin: '20px auto 0', textAlign: 'center', fontSize: 14, color: C.faint }}>
+        {c.integrations.note}
+      </p>
+    </section>
+  );
+}
+
+/* ── Languages ────────────────────────────────────────────────────────── */
+
+/**
+ * The one claim no competitor on the market makes. Slang, Rosie and Goodcall are
+ * all English only.
+ *
+ * Note this is about what the employee SPEAKS to callers, which is a different
+ * thing from which languages this website is published in.
+ */
+export function Languages() {
+  const c = useHalaCopy();
+
+  return (
+    <section style={{ ...wrap, padding: '0 clamp(20px, 5vw, 48px) clamp(56px, 7vw, 100px)' }}>
+      <div
+        style={{
+          borderRadius: 22, border: `1px solid ${C.line}`,
+          padding: 'clamp(28px, 3.6vw, 48px)',
+          background: 'linear-gradient(140deg, rgba(110,123,242,0.14) 0%, rgba(12,12,15,0.6) 62%)',
+        }}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <span
+            style={{
+              fontFamily: mono, fontSize: 11, letterSpacing: '0.18em',
+              textTransform: 'uppercase', color: C.faint,
+            }}
+          >
+            {c.languages.eyebrow}
+          </span>
+          <h2
+            style={{
+              fontFamily: display, fontWeight: 600,
+              fontSize: 'clamp(1.7rem, 3.6vw, 2.5rem)',
+              lineHeight: 1.08, letterSpacing: tracking.heading,
+              margin: '18px auto 0', maxInlineSize: '20ch',
+            }}
+          >
+            {c.languages.heading}
+          </h2>
+          <p style={{ margin: '16px auto 0', fontSize: 15.5, color: C.muted, maxInlineSize: '50ch' }}>
+            {c.languages.sub}
+          </p>
+        </div>
+
+        <div className="v4-langs" style={{ display: 'grid', gap: 12, marginTop: 'clamp(24px, 3vw, 36px)' }}>
+          {c.languages.items.map((l) => (
+            <div
+              key={l.name}
+              style={{
+                background: 'rgba(8,8,10,0.5)', border: `1px solid ${C.line}`,
+                borderRadius: 14, padding: '18px 20px',
+              }}
+            >
+              <div
+                lang={l.native === 'العربية' ? 'ar' : undefined}
+                dir={l.native === 'العربية' ? 'rtl' : undefined}
+                style={{ fontFamily: display, fontWeight: 600, fontSize: 20, letterSpacing: tracking.ui }}
+              >
+                {l.native}
+              </div>
+              <div style={{ fontSize: 13, color: C.accent, marginTop: 4 }}>{l.name}</div>
+              <p style={{ margin: '10px 0 0', fontSize: 13.5, lineHeight: 1.55, color: C.muted }}>
+                {l.line}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <p style={{ margin: '22px auto 0', textAlign: 'center', fontSize: 14.5, color: '#C3CAFF' }}>
+          {c.languages.note}
+        </p>
+      </div>
     </section>
   );
 }

@@ -113,6 +113,36 @@ export interface HalaCopy {
     footnote: string;
   };
 
+  /**
+   * The alternatives a buyer is actually choosing between. Competitors lead with
+   * outcome claims; this argues against the three things an owner is doing today,
+   * which works without any customer numbers to quote.
+   */
+  versus: {
+    eyebrow: string;
+    heading: string;
+    options: { title: string; points: string[] }[];
+    answer: { title: string; points: string[] };
+  };
+
+  /** Named systems. "The calendar you already use" reads as no integration. */
+  integrations: {
+    eyebrow: string;
+    heading: string;
+    sub: string;
+    groups: { label: string; items: string[] }[];
+    note: string;
+  };
+
+  /** Three languages is the one thing no competitor offers. */
+  languages: {
+    eyebrow: string;
+    heading: string;
+    sub: string;
+    items: { name: string; native: string; line: string }[];
+    note: string;
+  };
+
   /** The one sector-specific section. Everything else stays neutral. */
   showcase: {
     eyebrow: string;
@@ -374,6 +404,73 @@ export const en: HalaCopy = {
       followNote: 'Confirmations, reminders, review requests — and keeping in touch',
     },
     footnote: 'Your team only hears about the ones that need a person.',
+  },
+
+  versus: {
+    eyebrow: 'The alternatives',
+    heading: 'Right now the phone has three bad answers.',
+    options: [
+      {
+        title: 'You answer it yourself',
+        points: [
+          'Interrupted mid-job, mid-appointment, mid-service',
+          'Spam and sales calls cost you the same time as real ones',
+          'The ones that come while you are busy still go missed',
+        ],
+      },
+      {
+        title: 'It goes to voicemail',
+        points: [
+          'Most people never leave a message',
+          'They call the next business on Google instead',
+          'By the time you ring back they have booked elsewhere',
+        ],
+      },
+      {
+        title: 'You pay an answering service',
+        points: [
+          'Billed by the minute, whoever is calling',
+          'Callers wait in a queue to reach a stranger',
+          'They read a script — they do not know your prices',
+        ],
+      },
+    ],
+    answer: {
+      title: 'Or Hala answers',
+      points: [
+        'Every call on the first ring, day or night',
+        'Knows your hours, services, prices and rules',
+        'Books them in and writes it to your systems',
+        'Hands to your team the moment someone needs a person',
+      ],
+    },
+  },
+
+  integrations: {
+    eyebrow: 'Connects to',
+    heading: 'It writes into the tools you already run on.',
+    sub: 'Bookings, jobs and contacts land where your team already looks — nobody retypes anything, and nobody learns a new system.',
+    groups: [
+      { label: 'Calendars', items: ['Google Calendar', 'Outlook', 'Calendly'] },
+      { label: 'Restaurants', items: ['OpenTable', 'SevenRooms', 'ResDiary'] },
+      { label: 'Salons & clinics', items: ['Fresha', 'Treatwell', 'Phorest'] },
+      { label: 'Trades', items: ['Jobber', 'ServiceM8', 'Tradify'] },
+      { label: 'CRM', items: ['GoHighLevel', 'HubSpot', 'Pipedrive'] },
+      { label: 'Messaging', items: ['WhatsApp Business', 'Instagram', 'Messenger'] },
+    ],
+    note: 'Using something else? We connect it during onboarding.',
+  },
+
+  languages: {
+    eyebrow: 'Languages',
+    heading: 'It answers your customer in their language.',
+    sub: 'Not a translated website — the employee itself speaks all three. The same number, the same memory, whoever calls.',
+    items: [
+      { name: 'English', native: 'English', line: 'UK and international callers' },
+      { name: 'German', native: 'Deutsch', line: 'Formal Sie, as German business expects' },
+      { name: 'Arabic', native: 'العربية', line: 'Modern Standard, understood Gulf to Morocco' },
+    ],
+    note: 'Most AI answering services are English only. Yours does not have to be.',
   },
 
   showcase: {

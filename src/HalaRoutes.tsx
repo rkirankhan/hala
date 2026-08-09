@@ -52,7 +52,11 @@ export default function HalaRoutes() {
         </Fragment>
       ))}
 
-      <Route path="*" element={<Navigate to="." replace />} />
+      {/* Absolute, not relative: `to="."` inside a splat route resolves to the
+          matched path itself, so an unknown URL rendered a blank page instead of
+          going home. Showed up the moment Arabic was unpublished and /ar stopped
+          matching. */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

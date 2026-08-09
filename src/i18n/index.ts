@@ -9,11 +9,19 @@ export type HalaLocale = 'en' | 'de' | 'ar';
 
 export const COPY: Record<HalaLocale, HalaCopy> = { en, de, ar };
 
-/** Display order in the switcher. English first because it is the default. */
+/**
+ * Display order in the switcher, and the source of truth for which languages
+ * the site publishes: routes, hreflang and the language menu are all generated
+ * from this list.
+ *
+ * Arabic is built and translated but not published — uncomment the entry to
+ * turn it back on. Nothing else needs changing: ar.ts, the RTL handling and the
+ * legal pages all stay in place and typechecked.
+ */
 export const LOCALES: { code: HalaLocale; label: string; name: string; dir: 'ltr' | 'rtl' }[] = [
   { code: 'en', label: 'EN', name: 'English', dir: 'ltr' },
   { code: 'de', label: 'DE', name: 'Deutsch', dir: 'ltr' },
-  { code: 'ar', label: 'AR', name: 'العربية', dir: 'rtl' },
+  // { code: 'ar', label: 'AR', name: 'العربية', dir: 'rtl' },
 ];
 
 export function dirOf(locale: HalaLocale): 'ltr' | 'rtl' {
