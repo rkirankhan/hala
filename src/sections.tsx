@@ -856,7 +856,7 @@ const WIDE: Layout = {
     [620, 200, 172],
     [620, 330, 172],
   ],
-  follow: [952, 200, 168],
+  follow: [952, 200, 180],
 };
 
 /** Phone layout: a vertical trunk on the reading-start side carries the fork. */
