@@ -36,7 +36,7 @@ export const legalEn: LegalSet = {
       {
         h: 'Who we are',
         body: [
-          'Hala is a product of Khaas Hub Ltd, registered at [[REGISTERED ADDRESS]]. We are the data controller for information collected through this website.',
+          'Hala is a product of Khaas Hub Ltd, registered at 5th Floor, 167-169 Great Portland Street, London W1W 5PF. We are the data controller for information collected through this website.',
           'You can reach us at info@khaashub.com.',
         ],
       },
@@ -134,7 +134,7 @@ export const legalEn: LegalSet = {
       {
         h: 'Governing law',
         body: [
-          'These terms are governed by the laws of [[ENGLAND AND WALES — CONFIRM]], and disputes fall to the courts of [[ENGLAND AND WALES — CONFIRM]].',
+          'These terms are governed by the laws of England and Wales, and disputes fall to the courts of England and Wales.',
         ],
       },
     ],
@@ -150,8 +150,8 @@ export const legalEn: LegalSet = {
         h: 'Operator',
         body: [
           'Khaas Hub Ltd',
-          '[[REGISTERED ADDRESS]]',
-          'United Kingdom',
+          '5th Floor, 167-169 Great Portland Street',
+          'London W1W 5PF, United Kingdom',
         ],
       },
       {
@@ -165,14 +165,14 @@ export const legalEn: LegalSet = {
       {
         h: 'Registration',
         body: [
-          'Registered at Companies House, [[ENGLAND AND WALES / SCOTLAND / NORTHERN IRELAND]]',
-          'Company number: [[COMPANY NUMBER]]',
+          'Registered at Companies House, England and Wales',
+          'Company number: 16721132',
           'VAT number: [[UK VAT NUMBER, or “not VAT registered”]]',
         ],
       },
       {
         h: 'Responsible for content',
-        body: ['[[NAME]], [[ADDRESS]]'],
+        body: ['[[NAME OF DIRECTOR]]', '5th Floor, 167-169 Great Portland Street, London W1W 5PF'],
       },
       {
         h: 'Consumer dispute resolution',
@@ -198,7 +198,7 @@ export const legalDe: LegalSet = {
       {
         h: 'Verantwortlicher',
         body: [
-          'Hala ist ein Produkt von Khaas Hub Ltd, [[REGISTERED ADDRESS]]. Wir sind Verantwortlicher im Sinne der DSGVO für die über diese Website erhobenen Daten.',
+          'Hala ist ein Produkt von Khaas Hub Ltd, 5th Floor, 167-169 Great Portland Street, London W1W 5PF. Wir sind Verantwortlicher im Sinne der DSGVO für die über diese Website erhobenen Daten.',
           'Sie erreichen uns unter info@khaashub.com.',
         ],
       },
@@ -295,7 +295,7 @@ export const legalDe: LegalSet = {
       },
       {
         h: 'Anwendbares Recht',
-        body: ['Es gilt das Recht von [[ENGLAND UND WALES — PRÜFEN]]. Gerichtsstand ist [[ENGLAND UND WALES — PRÜFEN]].'],
+        body: ['Es gilt das Recht von England und Wales. Gerichtsstand ist England und Wales.'],
       },
     ],
   },
@@ -307,7 +307,7 @@ export const legalDe: LegalSet = {
     sections: [
       {
         h: 'Anbieter',
-        body: ['Khaas Hub Ltd', '[[REGISTERED ADDRESS]]', 'Vereinigtes Königreich'],
+        body: ['Khaas Hub Ltd', '5th Floor, 167-169 Great Portland Street', 'London W1W 5PF, Vereinigtes Königreich'],
       },
       {
         h: 'Vertreten durch',
@@ -320,14 +320,14 @@ export const legalDe: LegalSet = {
       {
         h: 'Registereintrag',
         body: [
-          'Register: Companies House, [[ENGLAND AND WALES / SCOTLAND / NORTHERN IRELAND]]',
-          'Registernummer: [[COMPANY NUMBER]]',
+          'Register: Companies House, England and Wales',
+          'Registernummer: 16721132',
           'Umsatzsteuer-Identifikationsnummer: [[USt-IdNr. bei Registrierung in der EU, sonst „nicht in Deutschland umsatzsteuerlich registriert“]]',
         ],
       },
       {
         h: 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV',
-        body: ['[[NAME]], [[ANSCHRIFT]]'],
+        body: ['[[NAME DER GESCHÄFTSFÜHRUNG]]', '5th Floor, 167-169 Great Portland Street, London W1W 5PF'],
       },
       {
         h: 'Verbraucherstreitbeilegung',
