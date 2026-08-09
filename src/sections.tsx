@@ -798,6 +798,14 @@ export function ChannelList() {
  * That has to be inline rather than a stylesheet rule, because the tiles carry
  * an inline transform for centering and CSS cannot override it.
  */
+/**
+ * Connector stroke. C.line (white at 10%) is right for panel borders but far too
+ * faint for lines that have to be followed across the page — at that weight the
+ * tiles read as a scattered grid rather than a route. Accent-tinted and heavier,
+ * with a tighter dash, so the path is legible without competing with the tiles.
+ */
+const MAP_STROKE = 'rgba(110,123,242,0.55)';
+
 interface Layout {
   w: number;
   h: number;
@@ -992,9 +1000,10 @@ function FlowMap({
               key={i}
               d={d}
               fill="none"
-              stroke={C.line}
-              strokeWidth={1.4}
-              strokeDasharray="3 7"
+              stroke={MAP_STROKE}
+              strokeWidth={1.8}
+              strokeDasharray="5 5"
+              strokeLinecap="round"
             />
           ))}
         </svg>
