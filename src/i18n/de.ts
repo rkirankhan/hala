@@ -225,7 +225,7 @@ export const de: HalaCopy = {
       },
     ],
     answer: {
-      title: 'Oder Hala geht ran',
+      title: 'Wenn Hala rangeht',
       points: [
         'Jeder Anruf beim ersten Klingeln, Tag und Nacht',
         'Kennt Ihre Zeiten, Leistungen, Preise und Regeln',

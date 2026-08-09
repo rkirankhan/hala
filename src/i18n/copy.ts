@@ -449,7 +449,7 @@ export const en: HalaCopy = {
       },
     ],
     answer: {
-      title: 'Or Hala answers',
+      title: 'When Hala answers',
       points: [
         'Every call on the first ring, day or night',
         'Knows your hours, services, prices and rules',
