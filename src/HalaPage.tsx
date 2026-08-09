@@ -5,6 +5,7 @@ import { useHalaMeta } from './useHalaMeta';
 import { Link } from 'react-router-dom';
 import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
 import { LanguageMenu } from './LanguageMenu';
+import { HalaMark } from './HalaMark';
 import { INDUSTRY_ICONS } from './sections';
 import { useIndustry } from './industry';
 import {
@@ -227,7 +228,8 @@ export function HalaPage() {
           {/* Endorsed lockup: Hala carries the page, Khaas Hub signs it. The
               byline links back to the agency site — the only crossing point
               between the two properties. */}
-          <span style={{ display: 'flex', alignItems: 'baseline', gap: 9 }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
+            <HalaMark size={26} />
             <span style={{ fontFamily: display, fontWeight: 600, fontSize: 22, letterSpacing: tracking.ui }}>
               Hala
             </span>

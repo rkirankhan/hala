@@ -27,6 +27,7 @@ import {
 import { C, display, mono, sans, tracking, wrap } from './tokens';
 import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
 import { useIndustry } from './industry';
+import { HalaMark } from './HalaMark';
 
 /**
  * The sections added after reviewing the reference site end to end.
@@ -620,7 +621,7 @@ export function ChannelOrbit() {
           boxShadow: '0 0 70px -8px rgba(110,123,242,0.55)',
         }}
       >
-        <Sparkles size={24} strokeWidth={1.8} style={{ color: C.accent }} />
+        <HalaMark size={30} />
         <span
           style={{
             fontFamily: display, fontWeight: 700, fontSize: 15,
