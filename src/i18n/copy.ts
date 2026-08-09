@@ -492,7 +492,7 @@ export const en: HalaCopy = {
         line: 'Formal Sie, 24-hour times, as German business expects',
       },
     ],
-    note: 'English for the UK, German for Germany — each built natively. Most AI answering services only offer English at all.',
+    note: 'English for the UK, German for Germany — each built natively.',
   },
 
   showcase: {

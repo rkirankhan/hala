@@ -265,7 +265,7 @@ export const de: HalaCopy = {
         line: 'Förmliches Sie, 24-Stunden-Zeiten, wie erwartet',
       },
     ],
-    note: 'Englisch für Großbritannien, Deutsch für Deutschland — jeweils nativ aufgebaut. Die meisten KI-Telefondienste bieten überhaupt nur Englisch an.',
+    note: 'Englisch für Großbritannien, Deutsch für Deutschland — jeweils nativ aufgebaut.',
   },
 
   showcase: {
