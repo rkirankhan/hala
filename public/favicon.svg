@@ -3,6 +3,6 @@
   <!-- Heavier stroke and a larger dot than the in-app mark: at 16px the
        web weights thin out and the gap closes up. -->
   <circle cx="32" cy="32" r="20" fill="none" stroke="#8E9BFF" stroke-width="8"
-          stroke-linecap="round" stroke-dasharray="100 26" transform="rotate(118 32 32)"/>
-  <circle cx="18.5" cy="47" r="7.5" fill="#3ECF8E"/>
+          stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/>
+  <circle cx="17.9" cy="46.1" r="7.5" fill="#3ECF8E"/>
 </svg>

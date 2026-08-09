@@ -40,16 +40,18 @@ export function HalaMark({
         stroke={mono ? 'currentColor' : C.accent}
         strokeWidth="6"
         strokeLinecap="round"
-        /* A 74-degree gap sitting at the bottom, which leaves two ends where a
-           headset's earcups would be — and the dot beside the left one reads as
-           the mic. That double reading is deliberate: a halo to anyone who knows
-           هالة means halo, a headset to everyone who does not, and a headset is
-           what a restaurateur recognises in a fraction of a second.
-           Seating the dot tidily inside the gap kills it. Do not "fix" this. */
-        strokeDasharray="100 26"
-        transform="rotate(118 32 32)"
+        /* A 90-degree gap centred at the bottom, so both ends land at the 4 and
+           8 o'clock positions where a headset's earcups sit. The double reading
+           is deliberate: a halo to anyone who knows هالة means halo, a headset
+           to everyone who does not — and a headset is what a restaurateur
+           recognises in a fraction of a second, with no story attached.
+           Do not "correct" the gap into a tidy speech-bubble opening. */
+        strokeDasharray="94 31"
+        transform="rotate(135 32 32)"
       />
-      <circle cx="18.5" cy="47" r="6.5" fill={mono ? 'currentColor' : C.live} />
+      {/* One end weighted, one left plain. Two earcups would be a headset and
+          nothing more; one dot keeps the ring reading as a ring. */}
+      <circle cx="17.9" cy="46.1" r="6.5" fill={mono ? 'currentColor' : C.live} />
     </svg>
   );
 }
