@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hala — Brand Guidelines</title>
+<style>
+@font-face { font-family:'Plus Jakarta Sans'; font-weight:500; src:url('{{jakarta500}}') format('woff2'); }
+@font-face { font-family:'Plus Jakarta Sans'; font-weight:600; src:url('{{jakarta600}}') format('woff2'); }
+@font-face { font-family:'Plus Jakarta Sans'; font-weight:700; src:url('{{jakarta700}}') format('woff2'); }
+@font-face { font-family:'Inter'; font-weight:400; src:url('{{inter400}}') format('woff2'); }
+@font-face { font-family:'Inter'; font-weight:500; src:url('{{inter500}}') format('woff2'); }
+@font-face { font-family:'Inter'; font-weight:600; src:url('{{inter600}}') format('woff2'); }
+
+:root {
+  --black:#08080A; --panel:#141418; --inset:#1C1C21; --line:rgba(255,255,255,0.10);
+  --white:#FFFFFF; --muted:#A8A8A8; --faint:#707070;
+  --accent:#6E7BF2; --accent-bright:#8E9BFF; --accent-soft:rgba(110,123,242,0.14); --live:#3ECF8E;
+  --display:'Plus Jakarta Sans',system-ui,sans-serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { background:var(--black); color:var(--white); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
+.wrap { max-width:1080px; margin:0 auto; padding:0 clamp(20px,5vw,48px); }
+
+a { color:var(--accent-bright); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* Cover */
+.cover { min-height:88vh; display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden;
+  background: linear-gradient(160deg, rgba(110,123,242,0.10) 0%, rgba(8,8,10,0) 44%),
+              radial-gradient(circle at 85% 110%, rgba(62,207,142,0.06) 0%, rgba(8,8,10,0) 45%), #08080A; }
+.cover .ghost { position:absolute; right:-280px; top:-240px; opacity:0.05; }
+.cover h1 { font-family:var(--display); font-weight:700; font-size:clamp(2.6rem,7vw,4.8rem); letter-spacing:-0.025em; line-height:1.08; margin:36px 0 20px; max-width:14ch; }
+.cover p { color:var(--muted); font-size:1.05rem; max-width:52ch; }
+.coverMeta { margin-top:44px; display:flex; gap:26px; flex-wrap:wrap; font-family:var(--mono); font-size:0.72rem; letter-spacing:0.13em; text-transform:uppercase; color:var(--faint); }
+
+/* TOC */
+.toc { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:20px 0; display:flex; flex-wrap:wrap; gap:8px 28px; font-size:0.85rem; }
+.toc a { color:var(--muted); } .toc a:hover { color:#fff; text-decoration:none; }
+.toc .n { color:var(--faint); font-family:var(--mono); font-size:0.72rem; margin-right:6px; }
+
+/* Sections */
+section.block { padding:clamp(56px,7vw,96px) 0; border-bottom:1px solid var(--line); }
+.eyebrow { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:#9AA3F7; margin-bottom:14px; }
+h2 { font-family:var(--display); font-weight:700; font-size:clamp(1.8rem,3.6vw,2.6rem); letter-spacing:-0.02em; line-height:1.15; margin-bottom:18px; max-width:24ch; }
+h3 { font-family:var(--display); font-weight:600; font-size:1.15rem; letter-spacing:-0.01em; margin:40px 0 10px; }
+p.lead { color:var(--muted); font-size:1.02rem; max-width:64ch; }
+p.body { color:var(--muted); font-size:0.95rem; max-width:64ch; margin-top:10px; }
+p.body strong, p.lead strong { color:#fff; font-weight:600; }
+.note { border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:10px; background:var(--panel); padding:16px 20px; color:var(--muted); font-size:0.9rem; margin-top:22px; max-width:70ch; }
+.note.warn { border-left-color:#F59E0B; }
+.note.live { border-left-color:var(--live); }
+code { font-family:var(--mono); font-size:0.85em; background:var(--inset); border:1px solid var(--line); border-radius:6px; padding:1px 7px; color:#E8E8EA; }
+
+/* Grids & tiles */
+.grid { display:grid; gap:18px; margin-top:28px; }
+.g2 { grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+.g3 { grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+.tile { border:1px solid var(--line); border-radius:16px; background:var(--panel); padding:24px; }
+.tile .cap { font-family:var(--mono); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--faint); margin-top:16px; }
+.tile .cap b { color:var(--muted); font-weight:500; }
+.logoStage { display:flex; align-items:center; justify-content:center; min-height:150px; border-radius:10px; }
+.logoStage.dark { background:#08080A; border:1px solid var(--line); }
+.logoStage.light { background:#FFFFFF; }
+.logoStage.panelbg { background:var(--inset); }
+
+/* Swatches */
+.swatch { border-radius:16px; overflow:hidden; border:1px solid var(--line); }
+.swatch .chip { height:92px; }
+.swatch .meta { background:var(--panel); padding:14px 18px; }
+.swatch .nm { font-family:var(--display); font-weight:600; font-size:0.95rem; }
+.swatch .hex { font-family:var(--mono); font-size:0.75rem; color:var(--muted); margin-top:2px; }
+.swatch .use { font-size:0.8rem; color:var(--faint); margin-top:6px; line-height:1.5; }
+
+/* Type specimens */
+.spec { border:1px solid var(--line); border-radius:16px; background:var(--panel); padding:28px; margin-top:18px; }
+.spec .label { font-family:var(--mono); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--faint); margin-bottom:14px; }
+.spec .sampleDisplay { font-family:var(--display); font-weight:700; font-size:clamp(1.9rem,4.4vw,3rem); letter-spacing:-0.025em; line-height:1.12; }
+.spec .sampleHeading { font-family:var(--display); font-weight:600; font-size:1.5rem; letter-spacing:-0.02em; }
+.spec .sampleUI { font-family:var(--display); font-weight:600; font-size:1.05rem; letter-spacing:-0.01em; }
+.spec .sampleBody { font-family:var(--sans); font-size:0.95rem; color:var(--muted); max-width:60ch; }
+.spec .sampleMono { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.13em; text-transform:uppercase; color:var(--faint); }
+
+/* Do / don't */
+.dd { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); margin-top:26px; }
+.ddcard { border:1px solid var(--line); border-radius:16px; background:var(--panel); padding:22px; }
+.ddcard .tag { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:0.68rem; letter-spacing:0.13em; text-transform:uppercase; margin-bottom:14px; }
+.ddcard.do .tag { color:var(--live); } .ddcard.dont .tag { color:#F27B7B; }
+.ddcard .q { font-size:0.93rem; color:#E8E8EA; border-left:2px solid var(--line); padding-left:14px; margin:10px 0; line-height:1.55; }
+.ddcard.do .q { border-left-color:rgba(62,207,142,0.5); }
+.ddcard.dont .q { border-left-color:rgba(242,123,123,0.5); }
+.ddcard .why { font-size:0.82rem; color:var(--faint); margin-top:12px; }
+
+ul.rules { margin:18px 0 0 0; padding:0; list-style:none; max-width:70ch; }
+ul.rules li { padding:12px 0 12px 30px; border-bottom:1px solid var(--line); position:relative; color:var(--muted); font-size:0.93rem; }
+ul.rules li:last-child { border-bottom:none; }
+ul.rules li::before { content:''; position:absolute; left:4px; top:1.22em; width:7px; height:7px; border-radius:50%; background:var(--accent); }
+ul.rules li b, ul.rules li strong { color:#fff; font-weight:600; }
+ul.rules.red li::before { background:#F27B7B; }
+ul.rules.green li::before { background:var(--live); }
+
+/* Tables */
+table { width:100%; border-collapse:collapse; margin-top:24px; font-size:0.88rem; }
+th { text-align:left; font-family:var(--mono); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--faint); font-weight:500; padding:10px 14px; border-bottom:1px solid var(--line); }
+td { padding:12px 14px; border-bottom:1px solid var(--line); color:var(--muted); vertical-align:top; }
+td b { color:#fff; font-weight:600; }
+td code { white-space:nowrap; }
+
+/* Preview gallery */
+.gallery { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:28px; }
+.shot { border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--panel); }
+.shot img { display:block; width:100%; height:auto; }
+.shot .cap { padding:12px 16px; font-family:var(--mono); font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--faint); }
+.shot.wide { grid-column:1/-1; }
+
+footer { padding:48px 0 72px; color:var(--faint); font-size:0.82rem; }
+
+@media print {
+  body { background:#08080A !important; }
+  .tile, .swatch, .spec, .ddcard, .shot, .note, table, ul.rules li { break-inside:avoid; }
+  h2, h3 { break-after:avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <svg class="ghost" width="820" height="820" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/></svg>
+  <div class="wrap">
+    <svg width="76" height="76" viewBox="0 0 64 64" aria-label="Hala"><circle cx="32" cy="32" r="20" fill="none" stroke="#6E7BF2" stroke-width="6" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/><circle cx="17.9" cy="46.1" r="6.5" fill="#3ECF8E"/></svg>
+    <h1>Hala<br>Brand Guidelines</h1>
+    <p>How Hala looks, sounds and behaves in marketing — built from the product site at hala.khaashub.com, for anyone making social content on the brand's behalf.</p>
+    <div class="coverMeta"><span>Version 1.0</span><span>August 2026</span><span>Marketing &amp; social media</span><span>A Khaas Hub product</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<nav class="toc">
+  <a href="#brand"><span class="n">01</span>The brand</a>
+  <a href="#logo"><span class="n">02</span>Logo</a>
+  <a href="#colour"><span class="n">03</span>Colour</a>
+  <a href="#type"><span class="n">04</span>Typography</a>
+  <a href="#voice"><span class="n">05</span>Voice &amp; tone</a>
+  <a href="#social"><span class="n">06</span>Social media</a>
+  <a href="#assets"><span class="n">07</span>Asset pack</a>
+</nav>
+
+<!-- ─────────────────────────── 01 THE BRAND ─────────────────────────── -->
+<section class="block" id="brand">
+  <div class="eyebrow">01 · The brand</div>
+  <h2>An AI Employee, not a chatbot.</h2>
+  <p class="lead">Hala answers every call, message and enquiry on the first ring, books customers in, follows up, and hands over to your team when someone needs a person. That sentence is the brand — every piece of marketing is some part of it made concrete.</p>
+
+  <h3>The name</h3>
+  <p class="body"><strong>هالة means halo.</strong> The name also lands as a greeting — "Hala!" is how you welcome someone in much of the Arabic-speaking world, and it sounds close to "Hello". A name about answering warmly, worn by a product that answers. In every language, the brand is written <strong>Hala</strong> in Latin script — including inside German and Arabic sentences.</p>
+
+  <h3>Who it speaks to</h3>
+  <p class="body">Owners of busy local businesses — restaurants, takeaways, salons, clinics, trades — who lose customers every day to an unanswered phone. They are practical, time-poor and allergic to tech hype. The brand speaks to them <strong>in their working day</strong>: Friday 19:42, mid-service, plating desserts. Never in AI-industry language.</p>
+
+  <h3>Positioning spine</h3>
+  <p class="body">The core promise is <strong>industry-neutral</strong> — customers, enquiries, appointments. Sector-specific words (covers, allergens, stylists, patch tests) belong only in industry-scene content, one sector at a time. This is how the site is written, and marketing follows the same rule: adding an industry never changes the core message.</p>
+
+  <h3>Product and parent</h3>
+  <p class="body">Hala is <strong>a Khaas Hub product</strong>. The lockup is "Hala <span style="color:var(--faint)">by Khaas Hub</span>" — Hala leads, the byline stays quiet and never grows to equal weight. On social profiles, Hala gets its own accounts; Khaas Hub appears in the byline, the about text and nowhere else.</p>
+
+  <div class="note live"><strong style="color:#fff">The one-sentence test.</strong> If a post can't be traced back to "answers on the first ring, books, follows up, hands over", it's off-brand — however clever it is.</div>
+</section>
+
+<!-- ─────────────────────────── 02 LOGO ─────────────────────────── -->
+<section class="block" id="logo">
+  <div class="eyebrow">02 · Logo</div>
+  <h2>An open ring, and a reply.</h2>
+  <p class="lead">The mark is an open ring — هالة means halo — with a dot resting where the ring opens. The gap reads as a speech tail, the dot as the reply. The dot is the same green the product uses for live status: by the time someone has seen the brand twice, they know what that green means.</p>
+  <p class="body">The 90° gap is centred at the bottom so both ends land at the 4 and 8 o'clock positions — where a headset's earcups sit. The double reading is deliberate: <strong>a halo to anyone who knows the name's meaning, a headset to everyone else.</strong> One end carries the dot; the other is left plain. Two dots would make it just a headset; none would make it just a ring.</p>
+
+  <div class="grid g3">
+    <div class="tile">
+      <div class="logoStage dark"><svg width="88" height="88" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="#6E7BF2" stroke-width="6" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/><circle cx="17.9" cy="46.1" r="6.5" fill="#3ECF8E"/></svg></div>
+      <div class="cap"><b>Primary</b> · colour on dark · ≥24px</div>
+    </div>
+    <div class="tile">
+      <div class="logoStage dark"><svg width="40" height="40" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="#8E9BFF" stroke-width="8" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/><circle cx="17.9" cy="46.1" r="7.5" fill="#3ECF8E"/></svg></div>
+      <div class="cap"><b>Small cut</b> · &lt;24px · heavier stroke, brighter ring</div>
+    </div>
+    <div class="tile">
+      <div class="logoStage light"><svg width="88" height="88" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="#6E7BF2" stroke-width="6" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/><circle cx="17.9" cy="46.1" r="6.5" fill="#3ECF8E"/></svg></div>
+      <div class="cap"><b>On light</b> · same colours, no outline, no shadow</div>
+    </div>
+    <div class="tile">
+      <div class="logoStage dark"><svg width="88" height="88" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/><circle cx="17.9" cy="46.1" r="6.5" fill="#FFFFFF"/></svg></div>
+      <div class="cap"><b>Mono white</b> · print, embroidery, watermarks</div>
+    </div>
+    <div class="tile">
+      <div class="logoStage light"><svg width="88" height="88" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="#08080A" stroke-width="6" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/><circle cx="17.9" cy="46.1" r="6.5" fill="#08080A"/></svg></div>
+      <div class="cap"><b>Mono black</b> · light single-colour contexts</div>
+    </div>
+    <div class="tile">
+      <div class="logoStage dark"><span style="display:flex;align-items:center;gap:12px;"><svg width="44" height="44" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="#6E7BF2" stroke-width="6" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/><circle cx="17.9" cy="46.1" r="6.5" fill="#3ECF8E"/></svg><span style="font-family:var(--display);font-weight:700;font-size:2rem;letter-spacing:-0.01em;">Hala</span></span></div>
+      <div class="cap"><b>Lockup</b> · mark + wordmark, Jakarta 700</div>
+    </div>
+  </div>
+
+  <h3>Clear space &amp; minimum size</h3>
+  <p class="body">Keep clear space around the mark equal to <strong>half the ring's diameter</strong> on every side. Minimum sizes: 20px for the small cut, 24px for the standard cut, 32px for the lockup. As an avatar, the mark sits alone at roughly 60% of the tile on the Night background — never the lockup, which dies in a small circle.</p>
+
+  <h3>Don't</h3>
+  <ul class="rules red">
+    <li><strong>Don't "correct" the gap</strong> into a tidy speech-bubble opening or close it into a full circle — the 4-and-8-o'clock opening is the whole idea.</li>
+    <li><strong>Don't recolour the dot.</strong> It is Live Green because green means "live" everywhere in the product. An indigo dot is a different brand.</li>
+    <li><strong>Don't add a second dot</strong>, rotate the mark, outline it, add gradients or drop shadows, or set it in a container shape.</li>
+    <li><strong>Don't put the colour mark on busy photography</strong> or mid-tone backgrounds — switch to mono white/black instead.</li>
+    <li><strong>Don't redraw the wordmark.</strong> It is always Plus Jakarta Sans 700 with -0.01em tracking, white or near-black.</li>
+  </ul>
+</section>
+
+<!-- ─────────────────────────── 03 COLOUR ─────────────────────────── -->
+<section class="block" id="colour">
+  <div class="eyebrow">03 · Colour</div>
+  <h2>Dark-first, one accent, and a green that means something.</h2>
+  <p class="lead">Hala is a dark brand: near-black surfaces, white type, one indigo accent, hairlines instead of boxes. Colour is used sparingly enough that when it appears, it carries information.</p>
+
+  <div class="grid g3">
+    <div class="swatch"><div class="chip" style="background:#08080A;"></div><div class="meta"><div class="nm">Night</div><div class="hex">#08080A</div><div class="use">The background. Every social canvas starts here.</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#141418;"></div><div class="meta"><div class="nm">Panel</div><div class="hex">#141418</div><div class="use">Cards and raised surfaces.</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#1C1C21;"></div><div class="meta"><div class="nm">Inset</div><div class="hex">#1C1C21</div><div class="use">Bubbles, inputs, inner surfaces.</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#6E7BF2;"></div><div class="meta"><div class="nm">Deep Indigo</div><div class="hex">#6E7BF2</div><div class="use">The accent. One emphasised word per headline, primary buttons, the ring.</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#8E9BFF;"></div><div class="meta"><div class="nm">Indigo Bright</div><div class="hex">#8E9BFF</div><div class="use">Small sizes and small text on dark, where #6E7BF2 loses contrast.</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#3ECF8E;"></div><div class="meta"><div class="nm">Live Green</div><div class="hex">#3ECF8E</div><div class="use">Live status, confirmations, booked outcomes, the dot. Nothing else.</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#FFFFFF;"></div><div class="meta"><div class="nm">White</div><div class="hex">#FFFFFF</div><div class="use">Headlines and primary text.</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#A8A8A8;"></div><div class="meta"><div class="nm">Muted</div><div class="hex">#A8A8A8</div><div class="use">Body copy on dark.</div></div></div>
+    <div class="swatch"><div class="chip" style="background:#707070;"></div><div class="meta"><div class="nm">Faint</div><div class="hex">#707070</div><div class="use">Captions, metadata, eyebrows, bylines.</div></div></div>
+  </div>
+
+  <h3>Supporting values</h3>
+  <table>
+    <tr><th>Token</th><th>Value</th><th>Use</th></tr>
+    <tr><td><b>Hairline</b></td><td><code>rgba(255,255,255,0.10)</code></td><td>Borders and dividers — the brand draws with hairlines, not filled boxes.</td></tr>
+    <tr><td><b>Accent soft</b></td><td><code>rgba(110,123,242,0.14)</code></td><td>Indigo washes: agent bubbles, tinted panels, gradient glows.</td></tr>
+    <tr><td><b>WhatsApp green</b></td><td><code>#25D366</code></td><td>Only as an icon tone when representing the WhatsApp channel.</td></tr>
+    <tr><td><b>Amber</b></td><td><code>#F59E0B</code></td><td>Only as an icon tone for background automations. Never for warnings in marketing.</td></tr>
+  </table>
+
+  <h3>Rules</h3>
+  <ul class="rules">
+    <li><strong>Roughly 90% of any canvas is Night, Panel and type.</strong> Indigo is an accent, not a fill — if a design feels "very purple", it's wrong.</li>
+    <li><strong>One indigo word per headline.</strong> The site emphasises exactly one word ("lead", "first ring") — never whole sentences.</li>
+    <li><strong>Green only ever means live / confirmed / booked.</strong> Don't decorate with it; it's the payoff colour that shows the job got done.</li>
+    <li><strong>Light backgrounds are the exception</strong> (print, co-branding). On white: Night for type, Deep Indigo as accent, and the same green rule.</li>
+    <li><strong>Contrast:</strong> body text on dark is Muted or lighter; small indigo text uses #8E9BFF. Never Faint below 12px.</li>
+  </ul>
+</section>
+
+<!-- ─────────────────────────── 04 TYPOGRAPHY ─────────────────────────── -->
+<section class="block" id="type">
+  <div class="eyebrow">04 · Typography</div>
+  <h2>Jakarta speaks. Inter explains.</h2>
+  <p class="lead">Two families, one job each. <strong>Plus Jakarta Sans</strong> carries every headline, price and UI label — it holds its weight from hero size down to a card title without turning fragile or fashion-editorial. <strong>Inter</strong> carries body copy. A system monospace carries eyebrows and metadata.</p>
+
+  <div class="spec"><div class="label">Display · Jakarta 700 · tracking −0.025em · 32px and up</div>
+    <div class="sampleDisplay">Turn every conversation into a <span style="color:var(--accent)">lead</span>.</div></div>
+  <div class="spec"><div class="label">Heading · Jakarta 600 · tracking −0.02em · 22–31px</div>
+    <div class="sampleHeading">It answers the phone like your best team member would.</div></div>
+  <div class="spec"><div class="label">UI / card titles · Jakarta 600 · tracking −0.01em · below 22px</div>
+    <div class="sampleUI">Appointment booked — Thu · 2:15 PM</div></div>
+  <div class="spec"><div class="label">Body · Inter 400 · Muted on dark</div>
+    <div class="sampleBody">Bookings, prices, opening hours and awkward questions — handled to the end, without pulling anyone off the job.</div></div>
+  <div class="spec"><div class="label">Eyebrow / meta · monospace · uppercase · +0.13em</div>
+    <div class="sampleMono">An AI employee for your business</div></div>
+
+  <h3>Rules</h3>
+  <ul class="rules">
+    <li><strong>Tracking follows optical size</strong>: −0.025em at 32px+, −0.02em at 22–31px, −0.01em below 22px. One negative value everywhere makes small text cramped.</li>
+    <li><strong>Weights:</strong> 700 for display, 600 for headings and UI, 400–500 for body. Nothing lighter than 400 on dark.</li>
+    <li><strong>Sentence case everywhere</strong> except mono eyebrows, which are uppercase with +0.13em letter-spacing.</li>
+    <li><strong>Headlines end with a full stop</strong> when they're statements — it's part of the plain-spoken register.</li>
+    <li><strong>Arabic</strong> uses IBM Plex Sans Arabic inside the same stacks — Latin words, including "Hala", keep the Latin face inside an Arabic sentence.</li>
+    <li><strong>Fallbacks</strong> when the brand fonts are unavailable (e.g. plain-text platforms): system sans. Never substitute a serif or a rounded display face.</li>
+  </ul>
+</section>
+
+<!-- ─────────────────────────── 05 VOICE ─────────────────────────── -->
+<section class="block" id="voice">
+  <div class="eyebrow">05 · Voice &amp; tone</div>
+  <h2>Plain-spoken, concrete, and on the owner's side.</h2>
+  <p class="lead">Hala sounds like a sharp, calm colleague explaining something over the counter — not a SaaS landing page. The register is British, direct and specific. If a sentence could appear in any AI company's deck, it doesn't belong here.</p>
+
+  <h3>Principles</h3>
+  <ul class="rules">
+    <li><strong>Scenes, not claims.</strong> Start where the reader is standing: "Friday, 19:42. Everyone's mid-service." A time and a situation beat any adjective.</li>
+    <li><strong>Numbers do the talking.</strong> First ring. 60 seconds. 24 hours. Live in 48 hours. Never "revolutionary", "seamless", "game-changing", "supercharge".</li>
+    <li><strong>Second person, their world.</strong> "Your hours, your services, your prices, your policies." The product is described by what it takes off the owner's plate.</li>
+    <li><strong>An employee, not a bot — but never a secret.</strong> Hala is written about like a capable colleague ("it answers", "it books", "hands over"). At the same time, customers must always be told they're talking to an AI. Warm, never deceptive.</li>
+    <li><strong>Short sentences with rhythm.</strong> "1 employee. 6 channels. Every hour of the day." Fragments are fine. Exclamation marks are not — the brand almost never uses them.</li>
+    <li><strong>Honest to a fault.</strong> No invented stats, no fake testimonials, no integration we don't have. The site holds its proof section empty until a real customer will be named; marketing does the same.</li>
+  </ul>
+
+  <div class="dd">
+    <div class="ddcard do"><span class="tag">● Sounds like Hala</span>
+      <div class="q">Your phone rings at 19:42 on a Friday. Everyone's mid-service. Nobody picks up. That call was a table of four.</div>
+      <div class="q">A text back within a minute of every missed call. A nudge when an enquiry goes quiet.</div>
+      <div class="q">It answers the phone like your best team member would.</div>
+      <div class="why">Concrete time, concrete loss, plain verbs, the owner's vantage point.</div>
+    </div>
+    <div class="ddcard dont"><span class="tag">✕ Doesn't</span>
+      <div class="q">Revolutionise your customer engagement with cutting-edge conversational AI! 🚀</div>
+      <div class="q">Our proprietary LLM-powered omnichannel platform delivers seamless CX at scale.</div>
+      <div class="q">Say goodbye to missed calls forever!!</div>
+      <div class="why">Hype adjectives, industry jargon, exclamation marks, and nothing the reader can picture.</div>
+    </div>
+  </div>
+
+  <h3>German</h3>
+  <p class="body">German copy is a <strong>rewrite, not a translation</strong> — idiomatic first, faithful second. Register is <strong>Sie throughout</strong>, without exception; the buyer is a business owner and <em>du</em> reads as presumptuous. Where English uses "it", German <strong>names Hala as the subject</strong> ("Hala antwortet…") to sidestep the er/sie pronoun choice. Times are 24-hour (14:15), thousands use a dot (1.200), prices are in euros. Everything German should get a native speaker's pass before publishing — especially headlines, where English rhythm rarely survives word-for-word.</p>
+
+  <div class="note warn"><strong style="color:#fff">Claims discipline.</strong> Three claims are off-limits until the facts change: an agent that switches language per caller (each deployment is one language), integrations not yet confirmed, and any customer numbers or testimonials. When in doubt, describe behaviour, not results.</div>
+</section>
+
+<!-- ─────────────────────────── 06 SOCIAL ─────────────────────────── -->
+<section class="block" id="social">
+  <div class="eyebrow">06 · Social media</div>
+  <h2>Show the phone being answered.</h2>
+  <p class="lead">The strongest thing Hala can post is the product doing its job: a conversation, a booked outcome, a green light. Social content recreates the site's rhythm — dark canvas, one idea per card, one accent word, the URL in the footer.</p>
+
+  <h3>Content pillars</h3>
+  <table>
+    <tr><th>Pillar</th><th>What it looks like</th><th>Template</th></tr>
+    <tr><td><b>Scenes</b></td><td>A moment from the owner's day where a call would have been missed — and wasn't. One industry at a time.</td><td>Chat card / story chat</td></tr>
+    <tr><td><b>How it works</b></td><td>One capability per post: missed-call text-back, one memory across channels, warm handover, live in 48 hours.</td><td>Feature card</td></tr>
+    <tr><td><b>Straight answers</b></td><td>The pre-demo questions answered honestly: "Will it sound like a robot?" "Is this replacing my staff?"</td><td>Headline card</td></tr>
+    <tr><td><b>The three bad answers</b></td><td>Answer it yourself / voicemail / answering service — the carousel argument against the status quo.</td><td>Carousel of stat/feature cards</td></tr>
+    <tr><td><b>Proof</b></td><td>Reserved. Only real, named customers with real numbers — the moment one exists, this becomes the lead pillar.</td><td>Stat card</td></tr>
+  </table>
+
+  <h3>Formats per platform</h3>
+  <table>
+    <tr><th>Platform</th><th>Sizes</th><th>Notes</th></tr>
+    <tr><td><b>Instagram</b></td><td>1080×1080 feed · 1080×1920 story/reel</td><td>Scenes and chat cards lead. 3–5 concrete hashtags. Link in bio to the demo.</td></tr>
+    <tr><td><b>LinkedIn</b></td><td>1200×627 link/post image · banner 1584×396</td><td>Longer captions work; lead with the scene, end with the demo line. 0–3 hashtags.</td></tr>
+    <tr><td><b>Facebook</b></td><td>1080×1080 posts · cover 1640×624</td><td>Where local owners are. Same posts as IG; captions can run longer. No hashtags needed.</td></tr>
+    <tr><td><b>TikTok / YouTube</b></td><td>1080×1920 vertical · YT art 2560×1440</td><td>Real call recordings (with consent) are the format. Verticals double as end-cards; keep YT art content in the 1546×423 safe area.</td></tr>
+  </table>
+
+  <h3>Template rules</h3>
+  <ul class="rules">
+    <li>Every card carries the <strong>mark + wordmark top-left</strong> and <strong>hala.khaashub.com in the footer</strong>, separated by a hairline.</li>
+    <li><strong>One indigo word per headline</strong>, chosen for meaning ("lead", "first ring") — the accent moves to wherever the emphasis falls in German.</li>
+    <li>Chat cards show <strong>real product behaviour only</strong> — exchanges the agent genuinely handles, guest in Inset grey on the left, Hala in indigo wash on the right, outcome card with the green check underneath.</li>
+    <li>The <strong>"Answering now" live badge</strong> (green dot + mono caps) is reserved for content showing the product live — don't use it decoratively.</li>
+    <li>The oversized <strong>ghost ring</strong> sits at ~5% white opacity, cropped by a corner — never fully visible, never in colour.</li>
+    <li>Photography, when it arrives, is real businesses mid-service in low warm light — never stock handshakes, headsets or robots. <strong>No robot imagery, ever.</strong></li>
+  </ul>
+
+  <h3>The templates</h3>
+  <div class="gallery">
+    <div class="shot"><img src="{{post_headline}}" alt="Headline card"><div class="cap">post-headline · 1080×1080</div></div>
+    <div class="shot"><img src="{{post_stat}}" alt="Stat card"><div class="cap">post-stat · 1080×1080</div></div>
+    <div class="shot"><img src="{{post_chat}}" alt="Chat card"><div class="cap">post-chat · 1080×1080</div></div>
+    <div class="shot"><img src="{{post_feature}}" alt="Feature card"><div class="cap">post-feature · 1080×1080</div></div>
+    <div class="shot"><img src="{{story_headline}}" alt="Story headline"><div class="cap">story-headline · 1080×1920</div></div>
+    <div class="shot"><img src="{{story_chat}}" alt="Story chat"><div class="cap">story-chat · 1080×1920</div></div>
+    <div class="shot wide"><img src="{{linkedin_post}}" alt="LinkedIn post"><div class="cap">linkedin-post · 1200×627</div></div>
+    <div class="shot wide"><img src="{{banner_linkedin}}" alt="LinkedIn banner"><div class="cap">linkedin-banner · 1584×396</div></div>
+    <div class="shot wide"><img src="{{banner_facebook}}" alt="Facebook cover"><div class="cap">facebook-cover · 1640×624</div></div>
+  </div>
+
+  <div class="note warn"><strong style="color:#fff">Compliance on social.</strong> If the Hala account replies with AI assistance, say so. The EU AI Act requires customers to know they're talking to an AI — the brand treats that as a feature ("most callers never ask"), not small print. And nothing goes out claiming an unconfirmed integration or an invented result.</div>
+</section>
+
+<!-- ─────────────────────────── 07 ASSETS ─────────────────────────── -->
+<section class="block" id="assets">
+  <div class="eyebrow">07 · Asset pack</div>
+  <h2>What's in the kit.</h2>
+  <p class="lead">Everything referenced in this guide ships alongside it. SVGs are the masters; PNGs are exports for platforms that need them. Editable HTML sources for every template are in <code>render/</code> — change the copy, re-render, and the design system comes along for free.</p>
+  <table>
+    <tr><th>Path</th><th>Contents</th></tr>
+    <tr><td><code>logo/</code></td><td>Mark SVGs (colour, small cut, mono ×2) · PNG exports 32–512px · lockups (white, black, byline) · avatars 1024px dark/light</td></tr>
+    <tr><td><code>templates/</code></td><td>Feed cards 1080×1080 (headline, stat, chat, feature) · stories 1080×1920 (headline, chat) · LinkedIn 1200×627</td></tr>
+    <tr><td><code>banners/</code></td><td>LinkedIn 1584×396 · Facebook cover 1640×624 · YouTube channel art 2560×1440</td></tr>
+    <tr><td><code>copy/</code></td><td><code>sample-posts.md</code> — launch, feature, industry and FAQ posts, EN + DE · <code>profile-kit.md</code> — bios and profile text per platform</td></tr>
+    <tr><td><code>guide/</code></td><td>This document, plus the PDF export</td></tr>
+    <tr><td><code>render/</code></td><td>Editable HTML/CSS sources + <code>render.js</code> (Node + Playwright) to regenerate every PNG</td></tr>
+  </table>
+  <p class="body" style="margin-top:26px">Fonts: <a href="https://fonts.google.com/specimen/Plus+Jakarta+Sans">Plus Jakarta Sans</a>, <a href="https://fonts.google.com/specimen/Inter">Inter</a> and <a href="https://fonts.google.com/specimen/IBM+Plex+Sans+Arabic">IBM Plex Sans Arabic</a> — all open (OFL), free for commercial use.</p>
+</section>
+
+<footer>
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+    <svg width="26" height="26" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="#6E7BF2" stroke-width="6" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/><circle cx="17.9" cy="46.1" r="6.5" fill="#3ECF8E"/></svg>
+    <span style="font-family:var(--display);font-weight:600;color:#fff;">Hala</span>
+    <span>· Brand guidelines v1.0 · August 2026</span>
+  </div>
+  Hala is a Khaas Hub product · hala.khaashub.com · Questions about the brand: info@khaashub.com
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><link rel="stylesheet" href="post.css">
+<style>
+  .convo { display: flex; flex-direction: column; gap: 34px; margin: 64px 0 56px; }
+  .bubble { font-size: 36px; padding: 32px 40px; border-radius: 32px; }
+  .middle { margin: auto 0; }
+  h2.q { font-family: var(--display); font-weight: 700; font-size: 76px; letter-spacing: var(--tr-heading); line-height: 1.15; max-width: 14ch; }
+  .card .v { font-size: 33px; } .card .k { font-size: 26px; } .card { padding: 34px 42px; border-radius: 24px; }
+</style></head>
+<body>
+<div class="frame story">
+  <div class="head" style="justify-content: space-between;">
+    <div style="display:flex; align-items:center; gap:20px;">
+      <svg class="mark" width="66" height="66" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="#6E7BF2" stroke-width="6" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/><circle cx="17.9" cy="46.1" r="6.5" fill="#3ECF8E"/></svg>
+      <div class="word" style="font-size:48px;">Hala</div>
+    </div>
+    <div class="live" style="font-size:24px;"><span class="dot"></span> Answering now</div>
+  </div>
+  <div class="middle">
+    <h2 class="q">It's 21:48. Your phone just answered itself.</h2>
+    <div class="convo">
+      <div class="bubble guest">Are you open tomorrow? Need an appointment.</div>
+      <div class="bubble agent">We open at 9:00 — I can book you in for 9:30.</div>
+      <div class="bubble guest">Yes please</div>
+    </div>
+    <div class="card">
+      <div class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3ECF8E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><div class="k">Replied in 4 seconds</div><div class="v">Booked · 9:30 · Reminder scheduled</div></div>
+    </div>
+  </div>
+  <div class="foot">
+    <div class="tag" style="font-size:27px;">While your customer is still deciding</div>
+    <div class="url" style="font-size:25px;">hala.khaashub.com</div>
+  </div>
+</div>
+</body></html>

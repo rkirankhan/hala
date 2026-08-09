@@ -876,12 +876,12 @@ export const CHANNEL_ICONS: { icon: LucideIcon; colour: string }[] = [
 ];
 
 function MapTile({
-  layout, x, y, width, icon: Icon, label, note, system, accent, rtl, channels,
+  layout, x, y, width, icon: Icon, label, note, system, accent, mark, rtl, channels,
   flashes = [], tone,
 }: {
   layout: Layout; x: number; y: number; width: number; icon: LucideIcon;
-  label: string; note?: string; system?: string; accent?: boolean; rtl: boolean;
-  channels?: boolean; flashes?: number[]; tone?: string;
+  label: string; note?: string; system?: string; accent?: boolean; mark?: boolean;
+  rtl: boolean; channels?: boolean; flashes?: number[]; tone?: string;
 }) {
   /* Geometry in percent and type in container query units, both against the
      canvas — so the diagram holds its proportions whether it has the full page,
@@ -904,9 +904,12 @@ function MapTile({
             ? `linear-gradient(150deg, ${tone}1A 0%, rgba(20,20,24,0.96) 70%)`
             : 'rgba(20,20,24,0.96)',
         border: `1px solid ${accent ? 'rgba(110,123,242,0.42)' : tone ? `${tone}3D` : C.line}`,
+        /* Enough to lift the tile off the canvas, not enough to read as a glow
+           — the coloured bloom under the amber and green tiles was competing
+           with the connector lines it was supposed to be echoing. */
         boxShadow: tone
-          ? `0 24px 50px -30px ${tone}66`
-          : '0 18px 40px -24px rgba(0,0,0,0.9)',
+          ? `0 14px 30px -28px ${tone}59`
+          : '0 12px 26px -24px rgba(0,0,0,0.8)',
         textAlign: !note && !system ? 'center' : 'start',
       }}
     >
@@ -943,6 +946,20 @@ function MapTile({
               <Ch size={11} strokeWidth={2} />
             </span>
           ))}
+        </span>
+      ) : mark ? (
+        /* The accent tile is Hala itself, so it wears the mark rather than a
+           generic sparkle in a box. Sized by the class rule, not the component's
+           `size` prop, so it scales with the canvas like everything else here. */
+        <span
+          className="v4-map-mark"
+          style={{
+            display: 'inline-flex',
+            width: 'clamp(22px, 5.6cqw, 28px)', height: 'clamp(22px, 5.6cqw, 28px)',
+            marginBottom: 'clamp(5px, 1.8cqw, 9px)',
+          }}
+        >
+          <HalaMark size={28} title="" />
         </span>
       ) : (
         <span
@@ -1008,7 +1025,7 @@ function FlowMap({
       flashes: layout.nodes.contact,
     },
     {
-      pos: layout.answer, icon: Sparkles, label: flow.map.answer, accent: true,
+      pos: layout.answer, icon: Sparkles, label: flow.map.answer, accent: true, mark: true,
       flashes: layout.nodes.answer,
     },
   ];
@@ -1119,7 +1136,7 @@ function FlowMap({
             key={t.label}
             layout={layout}
             x={t.pos[0]} y={t.pos[1]} width={t.pos[2]}
-            icon={t.icon} label={t.label} note={t.note} accent={t.accent}
+            icon={t.icon} label={t.label} note={t.note} accent={t.accent} mark={t.mark}
             channels={t.channels} flashes={t.flashes} rtl={rtl}
           />
         ))}

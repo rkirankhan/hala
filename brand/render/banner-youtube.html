@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><link rel="stylesheet" href="post.css">
+<style>
+  /* YouTube channel art: 2560x1440, but content must sit in the 1546x423 safe
+     area centred on the canvas — everything outside may be cropped on TV/desktop. */
+  .frame { width: 2560px; height: 1440px; padding: 0; align-items: center; justify-content: center; }
+  .safe { width: 1546px; height: 423px; display: flex; align-items: center; justify-content: center; gap: 40px; }
+  .word { font-family: var(--display); font-weight: 700; font-size: 88px; letter-spacing: var(--tr-ui); color: #fff; }
+  .tagline { font-family: var(--display); font-weight: 500; font-size: 34px; letter-spacing: var(--tr-heading); color: var(--muted); margin-top: 10px; }
+</style></head>
+<body>
+<div class="frame">
+  <svg class="ghost-ring" style="left:120px; top:-200px; opacity:0.05;" width="900" height="900" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/></svg>
+  <div class="safe">
+    <svg class="mark" width="150" height="150" viewBox="0 0 64 64"><circle cx="32" cy="32" r="20" fill="none" stroke="#6E7BF2" stroke-width="6" stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/><circle cx="17.9" cy="46.1" r="6.5" fill="#3ECF8E"/></svg>
+    <div>
+      <div class="word">Hala <span style="font-size:32px; font-weight:500; color:var(--faint);">by Khaas Hub</span></div>
+      <div class="tagline">The AI Employee for customer conversations · hala.khaashub.com</div>
+    </div>
+  </div>
+</div>
+</body></html>

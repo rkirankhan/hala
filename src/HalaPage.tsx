@@ -189,6 +189,7 @@ export function HalaPage() {
 
         /* The alternatives take the wider column: they carry nine lines to the
            answer's four, and the answer earns its weight from contrast, not size. */
+        .v4-map-mark svg { width: 100%; height: 100%; }
         .v4-versus { grid-template-columns: minmax(0,1fr); }
         @media (min-width: 940px) { .v4-versus { grid-template-columns: 1.25fr 1fr; } }
 
