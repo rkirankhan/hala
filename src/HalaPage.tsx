@@ -153,17 +153,6 @@ export function HalaPage() {
           .v4-map-tall { display: none; }
         }
 
-        /* Map and conversation side by side once there is room for both.
-           In a column the diagram switches to its vertical layout: the
-           horizontal one needs roughly 900px before the outcome tiles stop
-           colliding, and half a 1440px page is nowhere near that. */
-        .v4-flow-cols { display: grid; gap: 16px; align-items: start; grid-template-columns: minmax(0,1fr); }
-        @media (min-width: 1240px) {
-          .v4-flow-cols { grid-template-columns: minmax(0,0.95fr) minmax(0,1fr); gap: 28px; }
-          .v4-map-wide { display: none; }
-          .v4-map-tall { display: block; }
-        }
-
         /* Mirror the diagram for Arabic. Each tile un-mirrors itself inline —
            see MapTile — because a stylesheet rule cannot override the inline
            transform the tiles need for centering. */

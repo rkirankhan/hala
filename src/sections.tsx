@@ -1066,12 +1066,8 @@ export function FlowSection() {
         })}
       </div>
 
-      <div className="v4-flow-cols">
-        <div style={{ minWidth: 0 }}>
-          <FlowMap outcomes={industry.flow} layout={WIDE} className="v4-map-wide" />
-          <FlowMap outcomes={industry.flow} layout={TALL} className="v4-map-tall" />
-
-        </div>
+      <FlowMap outcomes={industry.flow} layout={WIDE} className="v4-map-wide" />
+      <FlowMap outcomes={industry.flow} layout={TALL} className="v4-map-tall" />
 
 
       <div
@@ -1115,7 +1111,6 @@ export function FlowSection() {
           <p style={{ margin: 0, fontSize: 15.5, fontWeight: 500, color: '#C3CAFF' }}>
             {industry.outcome}
           </p>
-        </div>
         </div>
       </div>
 
