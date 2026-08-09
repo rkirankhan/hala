@@ -202,9 +202,9 @@ export const de: HalaCopy = {
       {
         key: 'restaurants',
         flow: [
-          { label: 'Tisch reserviert', note: 'In Ihr Buch eingetragen, Allergien vermerkt' },
-          { label: 'Bestellung aufgenommen', note: 'An die Küche geschickt, Bon gedruckt' },
-          { label: 'Frage beantwortet', note: 'Karte, Öffnungszeiten oder Parken — mit Buchungslink' },
+          { label: 'Tisch reserviert', note: 'In Ihr Buch eingetragen, Allergien vermerkt', system: 'Reservierungsbuch · Küche informiert · SMS-Bestätigung' },
+          { label: 'Bestellung aufgenommen', note: 'An die Küche geschickt, Bon gedruckt', system: 'Küchenbon · Beleg gedruckt · SMS' },
+          { label: 'Frage beantwortet', note: 'Karte, Öffnungszeiten oder Parken — mit Buchungslink', system: 'Anfrage erfasst · Details gesendet' },
         ],
         label: 'Restaurants & Lieferdienste',
         line: 'Ein Tisch für vier am Freitag, so gegen acht?',
@@ -215,9 +215,9 @@ export const de: HalaCopy = {
       {
         key: 'clinics',
         flow: [
-          { label: 'Beratung gebucht', note: 'Anzahlung erhalten, Erinnerung geplant' },
-          { label: 'Behandlung kalkuliert', note: 'Aus Ihrer eigenen Preisliste' },
-          { label: 'Frage beantwortet', note: 'Nachsorge und Eignung, in Ihren Worten' },
+          { label: 'Beratung gebucht', note: 'Anzahlung erhalten, Erinnerung geplant', system: 'Kalender · Anzahlung erhalten · Erinnerung geplant' },
+          { label: 'Behandlung kalkuliert', note: 'Aus Ihrer eigenen Preisliste', system: 'Angebot erfasst · Ihre Preisliste angewendet' },
+          { label: 'Frage beantwortet', note: 'Nachsorge und Eignung, in Ihren Worten', system: 'Anfrage erfasst · Details gesendet' },
         ],
         label: 'Kosmetikkliniken',
         line: 'Was kostet eine Beratung für Filler?',
@@ -233,9 +233,9 @@ export const de: HalaCopy = {
       {
         key: 'property',
         flow: [
-          { label: 'Besichtigung gebucht', note: 'Im Kalender des Maklers' },
-          { label: 'Interessent qualifiziert', note: 'Budget und Zeitrahmen erfasst' },
-          { label: 'Frage beantwortet', note: 'Preis, Eigentumsform und Verfügbarkeit' },
+          { label: 'Besichtigung gebucht', note: 'Im Kalender des Maklers', system: 'Maklerkalender · Eigentümer informiert' },
+          { label: 'Interessent qualifiziert', note: 'Budget und Zeitrahmen erfasst', system: 'In Ihr CRM · Budget erfasst' },
+          { label: 'Frage beantwortet', note: 'Preis, Eigentumsform und Verfügbarkeit', system: 'Anfrage erfasst · Details gesendet' },
         ],
         label: 'Immobilienmakler',
         line: 'Ist die Wohnung in der Mühlenstraße noch frei?',
@@ -251,9 +251,9 @@ export const de: HalaCopy = {
       {
         key: 'salons',
         flow: [
-          { label: 'Termin gebucht', note: 'Beim gewünschten Stylisten' },
-          { label: 'Leistung kalkuliert', note: 'Aus Ihrer Preisliste' },
-          { label: 'Frage beantwortet', note: 'Öffnungszeiten, Produkte oder Allergietest' },
+          { label: 'Termin gebucht', note: 'Beim gewünschten Stylisten', system: 'Stylisten-Kalender · Erinnerung gesetzt' },
+          { label: 'Leistung kalkuliert', note: 'Aus Ihrer Preisliste', system: 'Angebot erfasst · Ihre Preisliste angewendet' },
+          { label: 'Frage beantwortet', note: 'Öffnungszeiten, Produkte oder Allergietest', system: 'Anfrage erfasst · Details gesendet' },
         ],
         label: 'Salons & Barbiere',
         line: 'Wäre Samstag noch etwas für Schnitt und Farbe frei?',
@@ -264,9 +264,9 @@ export const de: HalaCopy = {
       {
         key: 'trades',
         flow: [
-          { label: 'Auftrag gebucht', note: 'Adresse und Fehler erfasst' },
-          { label: 'Angebot angefragt', note: 'Vorbereitet und an Sie übergeben' },
-          { label: 'Frage beantwortet', note: 'Anfahrtskosten und Verfügbarkeit' },
+          { label: 'Auftrag gebucht', note: 'Adresse und Fehler erfasst', system: 'Auftragsschein · Techniker · SMS' },
+          { label: 'Angebot angefragt', note: 'Vorbereitet und an Sie übergeben', system: 'Lead erfasst · Adresse und Fehler dokumentiert' },
+          { label: 'Frage beantwortet', note: 'Anfahrtskosten und Verfügbarkeit', system: 'Anfrage erfasst · Details gesendet' },
         ],
         label: 'Handwerk & Haustechnik',
         line: 'Die Heizung ist undicht — kann heute noch jemand kommen?',

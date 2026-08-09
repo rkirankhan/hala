@@ -127,8 +127,12 @@ export interface HalaCopy {
       reply: string;
       handles: string[];
       outcome: string;
-      /** The three outcome nodes on the flow map, in this sector's words. */
-      flow: { label: string; note: string }[];
+      /**
+       * The three outcome nodes on the flow map, in this sector's words.
+       * `system` is what lands in the business's own tools — the part an owner
+       * cares about most, and the part a chat transcript never shows.
+       */
+      flow: { label: string; note: string; system: string }[];
     }[];
   };
 
@@ -381,9 +385,9 @@ export const en: HalaCopy = {
       {
         key: 'restaurants',
         flow: [
-          { label: 'Table booked', note: 'Written into your diary, allergies noted' },
-          { label: 'Order taken', note: 'Sent to the kitchen, receipt printed' },
-          { label: 'Question answered', note: 'Menu, hours or parking — with a booking link' },
+          { label: 'Table booked', note: 'Written into the diary, allergies noted', system: 'Diary · kitchen notified · SMS confirmation' },
+          { label: 'Order taken', note: 'Sent to the kitchen, receipt printed', system: 'Kitchen ticket · receipt · SMS to customer' },
+          { label: 'Question answered', note: 'Menu, hours or parking — with a booking link', system: 'Enquiry logged · details sent' },
         ],
         label: 'Restaurants & takeaways',
         line: 'Table for four this Friday, around eight?',
@@ -394,9 +398,9 @@ export const en: HalaCopy = {
       {
         key: 'clinics',
         flow: [
-          { label: 'Consultation booked', note: 'Deposit taken, reminder scheduled' },
-          { label: 'Treatment priced', note: 'Quoted from your own price list' },
-          { label: 'Question answered', note: 'Aftercare and suitability, in your words' },
+          { label: 'Consultation booked', note: 'Deposit taken, reminder scheduled', system: 'Calendar · deposit taken · reminder scheduled' },
+          { label: 'Treatment priced', note: 'Quoted from your own price list', system: 'Quote logged · your price list applied' },
+          { label: 'Question answered', note: 'Aftercare and suitability, in your words', system: 'Enquiry logged · details sent' },
         ],
         label: 'Cosmetic clinics',
         line: 'How much is a consultation for filler?',
@@ -407,9 +411,9 @@ export const en: HalaCopy = {
       {
         key: 'property',
         flow: [
-          { label: 'Viewing booked', note: 'Into the negotiator’s calendar' },
-          { label: 'Buyer qualified', note: 'Budget and timescale captured' },
-          { label: 'Question answered', note: 'Price, tenure and availability' },
+          { label: 'Viewing booked', note: 'Into the negotiator’s calendar', system: 'Negotiator diary · vendor notified' },
+          { label: 'Buyer qualified', note: 'Budget and timescale captured', system: 'Added to your CRM · budget recorded' },
+          { label: 'Question answered', note: 'Price, tenure and availability', system: 'Enquiry logged · details sent' },
         ],
         label: 'Estate agents',
         line: 'Is the flat on Mill Street still available?',
@@ -420,9 +424,9 @@ export const en: HalaCopy = {
       {
         key: 'salons',
         flow: [
-          { label: 'Appointment booked', note: 'With the stylist they asked for' },
-          { label: 'Service priced', note: 'Quoted from your price list' },
-          { label: 'Question answered', note: 'Hours, products or patch tests' },
+          { label: 'Appointment booked', note: 'With the stylist they asked for', system: 'Stylist calendar · reminder set' },
+          { label: 'Service priced', note: 'Quoted from your price list', system: 'Quote logged · your price list applied' },
+          { label: 'Question answered', note: 'Hours, products or patch tests', system: 'Enquiry logged · details sent' },
         ],
         label: 'Salons & barbers',
         line: 'Any chance of a cut and colour on Saturday?',
@@ -433,9 +437,9 @@ export const en: HalaCopy = {
       {
         key: 'trades',
         flow: [
-          { label: 'Job booked', note: 'Address and fault captured' },
-          { label: 'Quote requested', note: 'Briefed and passed straight to you' },
-          { label: 'Question answered', note: 'Callout charges and availability' },
+          { label: 'Job booked', note: 'Address and fault captured', system: 'Job sheet · engineer assigned · SMS' },
+          { label: 'Quote requested', note: 'Briefed and passed straight to you', system: 'Lead logged · address and fault captured' },
+          { label: 'Question answered', note: 'Callout charges and availability', system: 'Enquiry logged · details sent' },
         ],
         label: 'Trades & home services',
         line: 'Boiler is leaking — can someone come out today?',

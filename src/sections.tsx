@@ -831,46 +831,66 @@ interface Layout {
 
 const WIDE: Layout = {
   w: 1100,
-  h: 400,
+  h: 580,
+  /**
+   * Note there is no join from the third outcome to the follow-up.
+   *
+   * Someone who asked what time you close has not booked anything: there is no
+   * confirmation to send, no appointment to remind them about, and no visit to
+   * review. Drawing that arrow would promise a review request to a person who
+   * has never been a customer — odd on its own terms, and against Google's
+   * review policies besides. The enquiry is logged and nudged instead, which the
+   * node's own system line says.
+   */
   paths: [
-    'M 210 200 L 250 200',
-    'M 390 200 C 470 200, 470 70, 543 70',
-    'M 390 200 L 533 200',
-    'M 390 200 C 470 200, 470 330, 543 330',
-    'M 697 70 C 790 70, 790 200, 862 200',
-    'M 707 200 L 862 200',
-    'M 697 330 C 790 330, 790 200, 862 200',
+    'M 210 290 L 250 290',
+    'M 390 290 C 460 290, 460 100, 510 100',
+    'M 390 290 L 510 290',
+    'M 390 290 C 460 290, 460 480, 510 480',
+    'M 780 100 C 832 100, 832 290, 862 290',
+    'M 780 290 L 862 290',
   ],
-  seq: [0, 1, 2, 3, 4, 5, 6],
+  seq: [0, 1, 2, 3, 4, 5],
   nodes: {
     contact: [0],
     answer: [0.6],
     outcomes: [[1.4], [2.2], [3.0]],
-    follow: [3.8, 4.6, 5.4],
+    follow: [3.8, 4.6],
   },
-  contact: [112, 200, 188],
-  answer: [320, 200, 140],
-  badge: [320, 96],
+  contact: [112, 290, 188],
+  answer: [320, 290, 140],
+  badge: [320, 178],
+  /* Wide and short rather than narrow and tall. At 176 units the three lines
+     wrapped into 180px towers and the map became a column to scroll rather than
+     a picture to scan; at 262 they sit in roughly half that. */
   outcomes: [
-    [620, 70, 172],
-    [620, 200, 172],
-    [620, 330, 172],
+    [645, 100, 262],
+    [645, 290, 262],
+    [645, 480, 262],
   ],
-  follow: [952, 200, 180],
+  follow: [952, 290, 180],
 };
 
 /** Phone layout: a vertical trunk on the reading-start side carries the fork. */
 const TALL: Layout = {
   w: 600,
-  h: 1080,
+  h: 1500,
+  /**
+   * The phone layout keeps a single trunk into the follow-up rather than
+   * collecting only the two branches that feed it. A second collector down the
+   * right-hand side is what correctness would need, and at 375px it turns the
+   * diagram into spaghetti. The desktop map carries the distinction; here the
+   * trunk reads as "the conversation continues", which is close enough at this
+   * size.
+   */
   paths: [
-    'M 330 108 L 330 148',
-    'M 330 238 C 330 288, 70 278, 70 330',
-    'M 70 330 L 70 890',
-    'M 70 410 L 158 410',
-    'M 70 600 L 158 600',
-    'M 70 790 L 158 790',
-    'M 70 890 C 70 945, 330 935, 330 922',
+    'M 330 226 L 330 246',
+    'M 330 358 C 330 412, 70 402, 70 452',
+    'M 70 452 L 70 1200',
+    'M 70 540 L 158 540',
+    'M 70 810 L 158 810',
+    'M 70 1080 L 158 1080',
+    'M 70 1200 C 70 1272, 330 1262, 330 1248',
   ],
   seq: [0, 1, 1, 2, 3, 4, 5],
   nodes: {
@@ -879,15 +899,15 @@ const TALL: Layout = {
     outcomes: [[2.2], [3.0], [3.8]],
     follow: [4.6],
   },
-  contact: [330, 62, 360],
-  answer: [330, 193, 360],
-  badge: [330, 268],
+  contact: [330, 120, 360],
+  answer: [330, 300, 360],
+  badge: [330, 388],
   outcomes: [
-    [350, 410, 380],
-    [350, 600, 380],
-    [350, 790, 380],
+    [350, 540, 380],
+    [350, 810, 380],
+    [350, 1080, 380],
   ],
-  follow: [330, 975, 360],
+  follow: [330, 1350, 360],
 };
 
 /**
@@ -907,11 +927,12 @@ const CHANNEL_ICONS: { icon: LucideIcon; colour: string }[] = [
 ];
 
 function MapTile({
-  layout, x, y, width, icon: Icon, label, note, accent, rtl, channels, flashes = [],
+  layout, x, y, width, icon: Icon, label, note, system, accent, rtl, channels,
+  flashes = [],
 }: {
   layout: Layout; x: number; y: number; width: number; icon: LucideIcon;
-  label: string; note?: string; accent?: boolean; rtl: boolean; channels?: boolean;
-  flashes?: number[];
+  label: string; note?: string; system?: string; accent?: boolean; rtl: boolean;
+  channels?: boolean; flashes?: number[];
 }) {
   /* Geometry in percent and type in container query units, both against the
      canvas — so the diagram holds its proportions whether it has the full page,
@@ -990,6 +1011,23 @@ function MapTile({
           {note}
         </div>
       )}
+      {system && (
+        /* What lands in the business's own tools. Set apart by a hairline and
+           the mono face so it reads as machinery rather than more prose. */
+        <div
+          style={{
+            marginTop: 'clamp(6px, 1.6cqw, 9px)',
+            paddingTop: 'clamp(5px, 1.4cqw, 8px)',
+            borderTop: `1px solid ${C.line}`,
+            fontFamily: mono,
+            fontSize: 'clamp(8px, 1.9cqw, 10px)',
+            lineHeight: 1.5,
+            color: C.faint,
+          }}
+        >
+          {system}
+        </div>
+      )}
     </div>
   );
 }
@@ -997,7 +1035,7 @@ function MapTile({
 function FlowMap({
   outcomes, layout, className,
 }: {
-  outcomes: { label: string; note: string }[];
+  outcomes: { label: string; note: string; system: string }[];
   layout: Layout;
   className: string;
 }) {
@@ -1079,7 +1117,7 @@ function FlowMap({
             key={o.label}
             layout={layout}
             x={layout.outcomes[i][0]} y={layout.outcomes[i][1]} width={layout.outcomes[i][2]}
-            icon={outIcons[i]} label={o.label} note={o.note}
+            icon={outIcons[i]} label={o.label} note={o.note} system={o.system}
             flashes={layout.nodes.outcomes[i]} rtl={rtl}
           />
         ))}
