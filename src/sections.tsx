@@ -1,9 +1,13 @@
 import {
   ArrowRight,
+  BookOpen,
   CalendarCheck,
+  CalendarClock,
+  CalendarDays,
   Check,
   Facebook,
   Globe,
+  Heart,
   Instagram,
   Mail,
   MessageCircle,
@@ -12,8 +16,11 @@ import {
   Scissors,
   ShoppingBag,
   Sparkles,
-  UtensilsCrossed,
+  TrendingUp,
   Users,
+  Utensils,
+  UtensilsCrossed,
+  Workflow,
   X,
   type LucideIcon,
 } from 'lucide-react';
@@ -1399,6 +1406,30 @@ export function Versus() {
  * No brand marks: these are trademarked logos we have no licence to reproduce,
  * and a wordmark in our own type is both safer and more consistent.
  */
+/**
+ * A glyph per tool. These are functional icons, not brand logos: those are
+ * trademarked marks we have no licence to reproduce, and a row of mismatched
+ * third-party logos would fight the design anyway. Same approach the channel
+ * icons take.
+ */
+const TOOL_ICONS: Record<string, LucideIcon> = {
+  gcal: CalendarDays,
+  outlook: Mail,
+  calendly: CalendarClock,
+  opentable: UtensilsCrossed,
+  sevenrooms: Utensils,
+  resdiary: BookOpen,
+  fresha: Sparkles,
+  treatwell: Heart,
+  phorest: Scissors,
+  ghl: Workflow,
+  hubspot: Users,
+  pipedrive: TrendingUp,
+  whatsapp: MessageCircle,
+  instagram: Instagram,
+  messenger: Facebook,
+};
+
 const INTEGRATION_ICONS: Record<string, LucideIcon> = {
   calendars: CalendarCheck,
   food: UtensilsCrossed,
@@ -1476,20 +1507,27 @@ export function Integrations() {
               </div>
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {g.items.map((item) => (
-                  <span
-                    key={item}
-                    style={{
-                      padding: '8px 13px', borderRadius: 9,
-                      background: 'rgba(255,255,255,0.05)',
-                      border: `1px solid ${C.line}`,
-                      fontSize: 13.5, color: 'rgba(255,255,255,0.88)',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {item}
-                  </span>
-                ))}
+                {g.items.map((item) => {
+                  const ToolIcon = TOOL_ICONS[item.key];
+                  return (
+                    <span
+                      key={item.key}
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: 8,
+                        padding: '8px 13px', borderRadius: 9,
+                        background: 'rgba(255,255,255,0.05)',
+                        border: `1px solid ${C.line}`,
+                        fontSize: 13.5, color: 'rgba(255,255,255,0.88)',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {ToolIcon && (
+                        <ToolIcon size={14} strokeWidth={1.9} style={{ color: C.muted, flexShrink: 0 }} />
+                      )}
+                      {item.name}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           );

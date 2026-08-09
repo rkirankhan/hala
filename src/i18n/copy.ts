@@ -139,7 +139,7 @@ export interface HalaCopy {
     heading: string;
     sub: string;
     /** `key` maps to an icon and is never translated. */
-    groups: { key: string; label: string; items: string[] }[];
+    groups: { key: string; label: string; items: { key: string; name: string }[] }[];
     note: string;
   };
 
@@ -467,11 +467,11 @@ export const en: HalaCopy = {
     heading: 'It writes into the tools you already run on.',
     sub: 'Bookings, jobs and contacts land where your team already looks — nobody retypes anything, and nobody learns a new system.',
     groups: [
-      { key: 'calendars', label: 'Calendars', items: ['Google Calendar', 'Outlook', 'Calendly'] },
-      { key: 'food', label: 'Restaurants & takeaways', items: ['OpenTable', 'SevenRooms', 'ResDiary'] },
-      { key: 'beauty', label: 'Salons & clinics', items: ['Fresha', 'Treatwell', 'Phorest'] },
-      { key: 'crm', label: 'CRM & marketing', items: ['GoHighLevel', 'HubSpot', 'Pipedrive'] },
-      { key: 'messaging', label: 'Messaging', items: ['WhatsApp Business', 'Instagram', 'Messenger'] },
+      { key: 'calendars', label: 'Calendars', items: [{ key: 'gcal', name: 'Google Calendar' }, { key: 'outlook', name: 'Outlook' }, { key: 'calendly', name: 'Calendly' }] },
+      { key: 'food', label: 'Restaurants & takeaways', items: [{ key: 'opentable', name: 'OpenTable' }, { key: 'sevenrooms', name: 'SevenRooms' }, { key: 'resdiary', name: 'ResDiary' }] },
+      { key: 'beauty', label: 'Salons & clinics', items: [{ key: 'fresha', name: 'Fresha' }, { key: 'treatwell', name: 'Treatwell' }, { key: 'phorest', name: 'Phorest' }] },
+      { key: 'crm', label: 'CRM & marketing', items: [{ key: 'ghl', name: 'GoHighLevel' }, { key: 'hubspot', name: 'HubSpot' }, { key: 'pipedrive', name: 'Pipedrive' }] },
+      { key: 'messaging', label: 'Messaging', items: [{ key: 'whatsapp', name: 'WhatsApp Business' }, { key: 'instagram', name: 'Instagram' }, { key: 'messenger', name: 'Messenger' }] },
     ],
     note: 'Using something else? We connect it during onboarding.',
   },
