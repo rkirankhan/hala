@@ -8,6 +8,7 @@ import {
   Mail,
   MessageCircle,
   Phone,
+  Repeat,
   Scissors,
   ShoppingBag,
   Sparkles,
@@ -74,15 +75,6 @@ export function StatBand() {
 
 /* ── Tinted feature bands ─────────────────────────────────────────────── */
 
-interface Band {
-  tint: string;
-  glow: string;
-  eyebrow: string;
-  title: string;
-  body: string;
-  visual: React.ReactNode;
-}
-
 function Bubble({ side, text, tone }: { side: 'in' | 'out'; text: string; tone: string }) {
   const out = side === 'out';
   return (
@@ -109,25 +101,6 @@ function Bubble({ side, text, tone }: { side: 'in' | 'out'; text: string; tone: 
   );
 }
 
-function Fragment({ children }: { children: React.ReactNode }) {
-  return (
-    <div
-      style={{
-        background: 'rgba(8,8,10,0.72)',
-        border: `1px solid ${C.line}`,
-        borderRadius: 14,
-        padding: 16,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 9,
-        backdropFilter: 'blur(6px)',
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
 function Meta({ children }: { children: React.ReactNode }) {
   return (
     <div
@@ -144,158 +117,92 @@ function Meta({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Palette per band is a design constant; every word in them comes from copy. */
-function useBands(): Band[] {
-  const { bands } = useHalaCopy();
-
-  return [
-    {
-      tint: 'rgba(110,123,242,0.14)',
-      glow: 'rgba(110,123,242,0.45)',
-      eyebrow: bands.voice.eyebrow,
-      title: bands.voice.title,
-      body: bands.voice.body,
-      visual: (
-        <Fragment>
-          <Meta>{bands.voice.metaTop}</Meta>
-          <Bubble side="in" text={bands.voice.messages[0]} tone="#6E7BF2" />
-          <Bubble side="out" text={bands.voice.messages[1]} tone="#6E7BF2" />
-          <Bubble side="in" text={bands.voice.messages[2]} tone="#6E7BF2" />
-          <Meta>{bands.voice.metaBottom}</Meta>
-        </Fragment>
-      ),
-    },
-    {
-      tint: 'rgba(37,211,102,0.12)',
-      glow: 'rgba(37,211,102,0.38)',
-      eyebrow: bands.chat.eyebrow,
-      title: bands.chat.title,
-      body: bands.chat.body,
-      visual: (
-        <Fragment>
-          <Meta>{bands.chat.metaTop}</Meta>
-          <Bubble side="in" text={bands.chat.messages[0]} tone="#25D366" />
-          <Bubble side="out" text={bands.chat.messages[1]} tone="#25D366" />
-          <Bubble side="in" text={bands.chat.messages[2]} tone="#25D366" />
-          <Meta>{bands.chat.metaBottom}</Meta>
-        </Fragment>
-      ),
-    },
-    {
-      tint: 'rgba(245,158,11,0.12)',
-      glow: 'rgba(245,158,11,0.36)',
-      eyebrow: bands.automations.eyebrow,
-      title: bands.automations.title,
-      body: bands.automations.body,
-      visual: (
-        <Fragment>
-          <Meta>{bands.automations.metaTop}</Meta>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-            {bands.automations.rows.map((row, i) => (
-              <div key={i} style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                {row.map((step) => (
-                  <span
-                    key={step}
-                    style={{
-                      padding: '6px 10px',
-                      borderRadius: 8,
-                      background: 'rgba(255,255,255,0.06)',
-                      border: `1px solid ${C.line}`,
-                      fontSize: 11.5,
-                      color: 'rgba(255,255,255,0.84)',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {step}
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-          <Meta>{bands.automations.metaBottom}</Meta>
-        </Fragment>
-      ),
-    },
-  ];
-}
-
+/**
+ * Three capability cards.
+ *
+ * Was three full-width bands, each with its own chat mockup. Three problems: the
+ * page already showed a conversation in the hero and another in the industry
+ * showcase, so this was the third and fourth; the alternating left-right layout
+ * was motion without meaning; and it borrowed the flow map's three colours to
+ * mean something entirely different, which quietly broke the one place colour
+ * carries information.
+ *
+ * Now equal cards, neutral panels, colour only on the icon. Roughly a third of
+ * the height, and the map keeps colour to itself.
+ */
 export function FeatureBands() {
   const c = useHalaCopy();
-  const BANDS = useBands();
+
+  const cards = [
+    { icon: Phone, tone: '#6E7BF2', copy: c.bands.voice },
+    { icon: MessageCircle, tone: '#25D366', copy: c.bands.chat },
+    { icon: Repeat, tone: '#F59E0B', copy: c.bands.automations },
+  ];
 
   return (
-    <section style={{ padding: '0 0 clamp(48px, 6vw, 80px)' }}>
-      <div style={{ ...wrap, textAlign: 'center', marginBottom: 'clamp(32px, 4vw, 52px)' }}>
+    <section style={{ ...wrap, padding: '0 clamp(20px, 5vw, 48px) clamp(56px, 7vw, 100px)' }}>
+      <div style={{ textAlign: 'center', marginBottom: 'clamp(28px, 3.4vw, 44px)' }}>
         <h2
           style={{
-            fontFamily: display,
-            fontWeight: 600,
-            fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-            lineHeight: 1.06,
-            letterSpacing: tracking.heading,
-            margin: 0,
-            maxInlineSize: '20ch',
-            marginInline: 'auto',
+            fontFamily: display, fontWeight: 600,
+            fontSize: 'clamp(1.7rem, 3.6vw, 2.5rem)',
+            lineHeight: 1.08, letterSpacing: tracking.heading,
+            margin: 0, maxInlineSize: '22ch', marginInline: 'auto',
           }}
         >
           {c.bands.heading}
         </h2>
       </div>
 
-      <div style={{ ...wrap, display: 'flex', flexDirection: 'column', gap: 16 }}>
-        {BANDS.map((b) => (
+      <div className="v4-caps" style={{ display: 'grid', gap: 12 }}>
+        {cards.map(({ icon: Icon, tone, copy }) => (
           <div
-            key={b.eyebrow}
-            className="v4-band"
+            key={copy.eyebrow}
             style={{
-              display: 'grid',
-              gap: 'clamp(24px, 3vw, 48px)',
-              alignItems: 'center',
-              padding: 'clamp(26px, 3.4vw, 46px)',
-              borderRadius: 22,
-              border: `1px solid ${C.line}`,
-              background: `linear-gradient(135deg, ${b.tint} 0%, rgba(12,12,15,0.6) 62%)`,
-              boxShadow: `0 40px 90px -60px ${b.glow}`,
+              display: 'flex', flexDirection: 'column',
+              background: C.panel, border: `1px solid ${C.line}`,
+              borderRadius: 18, padding: 'clamp(22px, 2.6vw, 30px)',
             }}
           >
-            <div>
-              <span
-                style={{
-                  fontFamily: mono,
-                  fontSize: 10.5,
-                  letterSpacing: '0.18em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.62)',
-                }}
-              >
-                {b.eyebrow}
-              </span>
-              <h3
-                style={{
-                  fontFamily: display,
-                  fontWeight: 600,
-                  fontSize: 'clamp(1.4rem, 2.6vw, 2.1rem)',
-                  lineHeight: 1.12,
-                  letterSpacing: tracking.heading,
-                  margin: '14px 0 0',
-                  maxInlineSize: '20ch',
-                }}
-              >
-                {b.title}
-              </h3>
-              <p
-                style={{
-                  margin: '14px 0 0',
-                  fontSize: 15,
-                  lineHeight: 1.6,
-                  color: C.muted,
-                  maxInlineSize: '44ch',
-                }}
-              >
-                {b.body}
-              </p>
+            <span
+              style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                width: 34, height: 34, borderRadius: 10,
+                background: `${tone}1F`, color: tone,
+              }}
+            >
+              <Icon size={16} strokeWidth={2} />
+            </span>
+
+            <div style={{ marginTop: 16 }}>
+              <Meta>{copy.eyebrow}</Meta>
             </div>
-            <div>{b.visual}</div>
+
+            <h3
+              style={{
+                fontFamily: display, fontWeight: 600,
+                fontSize: 'clamp(1.15rem, 1.9vw, 1.4rem)',
+                lineHeight: 1.18, letterSpacing: tracking.ui,
+                margin: '10px 0 0', maxInlineSize: '18ch',
+              }}
+            >
+              {copy.title}
+            </h3>
+
+            <p style={{ margin: '12px 0 0', fontSize: 14.5, lineHeight: 1.6, color: C.muted }}>
+              {copy.body}
+            </p>
+
+            {/* Same mono treatment the flow map uses for what lands in your
+                systems, so the two sections rhyme instead of competing. */}
+            <div
+              style={{
+                marginTop: 'auto', paddingTop: 18,
+                fontFamily: mono, fontSize: 10.5, letterSpacing: '0.04em', color: tone,
+              }}
+            >
+              {copy.metaBottom}
+            </div>
           </div>
         ))}
       </div>

@@ -156,13 +156,10 @@ export function HalaPage() {
         .v4-stat-cols { grid-template-columns: minmax(0,1fr); }
         @media (min-width: 860px) { .v4-stat-cols { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 40px; } }
 
-        .v4-band { grid-template-columns: minmax(0,1fr); }
-        @media (min-width: 900px) { .v4-band { grid-template-columns: minmax(0,1fr) minmax(0,0.92fr); } }
-        /* Alternate which side the product fragment sits on, so the run of
-           bands does not read as a list. */
-        @media (min-width: 900px) {
-          .v4-band:nth-child(even) > div:first-child { order: 2; }
-        }
+        /* Equal-height capability cards; the mono footer pins to the bottom so
+           the three lines sit on one baseline regardless of body length. */
+        .v4-caps { grid-template-columns: minmax(0,1fr); }
+        @media (min-width: 760px) { .v4-caps { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 
         .v4-intents { grid-template-columns: repeat(2, minmax(0,1fr)); }
         @media (min-width: 900px) { .v4-intents { grid-template-columns: repeat(3, minmax(0,1fr)); } }
