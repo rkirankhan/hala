@@ -105,7 +105,6 @@ export interface HalaCopy {
       contact: string;
       answer: string;
       badge: string;
-      outcomes: { label: string; note: string }[];
       follow: string;
       followNote: string;
     };
@@ -126,6 +125,8 @@ export interface HalaCopy {
       reply: string;
       handles: string[];
       outcome: string;
+      /** The three outcome nodes on the flow map, in this sector's words. */
+      flow: { label: string; note: string }[];
     }[];
   };
 
@@ -362,11 +363,6 @@ export const en: HalaCopy = {
       contact: 'Customer gets in touch',
       answer: 'Hala answers',
       badge: 'Recognises returning customers',
-      outcomes: [
-        { label: 'Order taken', note: 'Sent through, receipt printed' },
-        { label: 'Booked in', note: 'Written into your diary' },
-        { label: 'Question answered', note: 'Details sent with a booking link' },
-      ],
       follow: 'Follow-up',
       followNote: 'Confirmation · reminder · feedback',
     },
@@ -381,6 +377,11 @@ export const en: HalaCopy = {
     items: [
       {
         key: 'restaurants',
+        flow: [
+          { label: 'Table booked', note: 'Written into your diary, allergies noted' },
+          { label: 'Order taken', note: 'Sent to the kitchen, receipt printed' },
+          { label: 'Question answered', note: 'Menu, hours or parking — with a booking link' },
+        ],
         label: 'Restaurants & takeaways',
         line: 'Table for four this Friday, around eight?',
         reply: 'I have 8:15 or 8:45. Which suits you better?',
@@ -389,6 +390,11 @@ export const en: HalaCopy = {
       },
       {
         key: 'clinics',
+        flow: [
+          { label: 'Consultation booked', note: 'Deposit taken, reminder scheduled' },
+          { label: 'Treatment priced', note: 'Quoted from your own price list' },
+          { label: 'Question answered', note: 'Aftercare and suitability, in your words' },
+        ],
         label: 'Cosmetic clinics',
         line: 'How much is a consultation for filler?',
         reply: 'Consultations are £50, redeemable against treatment. I have Thursday at 2:15.',
@@ -397,6 +403,11 @@ export const en: HalaCopy = {
       },
       {
         key: 'property',
+        flow: [
+          { label: 'Viewing booked', note: 'Into the negotiator’s calendar' },
+          { label: 'Buyer qualified', note: 'Budget and timescale captured' },
+          { label: 'Question answered', note: 'Price, tenure and availability' },
+        ],
         label: 'Estate agents',
         line: 'Is the flat on Mill Street still available?',
         reply: 'It is — viewings are Thursday and Saturday. Shall I book you in?',
@@ -405,6 +416,11 @@ export const en: HalaCopy = {
       },
       {
         key: 'salons',
+        flow: [
+          { label: 'Appointment booked', note: 'With the stylist they asked for' },
+          { label: 'Service priced', note: 'Quoted from your price list' },
+          { label: 'Question answered', note: 'Hours, products or patch tests' },
+        ],
         label: 'Salons & barbers',
         line: 'Any chance of a cut and colour on Saturday?',
         reply: 'Saturday is full, but I have Friday at 4:30 or Sunday at 11:00.',
@@ -413,6 +429,11 @@ export const en: HalaCopy = {
       },
       {
         key: 'trades',
+        flow: [
+          { label: 'Job booked', note: 'Address and fault captured' },
+          { label: 'Quote requested', note: 'Briefed and passed straight to you' },
+          { label: 'Question answered', note: 'Callout charges and availability' },
+        ],
         label: 'Trades & home services',
         line: 'Boiler is leaking — can someone come out today?',
         reply: 'I can get an engineer to you between 2 and 4 today. What is the postcode?',

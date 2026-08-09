@@ -186,11 +186,6 @@ export const de: HalaCopy = {
       contact: 'Kunde meldet sich',
       answer: 'Hala nimmt an',
       badge: 'Erkennt Stammkunden',
-      outcomes: [
-        { label: 'Bestellung aufgenommen', note: 'Weitergeleitet, Bon gedruckt' },
-        { label: 'Termin gebucht', note: 'In Ihr Buch eingetragen' },
-        { label: 'Frage beantwortet', note: 'Infos gesendet, mit Buchungslink' },
-      ],
       follow: 'Nachfassen',
       followNote: 'Bestätigung · Erinnerung · Feedback',
     },
@@ -205,6 +200,11 @@ export const de: HalaCopy = {
     items: [
       {
         key: 'restaurants',
+        flow: [
+          { label: 'Tisch reserviert', note: 'In Ihr Buch eingetragen, Allergien vermerkt' },
+          { label: 'Bestellung aufgenommen', note: 'An die Küche geschickt, Bon gedruckt' },
+          { label: 'Frage beantwortet', note: 'Karte, Öffnungszeiten oder Parken — mit Buchungslink' },
+        ],
         label: 'Restaurants & Lieferdienste',
         line: 'Ein Tisch für vier am Freitag, so gegen acht?',
         reply: 'Ich hätte 20:15 oder 20:45. Was passt Ihnen besser?',
@@ -213,6 +213,11 @@ export const de: HalaCopy = {
       },
       {
         key: 'clinics',
+        flow: [
+          { label: 'Beratung gebucht', note: 'Anzahlung erhalten, Erinnerung geplant' },
+          { label: 'Behandlung kalkuliert', note: 'Aus Ihrer eigenen Preisliste' },
+          { label: 'Frage beantwortet', note: 'Nachsorge und Eignung, in Ihren Worten' },
+        ],
         label: 'Kosmetikkliniken',
         line: 'Was kostet eine Beratung für Filler?',
         reply: 'Die Beratung kostet 50 €, anrechenbar auf die Behandlung. Ich hätte Donnerstag um 14:15.',
@@ -226,6 +231,11 @@ export const de: HalaCopy = {
       },
       {
         key: 'property',
+        flow: [
+          { label: 'Besichtigung gebucht', note: 'Im Kalender des Maklers' },
+          { label: 'Interessent qualifiziert', note: 'Budget und Zeitrahmen erfasst' },
+          { label: 'Frage beantwortet', note: 'Preis, Eigentumsform und Verfügbarkeit' },
+        ],
         label: 'Immobilienmakler',
         line: 'Ist die Wohnung in der Mühlenstraße noch frei?',
         reply: 'Ja — Besichtigungen sind Donnerstag und Samstag. Soll ich Sie eintragen?',
@@ -239,6 +249,11 @@ export const de: HalaCopy = {
       },
       {
         key: 'salons',
+        flow: [
+          { label: 'Termin gebucht', note: 'Beim gewünschten Stylisten' },
+          { label: 'Leistung kalkuliert', note: 'Aus Ihrer Preisliste' },
+          { label: 'Frage beantwortet', note: 'Öffnungszeiten, Produkte oder Allergietest' },
+        ],
         label: 'Salons & Barbiere',
         line: 'Wäre Samstag noch etwas für Schnitt und Farbe frei?',
         reply: 'Samstag ist voll, aber ich hätte Freitag um 16:30 oder Sonntag um 11:00.',
@@ -247,6 +262,11 @@ export const de: HalaCopy = {
       },
       {
         key: 'trades',
+        flow: [
+          { label: 'Auftrag gebucht', note: 'Adresse und Fehler erfasst' },
+          { label: 'Angebot angefragt', note: 'Vorbereitet und an Sie übergeben' },
+          { label: 'Frage beantwortet', note: 'Anfahrtskosten und Verfügbarkeit' },
+        ],
         label: 'Handwerk & Haustechnik',
         line: 'Die Heizung ist undicht — kann heute noch jemand kommen?',
         reply: 'Ich kann Ihnen heute zwischen 14 und 16 Uhr einen Techniker schicken. Wie ist die Postleitzahl?',

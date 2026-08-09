@@ -325,114 +325,6 @@ const INDUSTRY_ICONS: Record<string, LucideIcon> = {
   trades: Wrench,
 };
 
-export function IndustryShowcase() {
-  const c = useHalaCopy();
-  const [key, setKey] = useState(c.showcase.items[0].key);
-  const a = c.showcase.items.find((i) => i.key === key) ?? c.showcase.items[0];
-
-  const pad = 'clamp(18px, 2.2vw, 26px)';
-
-  return (
-    <section
-      id="industries"
-      style={{ ...wrap, padding: 'clamp(56px, 7vw, 100px) clamp(20px, 5vw, 48px)' }}
-    >
-      <div style={{ textAlign: 'center', marginBottom: 'clamp(28px, 3.4vw, 44px)' }}>
-        <span
-          style={{
-            fontFamily: mono, fontSize: 11, letterSpacing: '0.18em',
-            textTransform: 'uppercase', color: C.faint,
-          }}
-        >
-          {c.showcase.eyebrow}
-        </span>
-        <h2
-          style={{
-            fontFamily: display, fontWeight: 600,
-            fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-            lineHeight: 1.06, letterSpacing: tracking.heading,
-            margin: '18px auto 0', maxInlineSize: '18ch',
-          }}
-        >
-          {c.showcase.heading}
-        </h2>
-        <p style={{ margin: '16px auto 0', fontSize: 16, color: C.muted, maxInlineSize: '48ch' }}>
-          {c.showcase.sub}
-        </p>
-      </div>
-
-      <div className="v4-intents" style={{ display: 'grid', gap: 10 }}>
-        {c.showcase.items.map((i) => {
-          const on = i.key === key;
-          const Icon = INDUSTRY_ICONS[i.key];
-          return (
-            <button
-              key={i.key}
-              onClick={() => setKey(i.key)}
-              aria-pressed={on}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 10,
-                padding: '13px 15px', borderRadius: 12, cursor: 'pointer',
-                textAlign: 'start', font: 'inherit', fontFamily: sans,
-                background: on ? 'rgba(110,123,242,0.16)' : C.panel,
-                border: `1px solid ${on ? C.accent : C.line}`,
-                color: on ? '#C3CAFF' : C.white,
-              }}
-            >
-              {Icon && <Icon size={16} strokeWidth={2} style={{ flexShrink: 0 }} />}
-              <span style={{ fontSize: 13.5, fontWeight: 500 }}>{i.label}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      <div
-        style={{
-          marginTop: 12,
-          background: C.panel,
-          border: `1px solid ${C.line}`,
-          borderRadius: 18,
-          overflow: 'hidden',
-        }}
-      >
-        {/* The exchange, in this industry's own words. */}
-        <div
-          style={{
-            padding: pad, borderBottom: `1px solid ${C.line}`,
-            display: 'flex', flexDirection: 'column', gap: 12,
-          }}
-        >
-          <Bubble side="in" text={a.line} tone={C.accent} />
-          <Bubble side="out" text={a.reply} tone={C.accent} />
-        </div>
-
-        <div style={{ padding: pad, borderBottom: `1px solid ${C.line}` }}>
-          <Meta>{c.showcase.handlesLabel}</Meta>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
-            {a.handles.map((h) => (
-              <span
-                key={h}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 8,
-                  padding: '9px 13px', borderRadius: 10,
-                  background: C.inset, border: `1px solid ${C.line}`,
-                  fontSize: 13, color: 'rgba(255,255,255,0.88)',
-                }}
-              >
-                <Check size={13} strokeWidth={2.6} style={{ color: C.accent, flexShrink: 0 }} />
-                {h}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ padding: pad, background: 'rgba(110,123,242,0.10)' }}>
-          <p style={{ margin: 0, fontSize: 15.5, fontWeight: 500, color: '#C3CAFF' }}>{a.outcome}</p>
-        </div>
-      </div>
-    </section>
-  );
-}
 /* ── Four steps ───────────────────────────────────────────────────────── */
 
 export function HowItWorks() {
@@ -959,10 +851,10 @@ function MapTile({
   );
 }
 
-function FlowMap() {
+function FlowMap({ outcomes }: { outcomes: { label: string; note: string }[] }) {
   const { flow } = useHalaCopy();
   const rtl = dirOf(useHalaLocale()) === 'rtl';
-  const [a, b, cc] = flow.map.outcomes;
+  const [a, b, cc] = outcomes;
 
   return (
     <div
@@ -993,8 +885,8 @@ function FlowMap() {
 
         <MapTile x={90} y={200} width={140} icon={Phone} label={flow.map.contact} rtl={rtl} />
         <MapTile x={302} y={200} width={140} icon={Sparkles} label={flow.map.answer} accent rtl={rtl} />
-        <MapTile x={620} y={70} width={172} icon={ShoppingBag} label={a.label} note={a.note} rtl={rtl} />
-        <MapTile x={620} y={200} width={172} icon={CalendarCheck} label={b.label} note={b.note} rtl={rtl} />
+        <MapTile x={620} y={70} width={172} icon={CalendarCheck} label={a.label} note={a.note} rtl={rtl} />
+        <MapTile x={620} y={200} width={172} icon={ShoppingBag} label={b.label} note={b.note} rtl={rtl} />
         <MapTile x={620} y={330} width={172} icon={MessageCircle} label={cc.label} note={cc.note} rtl={rtl} />
         <MapTile
           x={952} y={200} width={168} icon={Check}
@@ -1045,10 +937,13 @@ const FLOW_ICONS: Record<string, LucideIcon> = {
 
 export function FlowSection() {
   const c = useHalaCopy();
+  const [key, setKey] = useState(c.showcase.items[0].key);
+  const industry = c.showcase.items.find((i) => i.key === key) ?? c.showcase.items[0];
+  const pad = 'clamp(18px, 2.2vw, 26px)';
 
   return (
     <section
-      id="how"
+      id="industries"
       style={{ ...wrap, padding: 'clamp(56px, 7vw, 100px) clamp(20px, 5vw, 48px)' }}
     >
       <div style={{ textAlign: 'center', marginBottom: 'clamp(32px, 4vw, 52px)' }}>
@@ -1058,7 +953,7 @@ export function FlowSection() {
             textTransform: 'uppercase', color: C.faint,
           }}
         >
-          {c.flow.eyebrow}
+          {c.showcase.eyebrow}
         </span>
         <h2
           style={{
@@ -1075,7 +970,32 @@ export function FlowSection() {
         </p>
       </div>
 
-      <FlowMap />
+      <div className="v4-intents" style={{ display: 'grid', gap: 10, marginBottom: 'clamp(20px, 2.6vw, 30px)' }}>
+        {c.showcase.items.map((i) => {
+          const on = i.key === key;
+          const Icon = INDUSTRY_ICONS[i.key];
+          return (
+            <button
+              key={i.key}
+              onClick={() => setKey(i.key)}
+              aria-pressed={on}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 10,
+                padding: '13px 15px', borderRadius: 12, cursor: 'pointer',
+                textAlign: 'start', font: 'inherit', fontFamily: sans,
+                background: on ? 'rgba(110,123,242,0.16)' : C.panel,
+                border: `1px solid ${on ? C.accent : C.line}`,
+                color: on ? '#C3CAFF' : C.white,
+              }}
+            >
+              {Icon && <Icon size={16} strokeWidth={2} style={{ flexShrink: 0 }} />}
+              <span style={{ fontSize: 13.5, fontWeight: 500 }}>{i.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <FlowMap outcomes={industry.flow} />
 
       <div className="v4-map-list" style={{ maxInlineSize: 780, marginInline: 'auto' }}>
         {c.flow.stages.map((stage, i) => {
@@ -1138,7 +1058,7 @@ export function FlowSection() {
                 {/* The one stage that forks. */}
                 {stage.key === 'handle' && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 14 }}>
-                    {c.flow.branches.map((b) => (
+                    {industry.flow.map((b) => (
                       <div
                         key={b.label}
                         style={{
@@ -1152,7 +1072,7 @@ export function FlowSection() {
                         }}
                       >
                         <span style={{ fontSize: 14, fontWeight: 600 }}>{b.label}</span>
-                        <span style={{ fontSize: 13.5, color: C.muted }}>{b.line}</span>
+                        <span style={{ fontSize: 13.5, color: C.muted }}>{b.note}</span>
                       </div>
                     ))}
                   </div>
@@ -1161,6 +1081,50 @@ export function FlowSection() {
             </div>
           );
         })}
+      </div>
+
+      <div
+        style={{
+          marginTop: 'clamp(20px, 2.6vw, 30px)',
+          background: C.panel, border: `1px solid ${C.line}`,
+          borderRadius: 18, overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            padding: pad, borderBottom: `1px solid ${C.line}`,
+            display: 'flex', flexDirection: 'column', gap: 12,
+          }}
+        >
+          <Bubble side="in" text={industry.line} tone={C.accent} />
+          <Bubble side="out" text={industry.reply} tone={C.accent} />
+        </div>
+
+        <div style={{ padding: pad, borderBottom: `1px solid ${C.line}` }}>
+          <Meta>{c.showcase.handlesLabel}</Meta>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
+            {industry.handles.map((h) => (
+              <span
+                key={h}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '9px 13px', borderRadius: 10,
+                  background: C.inset, border: `1px solid ${C.line}`,
+                  fontSize: 13, color: 'rgba(255,255,255,0.88)',
+                }}
+              >
+                <Check size={13} strokeWidth={2.6} style={{ color: C.accent, flexShrink: 0 }} />
+                {h}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ padding: pad, background: 'rgba(110,123,242,0.10)' }}>
+          <p style={{ margin: 0, fontSize: 15.5, fontWeight: 500, color: '#C3CAFF' }}>
+            {industry.outcome}
+          </p>
+        </div>
       </div>
 
       <p

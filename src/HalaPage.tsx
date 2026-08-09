@@ -12,7 +12,6 @@ import {
   FeatureBands,
   FlowSection,
   HowItWorks,
-  IndustryShowcase,
   Pricing,
   ProofSlot,
   StatBand,
@@ -466,7 +465,6 @@ export function HalaPage() {
       <StatBand />
       <FlowSection />
       <FeatureBands />
-      <IndustryShowcase />
       <HowItWorks />
 
       {/* ── 4. Channels ── */}
