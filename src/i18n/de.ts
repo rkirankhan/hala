@@ -184,6 +184,7 @@ export const de: HalaCopy = {
     ],
     map: {
       contact: 'Kunde meldet sich',
+      contactNote: 'Telefon, WhatsApp, Instagram, Web-Chat, E-Mail',
       answer: 'Hala nimmt an',
       badge: 'Erkennt Stammkunden',
       follow: 'Nachfassen',

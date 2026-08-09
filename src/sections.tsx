@@ -813,17 +813,17 @@ const WIDE: Layout = {
   w: 1100,
   h: 400,
   paths: [
-    'M 160 200 L 232 200',
-    'M 372 200 C 470 200, 470 70, 543 70',
-    'M 372 200 L 533 200',
-    'M 372 200 C 470 200, 470 330, 543 330',
+    'M 210 200 L 250 200',
+    'M 390 200 C 470 200, 470 70, 543 70',
+    'M 390 200 L 533 200',
+    'M 390 200 C 470 200, 470 330, 543 330',
     'M 697 70 C 790 70, 790 200, 862 200',
     'M 707 200 L 862 200',
     'M 697 330 C 790 330, 790 200, 862 200',
   ],
-  contact: [90, 200, 140],
-  answer: [302, 200, 140],
-  badge: [302, 96],
+  contact: [112, 200, 188],
+  answer: [320, 200, 140],
+  badge: [320, 96],
   outcomes: [
     [620, 70, 172],
     [620, 200, 172],
@@ -856,11 +856,27 @@ const TALL: Layout = {
   follow: [330, 975, 360],
 };
 
+/**
+ * The channels a conversation can arrive on, tinted to each platform.
+ *
+ * Shown as a row on the entry node rather than a single phone icon: "gets in
+ * touch" is the claim that the whole diagram rests on, and one telephone made it
+ * look like a phone product. Generic line icons, not brand marks.
+ */
+const CHANNEL_ICONS: { icon: LucideIcon; colour: string }[] = [
+  { icon: Phone, colour: '#6E7BF2' },
+  { icon: MessageCircle, colour: '#25D366' },
+  { icon: Instagram, colour: '#E1306C' },
+  { icon: Facebook, colour: '#0084FF' },
+  { icon: Globe, colour: '#A855F7' },
+  { icon: Mail, colour: '#F59E0B' },
+];
+
 function MapTile({
-  layout, x, y, width, icon: Icon, label, note, accent, rtl,
+  layout, x, y, width, icon: Icon, label, note, accent, rtl, channels,
 }: {
   layout: Layout; x: number; y: number; width: number; icon: LucideIcon;
-  label: string; note?: string; accent?: boolean; rtl: boolean;
+  label: string; note?: string; accent?: boolean; rtl: boolean; channels?: boolean;
 }) {
   /* Geometry in percent and type in container query units, both against the
      canvas — so the diagram holds its proportions whether it has the full page,
@@ -882,17 +898,39 @@ function MapTile({
         boxShadow: '0 18px 40px -24px rgba(0,0,0,0.9)',
       }}
     >
-      <span
-        style={{
-          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-          width: 'clamp(20px, 5cqw, 26px)', height: 'clamp(20px, 5cqw, 26px)',
-          borderRadius: 8, marginBottom: 'clamp(5px, 1.8cqw, 9px)',
-          background: accent ? C.accent : 'rgba(255,255,255,0.07)',
-          color: accent ? C.white : C.accent,
-        }}
-      >
-        <Icon size={13} strokeWidth={2} />
-      </span>
+      {channels ? (
+        <span
+          style={{
+            display: 'flex', flexWrap: 'wrap', alignItems: 'center',
+            gap: 'clamp(3px, 0.8cqw, 5px)', marginBottom: 'clamp(5px, 1.8cqw, 9px)',
+          }}
+        >
+          {CHANNEL_ICONS.map(({ icon: Ch, colour }, i) => (
+            <span
+              key={i}
+              style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                width: 'clamp(15px, 3.4cqw, 20px)', height: 'clamp(15px, 3.4cqw, 20px)',
+                borderRadius: 6, background: `${colour}1F`, color: colour,
+              }}
+            >
+              <Ch size={11} strokeWidth={2} />
+            </span>
+          ))}
+        </span>
+      ) : (
+        <span
+          style={{
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            width: 'clamp(20px, 5cqw, 26px)', height: 'clamp(20px, 5cqw, 26px)',
+            borderRadius: 8, marginBottom: 'clamp(5px, 1.8cqw, 9px)',
+            background: accent ? C.accent : 'rgba(255,255,255,0.07)',
+            color: accent ? C.white : C.accent,
+          }}
+        >
+          <Icon size={13} strokeWidth={2} />
+        </span>
+      )}
       <div style={{ fontSize: 'clamp(11px, 2.7cqw, 13.5px)', fontWeight: 600, lineHeight: 1.3 }}>
         {label}
       </div>
@@ -921,7 +959,10 @@ function FlowMap({
   const rtl = dirOf(useHalaLocale()) === 'rtl';
   const [a, b, cc] = outcomes;
   const tiles = [
-    { pos: layout.contact, icon: Phone, label: flow.map.contact, accent: false },
+    {
+      pos: layout.contact, icon: Phone, label: flow.map.contact,
+      note: flow.map.contactNote, accent: false, channels: true,
+    },
     { pos: layout.answer, icon: Sparkles, label: flow.map.answer, accent: true },
   ];
   const outIcons = [CalendarCheck, ShoppingBag, MessageCircle];
@@ -943,19 +984,18 @@ function FlowMap({
           width="100%" height="100%" aria-hidden
           style={{ position: 'absolute', inset: 0 }}
         >
+          {/* Connectors only. Pulses travelling the paths were dropped: the
+              diagram is read once and understood, and a slow loop in the corner
+              of the eye competes with the copy for the rest of the visit. */}
           {layout.paths.map((d, i) => (
-            <g key={i}>
-              <path d={d} fill="none" stroke={C.line} strokeWidth={1.4} strokeDasharray="3 7" />
-              {/* A pulse per path, so the diagram shows traffic moving rather
-                  than a static wiring chart. */}
-              <circle r={3} fill={C.accent}>
-                <animateMotion dur="3.6s" begin={`${i * 0.45}s`} repeatCount="indefinite" path={d} />
-                <animate
-                  attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.8;1"
-                  dur="3.6s" begin={`${i * 0.45}s`} repeatCount="indefinite"
-                />
-              </circle>
-            </g>
+            <path
+              key={i}
+              d={d}
+              fill="none"
+              stroke={C.line}
+              strokeWidth={1.4}
+              strokeDasharray="3 7"
+            />
           ))}
         </svg>
 
@@ -964,7 +1004,8 @@ function FlowMap({
             key={t.label}
             layout={layout}
             x={t.pos[0]} y={t.pos[1]} width={t.pos[2]}
-            icon={t.icon} label={t.label} accent={t.accent} rtl={rtl}
+            icon={t.icon} label={t.label} note={t.note} accent={t.accent}
+            channels={t.channels} rtl={rtl}
           />
         ))}
 

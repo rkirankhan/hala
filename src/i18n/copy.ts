@@ -103,6 +103,8 @@ export interface HalaCopy {
     /** Short labels for the diagram. Node tiles cannot carry a full sentence. */
     map: {
       contact: string;
+      /** Reinforces the icon row on the entry node for anyone not reading it. */
+      contactNote: string;
       answer: string;
       badge: string;
       follow: string;
@@ -361,6 +363,7 @@ export const en: HalaCopy = {
     ],
     map: {
       contact: 'Customer gets in touch',
+      contactNote: 'Phone, WhatsApp, Instagram, web chat, email',
       answer: 'Hala answers',
       badge: 'Recognises returning customers',
       follow: 'Follow-up',

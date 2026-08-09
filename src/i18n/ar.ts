@@ -179,6 +179,7 @@ export const ar: HalaCopy = {
     ],
     map: {
       contact: 'العميل يتواصل',
+      contactNote: 'الهاتف، واتساب، إنستغرام، محادثة الموقع، البريد',
       answer: 'يردّ Hala',
       badge: 'يتعرّف على العملاء المتكررين',
       follow: 'المتابعة',
