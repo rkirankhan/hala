@@ -276,7 +276,7 @@ export const en: HalaCopy = {
     sub: 'Every call, message and enquiry becomes an opportunity. Hala answers on the first ring, books customers in, and follows up with the ones who go quiet — so your team never misses the chance to connect.',
     ctaPrimary: 'Book a demo',
     ctaSecondary: 'Hear it answer',
-    callLabel: 'Call in progress',
+    callLabel: 'Answering now',
     messages: [
       { who: 'guest', t: 'Hi — do you have anything Thursday afternoon?' },
       { who: 'agent', t: 'I have 2:15 or 4:30 on Thursday. Which suits you better?' },

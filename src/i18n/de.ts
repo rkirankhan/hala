@@ -49,7 +49,7 @@ export const de: HalaCopy = {
     sub: 'Jeder Anruf, jede Nachricht und jede Anfrage wird zur Chance. Hala antwortet beim ersten Klingeln, bucht Kunden ein und fasst bei denen nach, die sich nicht mehr melden — damit Ihrem Team kein Kunde entgeht.',
     ctaPrimary: 'Demo vereinbaren',
     ctaSecondary: 'Live anhören',
-    callLabel: 'Laufendes Gespräch',
+    callLabel: 'Antwortet gerade',
     messages: [
       { who: 'guest', t: 'Hallo — haben Sie am Donnerstagnachmittag noch etwas frei?' },
       { who: 'agent', t: 'Ich hätte Donnerstag 14:15 oder 16:30. Was passt Ihnen besser?' },
