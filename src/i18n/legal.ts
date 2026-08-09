@@ -156,11 +156,11 @@ export const legalEn: LegalSet = {
       },
       {
         h: 'Represented by',
-        body: ['[[NAME OF DIRECTOR / OWNER]]'],
+        body: ['R. Kiran Khan'],
       },
       {
         h: 'Contact',
-        body: ['Telephone: [[PHONE NUMBER]]', 'Email: info@khaashub.com'],
+        body: ['Telephone: +44 7356 037295', 'Email: info@khaashub.com'],
       },
       {
         h: 'Registration',
@@ -172,7 +172,7 @@ export const legalEn: LegalSet = {
       },
       {
         h: 'Responsible for content',
-        body: ['[[NAME OF DIRECTOR]]', '5th Floor, 167-169 Great Portland Street, London W1W 5PF'],
+        body: ['R. Kiran Khan', '5th Floor, 167-169 Great Portland Street, London W1W 5PF'],
       },
       {
         h: 'Consumer dispute resolution',
@@ -311,11 +311,11 @@ export const legalDe: LegalSet = {
       },
       {
         h: 'Vertreten durch',
-        body: ['[[NAME DER GESCHÄFTSFÜHRUNG / INHABER]]'],
+        body: ['R. Kiran Khan'],
       },
       {
         h: 'Kontakt',
-        body: ['Telefon: [[TELEFONNUMMER]]', 'E-Mail: info@khaashub.com'],
+        body: ['Telefon: +44 7356 037295', 'E-Mail: info@khaashub.com'],
       },
       {
         h: 'Registereintrag',
@@ -327,7 +327,7 @@ export const legalDe: LegalSet = {
       },
       {
         h: 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV',
-        body: ['[[NAME DER GESCHÄFTSFÜHRUNG]]', '5th Floor, 167-169 Great Portland Street, London W1W 5PF'],
+        body: ['R. Kiran Khan', '5th Floor, 167-169 Great Portland Street, London W1W 5PF'],
       },
       {
         h: 'Verbraucherstreitbeilegung',
