@@ -38,6 +38,8 @@ export const de: HalaCopy = {
       { label: 'Preise', href: '#pricing' },
     ],
     cta: 'Demo vereinbaren',
+    languageLabel: 'Sprache wechseln',
+    languageNames: { en: 'Englisch', de: 'Deutsch', ar: 'Arabisch' },
   },
 
   hero: {

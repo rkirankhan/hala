@@ -33,7 +33,8 @@ export const C = {
  * trusts with their phone line. Jakarta holds its weight the whole way down and
  * is the only option that does not share a register with the reference site.
  */
-export const display = "'Plus Jakarta Sans', 'Inter', system-ui, sans-serif";
+export const display =
+  "'Plus Jakarta Sans', 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif";
 
 /**
  * Letter-spacing scale, by optical size rather than one value everywhere.
@@ -53,7 +54,14 @@ export const tracking = {
   ui: '-0.01em',
 } as const;
 
-export const sans = "'Inter', system-ui, -apple-system, sans-serif";
+/**
+ * Arabic sits in the stack rather than behind a locale switch. Neither Plus
+ * Jakarta Sans nor Inter carries Arabic glyphs, so the browser falls through to
+ * IBM Plex Sans Arabic per character — Latin words keep the Latin face even
+ * inside an Arabic sentence, which is what the brand name needs.
+ */
+export const sans =
+  "'Inter', 'IBM Plex Sans Arabic', system-ui, -apple-system, sans-serif";
 export const mono = 'ui-monospace, SFMono-Regular, Menlo, monospace';
 
 export const wrap = {

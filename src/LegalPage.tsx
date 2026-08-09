@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { C, display, mono, sans, tracking, wrap } from './tokens';
-import { useHalaCopy, useHalaLocale, type LegalDoc, type LegalSet } from './i18n';
+import { dirOf, useHalaCopy, useHalaLocale, type LegalDoc, type LegalSet } from './i18n';
 import { useLegalMeta } from './useHalaMeta';
 
 /**
@@ -52,7 +52,10 @@ export function LegalPage({ pick }: { pick: (set: LegalSet) => LegalDoc }) {
   useLegalMeta(doc.title, locale);
 
   return (
-    <div style={{ background: C.black, color: C.white, fontFamily: sans, minHeight: '100vh' }}>
+    <div
+      dir={dirOf(locale)}
+      style={{ background: C.black, color: C.white, fontFamily: sans, minHeight: '100vh' }}
+    >
       <div
         style={{
           position: 'sticky', top: 0, zIndex: 50,

@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { ArrowRight, Phone, Sparkles } from 'lucide-react';
 import { C, display, mono, sans, tracking, wrap } from './tokens';
 import { useHalaMeta } from './useHalaMeta';
-import { Link, useLocation } from 'react-router-dom';
-import { OTHER, otherLocalePath, useHalaCopy, useHalaLocale } from './i18n';
+import { Link } from 'react-router-dom';
+import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
+import { LanguageMenu } from './LanguageMenu';
 import {
   ChannelList,
   ChannelOrbit,
@@ -43,8 +44,8 @@ import {
 
 /** Where the two cards break out of the device frame — layout, not copy. */
 const CARD_POS = [
-  { top: '84%', left: '2%', rot: -7 },
-  { top: '93%', left: '48%', rot: 5 },
+  { top: '84%', start: '2%', rot: -7 },
+  { top: '93%', start: '48%', rot: 5 },
 ];
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -67,14 +68,20 @@ export function HalaPage() {
   const [asked, setAsked] = useState(false);
   const c = useHalaCopy();
   const locale = useHalaLocale();
-  const other = OTHER[locale];
-  const { pathname } = useLocation();
-  const otherLanguageHref = otherLocalePath(pathname, locale);
+  const dir = dirOf(locale);
   useHalaMeta(c, locale);
 
   return (
-    <div style={{ background: C.black, color: C.white, fontFamily: sans, minHeight: '100vh' }}>
+    <div
+      dir={dir}
+      style={{ background: C.black, color: C.white, fontFamily: sans, minHeight: '100vh' }}
+    >
       <style>{`
+        /* The step arrow is a glyph, not an icon, so it does not mirror on its
+           own. Everything else on the page uses logical properties and flips
+           with dir. */
+        [dir='rtl'] .v4-step-arrow { transform: scaleX(-1); }
+
         /* Anchor links must clear the 68px sticky nav. Set the offset in one
            place — scroll-padding-top on the root — and keep scroll-margin-top at
            zero, so the two never stack and overshoot.
@@ -171,19 +178,7 @@ export function HalaPage() {
               </a>
             ))}
           </span>
-          <Link
-            to={otherLanguageHref}
-            hrefLang={other.locale}
-            aria-label={other.ariaLabel}
-            style={{
-              padding: '8px 11px', borderRadius: 8,
-              border: `1px solid ${C.line}`, color: C.muted,
-              fontFamily: mono, fontSize: 11.5, letterSpacing: '0.08em',
-              textDecoration: 'none', whiteSpace: 'nowrap',
-            }}
-          >
-            {other.label}
-          </Link>
+          <LanguageMenu />
           <a
             href="#book"
             style={{
@@ -372,7 +367,7 @@ export function HalaPage() {
               <div
                 key={card.label}
                 style={{
-                  position: 'absolute', top: CARD_POS[i].top, left: CARD_POS[i].left,
+                  position: 'absolute', top: CARD_POS[i].top, insetInlineStart: CARD_POS[i].start,
                   transform: `rotate(${CARD_POS[i].rot}deg)`,
                   background: 'rgba(30,30,36,0.94)', backdropFilter: 'blur(8px)',
                   border: `1px solid ${C.line}`, borderRadius: 12,

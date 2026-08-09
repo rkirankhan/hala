@@ -22,14 +22,26 @@ npm run dev
 
 ## Languages
 
-English is at `/`, German at `/de`. Language is a **route**, not a stored
-preference — so each version has a real URL that can be linked, indexed and given
-an `hreflang` tag.
+English at `/`, German at `/de`, Arabic at `/ar`. Language is a **route**, not a
+stored preference — so each version has a real URL that can be linked, indexed
+and given an `hreflang` tag.
+
+Arabic is right-to-left. `dir` is set on the page root from the locale, and the
+layout uses logical CSS properties (`insetInlineStart`, `borderEndStartRadius`,
+`textAlign: start`) so it mirrors on its own. The one exception is the step
+arrow, a glyph rather than an icon, flipped with a `[dir='rtl']` rule.
+
+Arabic glyphs come from IBM Plex Sans Arabic, which sits *inside* the existing
+font stacks rather than behind a locale switch: neither Plus Jakarta Sans nor
+Inter carries Arabic, so the browser falls through per character. Latin words —
+including the brand name — keep the Latin face inside an Arabic sentence.
 
 All copy lives in `src/i18n`:
 
 - `copy.ts` — the `HalaCopy` interface plus the English strings
 - `de.ts` — the German strings
+- `ar.ts` — the Arabic strings
+- `legal.ts` — privacy, terms and Impressum in all three
 - `index.ts` — the locale context and the language-switcher helper
 
 The interface uses plain `string`, not `as const`. That matters: typing an
@@ -46,22 +58,27 @@ a route in `HalaRoutes.tsx`.
       the launch copy is final.
 - [ ] Pricing is proposed, not confirmed — see `src/i18n/copy.ts`. German prices
       are the pound figures carried across as a placeholder.
-- [ ] German copy needs a native speaker's pass, especially the headlines.
+- [ ] German and Arabic copy both need a native speaker's pass, especially the
+      headlines, where the English relies on rhythm that does not translate.
+- [ ] Arabic prices are still in pounds. If that page is aimed at Gulf buyers
+      rather than Arabic speakers in the UK, currency and pricing both need
+      revisiting — a commercial decision, not a translation one.
+- [ ] The brand stays "Hala" in Latin script inside Arabic text. Switching to
+      هلا or هالة is a branding decision if you want it.
 - [ ] The proof section is an empty placeholder awaiting a named customer.
-- [ ] Copy is written for restaurants; the product positioning is cross-industry.
 - [ ] No favicon or OG image yet.
 
 ## Legal pages
 
-Six routes, one per document per language:
+Nine routes, one per document per language:
 
-| English | German |
-| ------- | ------ |
-| `/privacy` | `/de/datenschutz` |
-| `/terms` | `/de/agb` |
-| `/impressum` | `/de/impressum` |
+| English | German | Arabic |
+| ------- | ------ | ------ |
+| `/privacy` | `/de/datenschutz` | `/ar/privacy` |
+| `/terms` | `/de/agb` | `/ar/terms` |
+| `/impressum` | `/de/impressum` | `/ar/impressum` |
 
-Content is in `src/i18n/legal.ts`. All six are `noindex, follow` — a privacy
+Content is in `src/i18n/legal.ts`. All nine are `noindex, follow` — a privacy
 policy outranking the product page for the brand name is an avoidable own goal.
 
 **These are drafts, not legal advice.** Before launch:

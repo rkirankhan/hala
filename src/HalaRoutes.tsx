@@ -1,93 +1,56 @@
+import { Fragment } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { HalaPage } from './HalaPage';
 import { LegalPage } from './LegalPage';
-import { HalaLocaleProvider, type HalaLocale } from './i18n';
+import { COPY, HalaLocaleProvider, LOCALES, type LegalSet } from './i18n';
 
 /**
- * Serves the root of hala.khaashub.com. Paths stay relative so the tree also
- * works unchanged if it is ever mounted under a prefix again.
+ * Serves the root of hala.khaashub.com.
  *
- * Language is a route rather than a stored preference, so /de is a real address
- * that can be linked, indexed and given an hreflang tag. The agency site keeps
- * its language in localStorage, which is why its German version has no URL and
- * cannot be found by search — the mistake this avoids.
+ * Language is a route rather than a stored preference, so every version has a
+ * real address that can be linked, indexed and given an hreflang tag. The agency
+ * site keeps its language in localStorage, which is why its German version has
+ * no URL and cannot be found by search — the mistake this avoids.
  *
- * Legal pages use each language's own slug (/privacy vs /de/datenschutz) rather
- * than a shared path, so a German visitor never sees an English word in the
- * address bar of a legal document.
+ * Routes are generated from the locale list and each language's own legal slugs
+ * (/privacy, /de/datenschutz, /ar/privacy) rather than written out twelve times,
+ * so adding a language is a copy file plus one entry in LOCALES.
  */
-function Localised({ locale, children }: { locale: HalaLocale; children: React.ReactNode }) {
-  return <HalaLocaleProvider value={locale}>{children}</HalaLocaleProvider>;
-}
+const DOCS: { key: string; pick: (set: LegalSet) => LegalSet[keyof LegalSet] }[] = [
+  { key: 'privacy', pick: (l) => l.privacy },
+  { key: 'terms', pick: (l) => l.terms },
+  { key: 'impressum', pick: (l) => l.impressum },
+];
+
+/** Slugs are stored absolute for use in links; routes want them relative. */
+const rel = (slug: string) => slug.replace(/^\//, '');
 
 export default function HalaRoutes() {
   return (
     <Routes>
-      <Route
-        index
-        element={
-          <Localised locale="en">
-            <HalaPage />
-          </Localised>
-        }
-      />
-      <Route
-        path="privacy"
-        element={
-          <Localised locale="en">
-            <LegalPage pick={(l) => l.privacy} />
-          </Localised>
-        }
-      />
-      <Route
-        path="terms"
-        element={
-          <Localised locale="en">
-            <LegalPage pick={(l) => l.terms} />
-          </Localised>
-        }
-      />
-      <Route
-        path="impressum"
-        element={
-          <Localised locale="en">
-            <LegalPage pick={(l) => l.impressum} />
-          </Localised>
-        }
-      />
-
-      <Route
-        path="de"
-        element={
-          <Localised locale="de">
-            <HalaPage />
-          </Localised>
-        }
-      />
-      <Route
-        path="de/datenschutz"
-        element={
-          <Localised locale="de">
-            <LegalPage pick={(l) => l.privacy} />
-          </Localised>
-        }
-      />
-      <Route
-        path="de/agb"
-        element={
-          <Localised locale="de">
-            <LegalPage pick={(l) => l.terms} />
-          </Localised>
-        }
-      />
-      <Route
-        path="de/impressum"
-        element={
-          <Localised locale="de">
-            <LegalPage pick={(l) => l.impressum} />
-          </Localised>
-        }
-      />
+      {LOCALES.map(({ code }) => (
+        <Fragment key={code}>
+          <Route
+            {...(code === 'en' ? { index: true } : { path: code })}
+            element={
+              <HalaLocaleProvider value={code}>
+                <HalaPage />
+              </HalaLocaleProvider>
+            }
+          />
+          {DOCS.map((doc) => (
+            <Route
+              key={`${code}-${doc.key}`}
+              path={rel(COPY[code].legal[doc.key as 'privacy'].slug)}
+              element={
+                <HalaLocaleProvider value={code}>
+                  <LegalPage pick={doc.pick as (set: LegalSet) => LegalSet['privacy']} />
+                </HalaLocaleProvider>
+              }
+            />
+          ))}
+        </Fragment>
+      ))}
 
       <Route path="*" element={<Navigate to="." replace />} />
     </Routes>

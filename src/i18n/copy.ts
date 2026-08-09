@@ -45,6 +45,10 @@ export interface HalaCopy {
     byline: string;
     links: { label: string; href: string }[];
     cta: string;
+    /** Language menu. Names are localised, so the German page offers
+     *  "Englisch / Deutsch / Arabisch" rather than English words. */
+    languageLabel: string;
+    languageNames: { en: string; de: string; ar: string };
   };
 
   hero: {
@@ -180,6 +184,8 @@ export const en: HalaCopy = {
       { label: 'Pricing', href: '#pricing' },
     ],
     cta: 'Book a demo',
+    languageLabel: 'Switch language',
+    languageNames: { en: 'English', de: 'German', ar: 'Arabic' },
   },
 
   hero: {

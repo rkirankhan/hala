@@ -91,8 +91,10 @@ function Bubble({ side, text, tone }: { side: 'in' | 'out'; text: string; tone: 
           maxWidth: '82%',
           padding: '9px 13px',
           borderRadius: 13,
-          borderBottomRightRadius: out ? 4 : 13,
-          borderBottomLeftRadius: out ? 13 : 4,
+          /* Logical, not physical: the tail must sit on the reading-end side
+             for outbound and the start side for inbound, which swaps under RTL. */
+          borderEndEndRadius: out ? 4 : 13,
+          borderEndStartRadius: out ? 13 : 4,
           fontSize: 13,
           lineHeight: 1.5,
           background: out ? `${tone}1E` : 'rgba(255,255,255,0.06)',
@@ -369,7 +371,7 @@ export function IndustryShowcase() {
               style={{
                 display: 'flex', alignItems: 'center', gap: 10,
                 padding: '13px 15px', borderRadius: 12, cursor: 'pointer',
-                textAlign: 'left', font: 'inherit', fontFamily: sans,
+                textAlign: 'start', font: 'inherit', fontFamily: sans,
                 background: on ? 'rgba(110,123,242,0.16)' : C.panel,
                 border: `1px solid ${on ? C.accent : C.line}`,
                 color: on ? '#C3CAFF' : C.white,

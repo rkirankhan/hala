@@ -17,6 +17,7 @@ const ORIGIN = 'https://hala.khaashub.com';
 const ALTERNATES: { hreflang: string; href: string }[] = [
   { hreflang: 'en', href: `${ORIGIN}/` },
   { hreflang: 'de', href: `${ORIGIN}/de` },
+  { hreflang: 'ar', href: `${ORIGIN}/ar` },
   { hreflang: 'x-default', href: `${ORIGIN}/` },
 ];
 
@@ -83,7 +84,7 @@ export function useHalaMeta(copy: HalaCopy, locale: HalaLocale) {
     setMeta(SELECTORS.description, copy.meta.description);
     setMeta(SELECTORS.ogTitle, copy.meta.title);
     setMeta(SELECTORS.ogDescription, copy.meta.description);
-    setMeta(SELECTORS.ogUrl, locale === 'de' ? `${ORIGIN}/de` : `${ORIGIN}/`);
+    setMeta(SELECTORS.ogUrl, locale === 'en' ? `${ORIGIN}/` : `${ORIGIN}/${locale}`);
 
     const links = ALTERNATES.map(({ hreflang, href }) => {
       const link = document.createElement('link');
