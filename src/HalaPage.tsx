@@ -195,9 +195,10 @@ export function HalaPage() {
         .v4-versus-yes { grid-template-columns: minmax(0,1fr); }
         @media (min-width: 760px) { .v4-versus-yes { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px 28px; } }
 
-        .v4-integrations { grid-template-columns: repeat(2, minmax(0,1fr)); }
-        @media (min-width: 700px) { .v4-integrations { grid-template-columns: repeat(3, minmax(0,1fr)); } }
-        @media (min-width: 1040px) { .v4-integrations { grid-template-columns: repeat(6, minmax(0,1fr)); } }
+        /* Category label beside the chips once there is room; stacked below it
+           on narrow, where a fixed label column would squeeze the chips. */
+        .v4-int-row { grid-template-columns: minmax(0,1fr); }
+        @media (min-width: 720px) { .v4-int-row { grid-template-columns: 220px minmax(0,1fr); } }
 
         /* auto-fit with a capped track and centred justification, so the row
            sits in the middle of the box whether there are two markets or three
@@ -336,7 +337,19 @@ export function HalaPage() {
                 margin: '26px 0 0', maxInlineSize: '13ch',
               }}
             >
-              {c.hero.h1}
+              {/* Split on the accent word rather than hard-coding the last few
+                  words: German and Arabic put the emphasis in a different
+                  place, and a missing match just renders the headline plain. */}
+              {c.hero.h1.split(c.hero.h1Accent).flatMap((part, i) =>
+                i === 0
+                  ? [part]
+                  : [
+                      <span key={i} style={{ color: C.accent }}>
+                        {c.hero.h1Accent}
+                      </span>,
+                      part,
+                    ],
+              )}
             </h1>
 
             <p

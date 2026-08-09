@@ -54,6 +54,12 @@ export interface HalaCopy {
   hero: {
     badge: string;
     h1: string;
+    /**
+     * The word inside `h1` to set in the accent colour. Kept as a substring
+     * rather than splitting the headline into parts, so a translator can move
+     * the emphasis to wherever it falls naturally in their language.
+     */
+    h1Accent: string;
     sub: string;
     ctaPrimary: string;
     ctaSecondary: string;
@@ -132,7 +138,8 @@ export interface HalaCopy {
     eyebrow: string;
     heading: string;
     sub: string;
-    groups: { label: string; items: string[] }[];
+    /** `key` maps to an icon and is never translated. */
+    groups: { key: string; label: string; items: string[] }[];
     note: string;
   };
 
@@ -265,6 +272,7 @@ export const en: HalaCopy = {
   hero: {
     badge: 'An AI Employee for your business',
     h1: 'Turn Every Conversation Into a Lead',
+    h1Accent: 'Lead',
     sub: 'Every call, message and enquiry becomes an opportunity. Hala answers on the first ring, books customers in, and follows up with the ones who go quiet — so your team never misses the chance to connect.',
     ctaPrimary: 'Book a demo',
     ctaSecondary: 'Hear it answer',
@@ -459,12 +467,11 @@ export const en: HalaCopy = {
     heading: 'It writes into the tools you already run on.',
     sub: 'Bookings, jobs and contacts land where your team already looks — nobody retypes anything, and nobody learns a new system.',
     groups: [
-      { label: 'Calendars', items: ['Google Calendar', 'Outlook', 'Calendly'] },
-      { label: 'Restaurants', items: ['OpenTable', 'SevenRooms', 'ResDiary'] },
-      { label: 'Salons & clinics', items: ['Fresha', 'Treatwell', 'Phorest'] },
-      { label: 'Trades', items: ['Jobber', 'ServiceM8', 'Tradify'] },
-      { label: 'CRM', items: ['GoHighLevel', 'HubSpot', 'Pipedrive'] },
-      { label: 'Messaging', items: ['WhatsApp Business', 'Instagram', 'Messenger'] },
+      { key: 'calendars', label: 'Calendars', items: ['Google Calendar', 'Outlook', 'Calendly'] },
+      { key: 'food', label: 'Restaurants & takeaways', items: ['OpenTable', 'SevenRooms', 'ResDiary'] },
+      { key: 'beauty', label: 'Salons & clinics', items: ['Fresha', 'Treatwell', 'Phorest'] },
+      { key: 'crm', label: 'CRM & marketing', items: ['GoHighLevel', 'HubSpot', 'Pipedrive'] },
+      { key: 'messaging', label: 'Messaging', items: ['WhatsApp Business', 'Instagram', 'Messenger'] },
     ],
     note: 'Using something else? We connect it during onboarding.',
   },

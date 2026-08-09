@@ -13,6 +13,7 @@ import {
   ShoppingBag,
   Sparkles,
   UtensilsCrossed,
+  Users,
   X,
   type LucideIcon,
 } from 'lucide-react';
@@ -1387,6 +1388,25 @@ export function Versus() {
 
 /* ── Integrations ─────────────────────────────────────────────────────── */
 
+/**
+ * Integrations as one panel of labelled rows rather than six columns of plain
+ * text.
+ *
+ * Six narrow columns made it a table to read; rows with a category on the
+ * reading-start side and the tools as chips make it a thing to scan. The chips
+ * also give the section some texture — it was the flattest block on the page.
+ *
+ * No brand marks: these are trademarked logos we have no licence to reproduce,
+ * and a wordmark in our own type is both safer and more consistent.
+ */
+const INTEGRATION_ICONS: Record<string, LucideIcon> = {
+  calendars: CalendarCheck,
+  food: UtensilsCrossed,
+  beauty: Scissors,
+  crm: Users,
+  messaging: MessageCircle,
+};
+
 export function Integrations() {
   const c = useHalaCopy();
 
@@ -1416,25 +1436,64 @@ export function Integrations() {
         </p>
       </div>
 
-      <div className="v4-integrations" style={{ display: 'grid', gap: 12 }}>
-        {c.integrations.groups.map((g) => (
-          <div
-            key={g.label}
-            style={{
-              background: C.panel, border: `1px solid ${C.line}`,
-              borderRadius: 14, padding: '16px 18px',
-            }}
-          >
-            <Meta>{g.label}</Meta>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 7, marginTop: 11 }}>
-              {g.items.map((i) => (
-                <span key={i} style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.86)' }}>
-                  {i}
+      <div
+        style={{
+          border: `1px solid ${C.line}`, borderRadius: 20, overflow: 'hidden',
+          background: 'linear-gradient(160deg, rgba(110,123,242,0.07) 0%, rgba(12,12,15,0.5) 55%)',
+        }}
+      >
+        {c.integrations.groups.map((g, i) => {
+          const Icon = INTEGRATION_ICONS[g.key];
+          return (
+            <div
+              key={g.key}
+              className="v4-int-row"
+              style={{
+                display: 'grid', alignItems: 'center',
+                gap: 'clamp(10px, 1.6vw, 24px)',
+                padding: 'clamp(16px, 1.9vw, 22px) clamp(18px, 2.2vw, 28px)',
+                borderTop: i === 0 ? 'none' : `1px solid ${C.line}`,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 11, minWidth: 0 }}>
+                <span
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                    width: 30, height: 30, borderRadius: 9, flexShrink: 0,
+                    background: 'rgba(110,123,242,0.14)', color: C.accent,
+                  }}
+                >
+                  {Icon && <Icon size={14} strokeWidth={2} />}
                 </span>
-              ))}
+                <span
+                  style={{
+                    fontFamily: mono, fontSize: 10.5, letterSpacing: '0.13em',
+                    textTransform: 'uppercase', color: C.muted,
+                  }}
+                >
+                  {g.label}
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                {g.items.map((item) => (
+                  <span
+                    key={item}
+                    style={{
+                      padding: '8px 13px', borderRadius: 9,
+                      background: 'rgba(255,255,255,0.05)',
+                      border: `1px solid ${C.line}`,
+                      fontSize: 13.5, color: 'rgba(255,255,255,0.88)',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <p style={{ margin: '20px auto 0', textAlign: 'center', fontSize: 14, color: C.faint }}>
