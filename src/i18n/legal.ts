@@ -14,8 +14,13 @@ import type { LegalSet } from './copy';
  *     these reviewed by someone qualified in German law before launch.
  *
  * The German versions are not translations of the English. An Impressum has a
- * statutory shape under § 5 DDG and § 18 MStV, so that page is written to the
- * German requirement and the English one mirrors it for readers who need it.
+ * statutory shape under § 5 DDG, so that page is written to the German
+ * requirement and the English one mirrors it for readers who need it.
+ *
+ * The § 18 Abs. 2 MStV "responsible for content" entry was deliberately removed:
+ * it applies to journalistic-editorial offerings, and a product marketing site
+ * is not one. Add it back if this site ever gains a blog, news or magazine
+ * section — at that point it becomes mandatory again.
  *
  * Deliberately omitted: the EU Online Dispute Resolution clause. The ODR
  * platform was shut down in July 2025, so the boilerplate link most templates
@@ -45,6 +50,7 @@ export const legalEn: LegalSet = {
         body: [
           'This is a marketing website. We do not ask you for personal information, and there are no forms, logins or accounts on it.',
           'Our hosting provider records standard server logs for every request: your IP address, browser type, the page requested and the time. These are used to serve the site, diagnose faults and protect against abuse. We do not use them to identify individuals.',
+          'The site is hosted by Vercel Inc. in the United States and served from the location nearest to you, so those logs may be processed outside the UK and EEA under Standard Contractual Clauses.',
         ],
       },
       {
@@ -55,17 +61,10 @@ export const legalEn: LegalSet = {
         ],
       },
       {
-        h: 'Hosting',
-        body: [
-          'This site is hosted by Vercel Inc., a company based in the United States. Requests are served from the location nearest to you, which may mean your IP address is processed outside the UK and EEA. Vercel offers Standard Contractual Clauses for these transfers.',
-          '[[CONFIRM: data processing agreement signed with Vercel]]',
-        ],
-      },
-      {
         h: 'Fonts',
         body: [
-          'This site currently loads its typefaces from Google Fonts. That means your IP address is transmitted to Google when the page loads.',
-          '[[DECISION NEEDED: self-host the fonts to remove this transfer entirely — see the note in the project README]]',
+          'This site loads its typefaces from Google Fonts, a service provided by Google Ireland Limited. When a page opens, your browser requests the font files from Google’s servers, which means your IP address is transmitted to Google.',
+          'We use the service so the site renders consistently across devices and browsers. The legal basis is our legitimate interest in a consistent presentation, under Article 6(1)(f) UK GDPR and GDPR. How Google handles that data is set out in its own privacy policy at policies.google.com/privacy.',
         ],
       },
       {
@@ -77,7 +76,7 @@ export const legalEn: LegalSet = {
       },
       {
         h: 'How long we keep things',
-        body: ['Server logs are retained for [[RETENTION PERIOD]] and then deleted.'],
+        body: ['Server logs are retained for 30 days and then deleted.'],
       },
       {
         h: 'Changes to this policy',
@@ -167,12 +166,8 @@ export const legalEn: LegalSet = {
         body: [
           'Registered at Companies House, England and Wales',
           'Company number: 16721132',
-          'VAT number: [[UK VAT NUMBER, or “not VAT registered”]]',
+          'VAT: not VAT registered',
         ],
-      },
-      {
-        h: 'Responsible for content',
-        body: ['R. Kiran Khan', '5th Floor, 167-169 Great Portland Street, London W1W 5PF'],
       },
       {
         h: 'Consumer dispute resolution',
@@ -207,6 +202,7 @@ export const legalDe: LegalSet = {
         body: [
           'Dies ist eine reine Informationswebsite. Wir fragen keine personenbezogenen Daten ab; es gibt keine Formulare, Logins oder Benutzerkonten.',
           'Unser Hoster speichert bei jedem Aufruf technisch notwendige Server-Logfiles: IP-Adresse, Browsertyp, aufgerufene Seite und Zeitpunkt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO — unser berechtigtes Interesse am sicheren und störungsfreien Betrieb der Website.',
+          'Gehostet wird die Website von der Vercel Inc. mit Sitz in den USA; die Auslieferung erfolgt über den nächstgelegenen Standort. Die Logfiles können daher auch außerhalb der EU auf Grundlage von Standardvertragsklauseln verarbeitet werden.',
         ],
       },
       {
@@ -217,17 +213,10 @@ export const legalDe: LegalSet = {
         ],
       },
       {
-        h: 'Hosting',
-        body: [
-          'Diese Website wird von der Vercel Inc. mit Sitz in den USA gehostet. Die Auslieferung erfolgt über den nächstgelegenen Standort, wodurch Ihre IP-Adresse auch außerhalb der EU verarbeitet werden kann. Vercel stellt hierfür Standardvertragsklauseln bereit.',
-          '[[PRÜFEN: Auftragsverarbeitungsvertrag mit Vercel abgeschlossen]]',
-        ],
-      },
-      {
         h: 'Schriftarten',
         body: [
-          'Diese Website lädt ihre Schriftarten derzeit von Google Fonts. Dabei wird Ihre IP-Adresse an Google übermittelt.',
-          '[[ENTSCHEIDUNG ERFORDERLICH: Schriften lokal einbinden, um diese Übermittlung vollständig zu vermeiden]]',
+          'Diese Website lädt ihre Schriftarten von Google Fonts, einem Dienst der Google Ireland Limited. Beim Aufruf einer Seite fordert Ihr Browser die Schriftdateien von Servern von Google an; dabei wird Ihre IP-Adresse an Google übermittelt.',
+          'Wir nutzen den Dienst für eine einheitliche Darstellung der Website auf allen Geräten und in allen Browsern. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO — unser berechtigtes Interesse an einer konsistenten Darstellung. Wie Google diese Daten verarbeitet, beschreibt Google in seiner Datenschutzerklärung unter policies.google.com/privacy.',
         ],
       },
       {
@@ -239,7 +228,7 @@ export const legalDe: LegalSet = {
       },
       {
         h: 'Speicherdauer',
-        body: ['Server-Logfiles werden nach [[SPEICHERDAUER]] gelöscht.'],
+        body: ['Server-Logfiles werden nach 30 Tagen gelöscht.'],
       },
       {
         h: 'Änderungen dieser Erklärung',
@@ -322,12 +311,8 @@ export const legalDe: LegalSet = {
         body: [
           'Register: Companies House, England and Wales',
           'Registernummer: 16721132',
-          'Umsatzsteuer-Identifikationsnummer: [[USt-IdNr. bei Registrierung in der EU, sonst „nicht in Deutschland umsatzsteuerlich registriert“]]',
+          'Umsatzsteuer-Identifikationsnummer: nicht umsatzsteuerlich registriert',
         ],
-      },
-      {
-        h: 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV',
-        body: ['R. Kiran Khan', '5th Floor, 167-169 Great Portland Street, London W1W 5PF'],
       },
       {
         h: 'Verbraucherstreitbeilegung',
