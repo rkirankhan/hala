@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { C, display, mono, sans, wrap } from './tokens';
+import { C, display, mono, sans, tracking, wrap } from './tokens';
 import { useHalaCopy, useHalaLocale, type LegalDoc, type LegalSet } from './i18n';
 import { useLegalMeta } from './useHalaMeta';
 
@@ -88,7 +88,7 @@ export function LegalPage({ pick }: { pick: (set: LegalSet) => LegalDoc }) {
           style={{
             fontFamily: display, fontWeight: 700,
             fontSize: 'clamp(2rem, 4.4vw, 3rem)',
-            lineHeight: 1.06, letterSpacing: '-0.035em',
+            lineHeight: 1.06, letterSpacing: tracking.heading,
             margin: '18px 0 0',
           }}
         >
@@ -104,7 +104,7 @@ export function LegalPage({ pick }: { pick: (set: LegalSet) => LegalDoc }) {
             <h2
               style={{
                 fontFamily: display, fontWeight: 600, fontSize: 19,
-                letterSpacing: '-0.02em', margin: 0,
+                letterSpacing: tracking.ui, margin: 0,
                 paddingBottom: 12, borderBottom: `1px solid ${C.line}`,
               }}
             >

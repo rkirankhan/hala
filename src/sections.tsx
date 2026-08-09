@@ -15,7 +15,7 @@ import {
   Wrench,
   type LucideIcon,
 } from 'lucide-react';
-import { C, display, mono, sans, wrap } from './tokens';
+import { C, display, mono, sans, tracking, wrap } from './tokens';
 import { useHalaCopy } from './i18n';
 
 /**
@@ -45,8 +45,8 @@ export function StatBand() {
           fontFamily: display,
           fontWeight: 600,
           fontSize: 'clamp(2.2rem, 5.4vw, 4rem)',
-          lineHeight: 1.04,
-          letterSpacing: '-0.04em',
+          lineHeight: 1.08,
+          letterSpacing: tracking.display,
           margin: 0,
           maxInlineSize: '16ch',
         }}
@@ -229,7 +229,7 @@ export function FeatureBands() {
             fontWeight: 600,
             fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
             lineHeight: 1.06,
-            letterSpacing: '-0.035em',
+            letterSpacing: tracking.heading,
             margin: 0,
             maxInlineSize: '20ch',
             marginInline: 'auto',
@@ -273,7 +273,7 @@ export function FeatureBands() {
                   fontWeight: 600,
                   fontSize: 'clamp(1.4rem, 2.6vw, 2.1rem)',
                   lineHeight: 1.12,
-                  letterSpacing: '-0.03em',
+                  letterSpacing: tracking.heading,
                   margin: '14px 0 0',
                   maxInlineSize: '20ch',
                 }}
@@ -346,7 +346,7 @@ export function IndustryShowcase() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-            lineHeight: 1.06, letterSpacing: '-0.035em',
+            lineHeight: 1.06, letterSpacing: tracking.heading,
             margin: '18px auto 0', maxInlineSize: '18ch',
           }}
         >
@@ -442,7 +442,7 @@ export function HowItWorks() {
         style={{
           fontFamily: display, fontWeight: 600,
           fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-          lineHeight: 1.06, letterSpacing: '-0.035em',
+          lineHeight: 1.06, letterSpacing: tracking.heading,
           margin: '0 0 clamp(28px, 3.4vw, 44px)', maxInlineSize: '16ch',
         }}
       >
@@ -462,7 +462,7 @@ export function HowItWorks() {
             <span style={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.16em', color: C.accent }}>
               {s.n}
             </span>
-            <div style={{ fontFamily: display, fontWeight: 600, fontSize: 17, letterSpacing: '-0.02em' }}>
+            <div style={{ fontFamily: display, fontWeight: 600, fontSize: 17, letterSpacing: tracking.ui }}>
               {s.t}
             </div>
             <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.6, color: C.muted }}>{s.b}</p>
@@ -493,7 +493,7 @@ export function Pricing() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-            lineHeight: 1.06, letterSpacing: '-0.035em', margin: 0,
+            lineHeight: 1.06, letterSpacing: tracking.heading, margin: 0,
           }}
         >
           {c.pricing.heading}
@@ -540,7 +540,7 @@ export function Pricing() {
             </div>
 
             <div>
-              <span style={{ fontFamily: display, fontWeight: 600, fontSize: 'clamp(2rem,3.2vw,2.6rem)', letterSpacing: '-0.04em' }}>
+              <span style={{ fontFamily: display, fontWeight: 600, fontSize: 'clamp(2rem,3.2vw,2.6rem)', letterSpacing: tracking.display }}>
                 {c.pricing.currency}
                 {p.price}
               </span>
@@ -593,7 +593,7 @@ export function ProofSlot() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
-            lineHeight: 1.1, letterSpacing: '-0.03em',
+            lineHeight: 1.1, letterSpacing: tracking.heading,
             margin: '16px auto 0', maxInlineSize: '24ch', color: C.muted,
           }}
         >
@@ -629,7 +629,7 @@ export function ClosingCTA() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(2rem, 4.6vw, 3.4rem)',
-            lineHeight: 1.04, letterSpacing: '-0.04em',
+            lineHeight: 1.08, letterSpacing: tracking.display,
             margin: 0, maxInlineSize: '18ch', marginInline: 'auto',
           }}
         >
@@ -813,7 +813,7 @@ export function ChannelOrbit() {
         <span
           style={{
             fontFamily: display, fontWeight: 700, fontSize: 15,
-            letterSpacing: '-0.02em',
+            letterSpacing: tracking.ui,
           }}
         >
           Hala

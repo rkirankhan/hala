@@ -35,6 +35,24 @@ export const C = {
  */
 export const display = "'Plus Jakarta Sans', 'Inter', system-ui, sans-serif";
 
+/**
+ * Letter-spacing scale, by optical size rather than one value everywhere.
+ *
+ * The page previously used -0.035em on both a 22px wordmark and a 50px heading.
+ * Tracking has to work the other way round: large type needs it pulled in,
+ * small type needs it left alone, and a single negative value applied to
+ * everything makes the small text look cramped. Plus Jakarta Sans is a fairly
+ * narrow geometric face with a tall x-height, which exaggerates the effect.
+ */
+export const tracking = {
+  /** 32px and up — hero, section headings, prices. */
+  display: '-0.025em',
+  /** Roughly 22–31px — sub-headings, band titles. */
+  heading: '-0.02em',
+  /** 22px and below — wordmark, card titles, legal headings. */
+  ui: '-0.01em',
+} as const;
+
 export const sans = "'Inter', system-ui, -apple-system, sans-serif";
 export const mono = 'ui-monospace, SFMono-Regular, Menlo, monospace';
 

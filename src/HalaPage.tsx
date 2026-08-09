@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight, Phone, Sparkles } from 'lucide-react';
-import { C, display, mono, sans, wrap } from './tokens';
+import { C, display, mono, sans, tracking, wrap } from './tokens';
 import { useHalaMeta } from './useHalaMeta';
 import { Link, useLocation } from 'react-router-dom';
 import { OTHER, otherLocalePath, useHalaCopy, useHalaLocale } from './i18n';
@@ -153,7 +153,7 @@ export function HalaPage() {
               byline links back to the agency site — the only crossing point
               between the two properties. */}
           <span style={{ display: 'flex', alignItems: 'baseline', gap: 9 }}>
-            <span style={{ fontFamily: display, fontWeight: 600, fontSize: 22, letterSpacing: '-0.035em' }}>
+            <span style={{ fontFamily: display, fontWeight: 600, fontSize: 22, letterSpacing: tracking.ui }}>
               Hala
             </span>
             <a
@@ -270,7 +270,7 @@ export function HalaPage() {
               style={{
                 fontFamily: display, fontWeight: 700,
                 fontSize: 'clamp(2.5rem, 5.6vw, 4.4rem)',
-                lineHeight: 1.02, letterSpacing: '-0.04em',
+                lineHeight: 1.06, letterSpacing: tracking.display,
                 margin: '26px 0 0', maxInlineSize: '13ch',
               }}
             >
@@ -401,7 +401,7 @@ export function HalaPage() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-            lineHeight: 1.06, letterSpacing: '-0.035em',
+            lineHeight: 1.06, letterSpacing: tracking.heading,
             margin: '18px 0 clamp(36px, 4.5vw, 60px)', maxInlineSize: '17ch',
           }}
         >
@@ -424,7 +424,7 @@ export function HalaPage() {
                 style={{
                   fontFamily: display, fontWeight: 600,
                   fontSize: 'clamp(2rem, 3.4vw, 2.9rem)',
-                  letterSpacing: '-0.04em', lineHeight: 1,
+                  letterSpacing: tracking.display, lineHeight: 1,
                   color: C.accent,
                 }}
               >
@@ -434,7 +434,7 @@ export function HalaPage() {
                 style={{
                   fontFamily: display, fontWeight: 600,
                   fontSize: 'clamp(1.15rem, 1.9vw, 1.5rem)',
-                  letterSpacing: '-0.025em', lineHeight: 1.18, margin: 0,
+                  letterSpacing: tracking.heading, lineHeight: 1.18, margin: 0,
                   maxInlineSize: '20ch',
                 }}
               >
@@ -466,7 +466,7 @@ export function HalaPage() {
             style={{
               fontFamily: display, fontWeight: 600,
               fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-              lineHeight: 1.06, letterSpacing: '-0.035em',
+              lineHeight: 1.06, letterSpacing: tracking.heading,
               margin: '18px auto 0', maxInlineSize: '18ch',
             }}
           >
@@ -494,7 +494,7 @@ export function HalaPage() {
               style={{
                 fontFamily: display, fontWeight: 600,
                 fontSize: 'clamp(1.9rem, 4vw, 2.9rem)',
-                lineHeight: 1.05, letterSpacing: '-0.035em', margin: 0,
+                lineHeight: 1.05, letterSpacing: tracking.heading, margin: 0,
               }}
             >
               {c.faq.heading}
