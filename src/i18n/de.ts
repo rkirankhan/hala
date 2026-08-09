@@ -265,7 +265,7 @@ export const de: HalaCopy = {
         line: 'Förmliches Sie, 24-Stunden-Zeiten, wie erwartet',
       },
     ],
-    note: 'Die meisten KI-Telefondienste können nur Englisch. Ein deutsches Unternehmen bekommt einen englischen Bot — oder gar nichts.',
+    note: 'Englisch für Großbritannien, Deutsch für Deutschland — jeweils nativ aufgebaut. Die meisten KI-Telefondienste bieten überhaupt nur Englisch an.',
   },
 
   showcase: {
