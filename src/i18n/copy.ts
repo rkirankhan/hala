@@ -406,7 +406,7 @@ export const en: HalaCopy = {
       columns: ['Any channel', 'Answered & understood', 'Handled', 'Followed up'],
       contact: 'Customer gets in touch',
       contactNote: 'Phone, WhatsApp, Instagram, web chat, email',
-      answer: 'Hala answers',
+      answer: 'Hala',
       badge: 'Recognises returning customers',
       follow: 'Follow-up & reviews',
       followNote: 'Confirmations, reminders, review requests — and keeping in touch',

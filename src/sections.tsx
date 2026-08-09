@@ -840,6 +840,12 @@ interface Layout {
   nodes: { contact: number[]; answer: number[]; outcomes: number[][]; follow: number[] };
   /** Colour per path, index-matched to `paths`. */
   pathTones: string[];
+  /**
+   * Which paths get an arrowhead. Only segments that terminate at a node do —
+   * a trunk that carries several branches should not appear to point at
+   * anything, or the arrow lands in empty space.
+   */
+  arrows: boolean[];
   /** x positions for the stage headings, wide layout only. */
   columnsAt?: number[];
   columnsY?: number;
@@ -883,6 +889,7 @@ const WIDE: Layout = {
     BRANCH_TONES[1],
     BRANCH_TONES[2],
   ],
+  arrows: [true, true, true, true, true, true, true],
   seq: [0, 1, 2, 3, 4, 5, 6],
   nodes: {
     contact: [0],
@@ -925,12 +932,18 @@ const TALL: Layout = {
   paths: [
     'M 330 226 L 330 246',
     'M 330 358 C 330 412, 70 402, 70 452',
-    'M 70 452 L 70 1200',
+    'M 70 452 L 70 1350',
     'M 70 540 L 158 540',
     'M 70 810 L 158 810',
     'M 70 1080 L 158 1080',
-    'M 70 1200 C 70 1272, 330 1262, 330 1248',
+    'M 70 1350 L 148 1350',
   ],
+  /* The trunk runs the full height and stubs sideways into every node,
+     follow-up included. It previously stopped short and curved up into the
+     follow-up from below, which left the arrowhead pointing away from the tile
+     it was meant to enter — and put a second arrowhead in mid-air where the
+     trunk ended. */
+  arrows: [true, false, false, true, true, true, true],
   /* The trunk carries every branch, so it stays neutral; only the stubs into
      each outcome take that outcome's colour. */
   pathTones: [
@@ -1008,6 +1021,7 @@ function MapTile({
         boxShadow: tone
           ? `0 24px 50px -30px ${tone}66`
           : '0 18px 40px -24px rgba(0,0,0,0.9)',
+        textAlign: !note && !system ? 'center' : 'start',
       }}
     >
       {/* One overlay per flash, rather than animating the tile itself: the tile
@@ -1021,6 +1035,9 @@ function MapTile({
           style={{ borderRadius: 'inherit', animationDelay: `${delay}s` }}
         />
       ))}
+      {/* Tiles carrying only an icon and a label centre; ones with a note and a
+          system line stay left-aligned, because centred body copy is harder to
+          read the moment it wraps. */}
       {channels ? (
         <span
           style={{
@@ -1170,7 +1187,9 @@ function FlowMap({
               strokeWidth={1.8}
               strokeDasharray="5 5"
               strokeLinecap="round"
-              markerEnd={`url(#${arrowId(className, layout.pathTones[i])})`}
+              markerEnd={
+                layout.arrows[i] ? `url(#${arrowId(className, layout.pathTones[i])})` : undefined
+              }
             />
           ))}
           {layout.paths.map((d, i) => (

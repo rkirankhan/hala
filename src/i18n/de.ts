@@ -186,7 +186,7 @@ export const de: HalaCopy = {
       columns: ['Jeder Kanal', 'Angenommen & verstanden', 'Erledigt', 'Nachgefasst'],
       contact: 'Kunde meldet sich',
       contactNote: 'Telefon, WhatsApp, Instagram, Web-Chat, E-Mail',
-      answer: 'Hala nimmt an',
+      answer: 'Hala',
       badge: 'Erkennt Stammkunden',
       follow: 'Nachfassen & Bewertungen',
       followNote: 'Bestätigungen, Erinnerungen, Bewertungsanfragen — und Kontakt halten',
