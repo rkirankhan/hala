@@ -803,12 +803,24 @@ export function ChannelList() {
  * an inline transform for centering and CSS cannot override it.
  */
 /**
- * Connector stroke. C.line (white at 10%) is right for panel borders but far too
- * faint for lines that have to be followed across the page — at that weight the
- * tiles read as a scattered grid rather than a route. Accent-tinted and heavier,
- * with a tighter dash, so the path is legible without competing with the tiles.
+ * One colour per branch, shared by the tiles and the lines that feed them, so a
+ * connector is read as belonging to its destination rather than as generic
+ * wiring. Taken from the feature bands rather than adding new colours.
  */
-const MAP_STROKE = 'rgba(110,123,242,0.55)';
+const BRANCH_TONES = ['#6E7BF2', '#F59E0B', '#25D366'];
+
+/** Trunk sections that belong to no single branch. */
+const MAP_ACCENT = '#6E7BF2';
+
+/** Connectors sit at 55% so they carry across the page without shouting. */
+const stroke = (tone: string) => `${tone}8C`;
+
+/**
+ * Arrowhead ids have to be unique per document, and both layouts render at once
+ * with one hidden — so the map's own class name namespaces them. Without that
+ * the second SVG's markers would silently win.
+ */
+const arrowId = (ns: string, tone: string) => `${ns}-arrow-${tone.replace('#', '')}`;
 
 interface Layout {
   w: number;
@@ -826,6 +838,8 @@ interface Layout {
    * it, so it lights once per branch.
    */
   nodes: { contact: number[]; answer: number[]; outcomes: number[][]; follow: number[] };
+  /** Colour per path, index-matched to `paths`. */
+  pathTones: string[];
   /** x positions for the stage headings, wide layout only. */
   columnsAt?: number[];
   columnsY?: number;
@@ -853,9 +867,19 @@ const WIDE: Layout = {
     'M 210 290 L 250 290',
     'M 390 290 C 460 290, 460 100, 510 100',
     'M 390 290 L 510 290',
-    'M 390 290 C 460 290, 460 480, 510 480',
+    'M 322 334 C 322 420, 300 470, 341 500',
     'M 780 100 C 832 100, 832 290, 862 290',
     'M 780 290 L 862 290',
+  ],
+  /* Each branch keeps its colour the whole way: out to its outcome and on to
+     the follow-up, so the eye can trace one route through the fork. */
+  pathTones: [
+    MAP_ACCENT,
+    BRANCH_TONES[0],
+    BRANCH_TONES[1],
+    BRANCH_TONES[2],
+    BRANCH_TONES[0],
+    BRANCH_TONES[1],
   ],
   seq: [0, 1, 2, 3, 4, 5],
   nodes: {
@@ -875,7 +899,11 @@ const WIDE: Layout = {
   outcomes: [
     [645, 100, 262],
     [645, 290, 262],
-    [645, 480, 262],
+    /* Pulled left and down, out of the column the other two sit in. It is the
+       one branch that does not carry on to the follow-up, and standing it apart
+       says so before the missing connector does — while using the empty space
+       the fork left in the bottom-left corner. */
+    [472, 500, 262],
   ],
   follow: [952, 290, 180],
 };
@@ -900,6 +928,17 @@ const TALL: Layout = {
     'M 70 810 L 158 810',
     'M 70 1080 L 158 1080',
     'M 70 1200 C 70 1272, 330 1262, 330 1248',
+  ],
+  /* The trunk carries every branch, so it stays neutral; only the stubs into
+     each outcome take that outcome's colour. */
+  pathTones: [
+    MAP_ACCENT,
+    MAP_ACCENT,
+    MAP_ACCENT,
+    BRANCH_TONES[0],
+    BRANCH_TONES[1],
+    BRANCH_TONES[2],
+    MAP_ACCENT,
   ],
   seq: [0, 1, 1, 2, 3, 4, 5],
   nodes: {
@@ -1073,7 +1112,7 @@ function FlowMap({
      single palette. Five identical dark tiles made the fork look like a list;
      tinting them says "these are three different endings" before a word is
      read. */
-  const outTones = ['#6E7BF2', '#F59E0B', '#25D366'];
+  const outTones = BRANCH_TONES;
 
   return (
     <div
@@ -1092,6 +1131,30 @@ function FlowMap({
           width="100%" height="100%" aria-hidden
           style={{ position: 'absolute', inset: 0 }}
         >
+          <defs>
+            {[...new Set(layout.pathTones)].map((tone) => (
+              <marker
+                key={tone}
+                id={arrowId(className, tone)}
+                viewBox="0 0 10 10"
+                refX={8}
+                refY={5}
+                markerWidth={4.5}
+                markerHeight={4.5}
+                orient="auto-start-reverse"
+              >
+                <path
+                  d="M 1 1.5 L 8 5 L 1 8.5"
+                  fill="none"
+                  stroke={tone}
+                  strokeWidth={1.8}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </marker>
+            ))}
+          </defs>
+
           {/* Two layers per connector: the dashed route, always visible, and a
               bright segment that traces it when its turn comes round. One
               segment is lit at a time, so the eye follows a single journey
@@ -1101,10 +1164,11 @@ function FlowMap({
               key={`base-${i}`}
               d={d}
               fill="none"
-              stroke={MAP_STROKE}
+              stroke={stroke(layout.pathTones[i])}
               strokeWidth={1.8}
               strokeDasharray="5 5"
               strokeLinecap="round"
+              markerEnd={`url(#${arrowId(className, layout.pathTones[i])})`}
             />
           ))}
           {layout.paths.map((d, i) => (
@@ -1114,7 +1178,7 @@ function FlowMap({
               d={d}
               pathLength={1}
               fill="none"
-              stroke={C.accent}
+              stroke={layout.pathTones[i]}
               strokeWidth={2.6}
               strokeLinecap="round"
               style={{ animationDelay: `${layout.seq[i] * 0.8}s` }}
