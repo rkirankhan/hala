@@ -14,9 +14,28 @@
  * industry should never require touching the rest of the copy.
  */
 
+import { legalEn } from './legal';
+
 export interface Message {
   who: 'guest' | 'agent';
   t: string;
+}
+
+/** One legal document. `slug` is the route it lives at, per language. */
+export interface LegalDoc {
+  slug: string;
+  title: string;
+  intro: string;
+  sections: { h: string; body: string[] }[];
+}
+
+export interface LegalSet {
+  backLabel: string;
+  updatedLabel: string;
+  updatedDate: string;
+  privacy: LegalDoc;
+  terms: LegalDoc;
+  impressum: LegalDoc;
 }
 
 export interface HalaCopy {
@@ -126,8 +145,11 @@ export interface HalaCopy {
   footer: {
     rights: string;
     productSuffix: string;
-    links: string[];
+    /** `to` is an in-app path, or a mailto:/https: URL for external links. */
+    links: { label: string; to: string }[];
   };
+
+  legal: LegalSet;
 }
 
 interface BandCopy {
@@ -426,6 +448,13 @@ export const en: HalaCopy = {
   footer: {
     rights: '© 2026 Hala — a',
     productSuffix: 'product',
-    links: ['Privacy', 'Terms', 'Impressum', 'info@khaashub.com'],
+    links: [
+      { label: 'Privacy', to: legalEn.privacy.slug },
+      { label: 'Terms', to: legalEn.terms.slug },
+      { label: 'Legal Notice', to: legalEn.impressum.slug },
+      { label: 'info@khaashub.com', to: 'mailto:info@khaashub.com' },
+    ],
   },
+
+  legal: legalEn,
 };

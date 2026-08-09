@@ -49,6 +49,41 @@ a route in `HalaRoutes.tsx`.
 - [ ] German copy needs a native speaker's pass, especially the headlines.
 - [ ] The proof section is an empty placeholder awaiting a named customer.
 - [ ] Copy is written for restaurants; the product positioning is cross-industry.
-- [ ] Footer links (Privacy, Terms, Impressum) are not wired up. An Impressum and
-      a Datenschutzerklärung are legally required for the German market.
 - [ ] No favicon or OG image yet.
+
+## Legal pages
+
+Six routes, one per document per language:
+
+| English | German |
+| ------- | ------ |
+| `/privacy` | `/de/datenschutz` |
+| `/terms` | `/de/agb` |
+| `/impressum` | `/de/impressum` |
+
+Content is in `src/i18n/legal.ts`. All six are `noindex, follow` — a privacy
+policy outranking the product page for the brand name is an avoidable own goal.
+
+**These are drafts, not legal advice.** Before launch:
+
+- [ ] Fill every `[[PLACEHOLDER]]` — they render in amber on the page so an
+      unfilled one is impossible to miss. Outstanding: registered address,
+      company number, VAT number, director's name, phone number, which UK
+      jurisdiction, and the log retention period.
+- [ ] Have the German Impressum and Datenschutzerklärung reviewed by someone
+      qualified in German law. The Abmahnung industry exists to profit from bad
+      ones, and a UK company running a German-language site is a visible target.
+- [ ] **GDPR Article 27** — Khaas Hub Ltd is a UK company with no EU
+      establishment. Targeting German customers may require appointing an EU
+      representative. The exemption for occasional, low-risk processing probably
+      covers this marketing site today, but almost certainly will not once
+      German customers are onboarded. Worth settling before the first one signs.
+- [ ] **Google Fonts is loaded from Google's CDN**, which transmits visitor IP
+      addresses to Google. German courts have ruled against this (LG München,
+      2022) and it is a favourite of Abmahnung letters. Self-hosting the two
+      font families removes the transfer entirely and is roughly an hour's work.
+- [ ] Confirm a data processing agreement is in place with Vercel.
+- [ ] The website terms are not service terms. A Hala subscription needs its own
+      agreement covering the service, pricing, SLA and a customer-facing DPA.
+- [ ] **EU AI Act** — customers must be told they are talking to an AI. That
+      belongs in the agent's opening line, not just the small print.

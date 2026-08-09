@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 import { en, type HalaCopy } from './copy';
 import { de } from './de';
 
-export type { HalaCopy } from './copy';
+export type { HalaCopy, LegalDoc, LegalSet } from './copy';
 
 export type HalaLocale = 'en' | 'de';
 

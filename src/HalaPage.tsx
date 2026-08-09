@@ -582,10 +582,18 @@ export function HalaPage() {
             </a>{' '}
             {c.footer.productSuffix}
           </span>
-          <span style={{ display: 'flex', gap: 22 }}>
-            {c.footer.links.map((l) => (
-              <span key={l}>{l}</span>
-            ))}
+          <span style={{ display: 'flex', flexWrap: 'wrap', gap: 22 }}>
+            {c.footer.links.map((l) =>
+              l.to.startsWith('/') ? (
+                <Link key={l.to} to={l.to} style={{ color: C.faint, textDecoration: 'none' }}>
+                  {l.label}
+                </Link>
+              ) : (
+                <a key={l.to} href={l.to} style={{ color: C.faint, textDecoration: 'none' }}>
+                  {l.label}
+                </a>
+              ),
+            )}
           </span>
         </div>
       </footer>

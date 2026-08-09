@@ -36,6 +36,33 @@ function getMeta(selector: string) {
   return document.head.querySelector<HTMLMetaElement>(selector)?.content ?? '';
 }
 
+/**
+ * Legal pages get their own title and, importantly, `noindex` — a privacy
+ * policy or Impressum outranking the product page for the brand name is a
+ * common and avoidable own goal.
+ */
+export function useLegalMeta(title: string, locale: HalaLocale) {
+  useEffect(() => {
+    const previousTitle = document.title;
+    const previousLang = document.documentElement.lang;
+
+    document.title = `${title} | Hala`;
+    document.documentElement.lang = locale;
+
+    const robots = document.createElement('meta');
+    robots.name = 'robots';
+    robots.content = 'noindex, follow';
+    robots.dataset.hala = 'legal-robots';
+    document.head.appendChild(robots);
+
+    return () => {
+      document.title = previousTitle;
+      document.documentElement.lang = previousLang;
+      robots.remove();
+    };
+  }, [title, locale]);
+}
+
 export function useHalaMeta(copy: HalaCopy, locale: HalaLocale) {
   useEffect(() => {
     /* Restore on unmount, so switching language and back leaves the head exactly

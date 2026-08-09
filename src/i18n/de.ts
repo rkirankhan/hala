@@ -1,4 +1,5 @@
 import type { HalaCopy } from './copy';
+import { legalDe } from './legal';
 
 /**
  * German copy — a rewrite, not a translation.
@@ -320,6 +321,13 @@ export const de: HalaCopy = {
   footer: {
     rights: '© 2026 Hala — ein',
     productSuffix: 'Produkt',
-    links: ['Datenschutz', 'AGB', 'Impressum', 'info@khaashub.com'],
+    links: [
+      { label: 'Datenschutz', to: legalDe.privacy.slug },
+      { label: 'Nutzungsbedingungen', to: legalDe.terms.slug },
+      { label: 'Impressum', to: legalDe.impressum.slug },
+      { label: 'info@khaashub.com', to: 'mailto:info@khaashub.com' },
+    ],
   },
+
+  legal: legalDe,
 };
