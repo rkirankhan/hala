@@ -854,22 +854,23 @@ const WIDE: Layout = {
   w: 1100,
   h: 580,
   /**
-   * Note there is no join from the third outcome to the follow-up.
+   * All three outcomes feed the follow-up, including the enquiry.
    *
-   * Someone who asked what time you close has not booked anything: there is no
-   * confirmation to send, no appointment to remind them about, and no visit to
-   * review. Drawing that arrow would promise a review request to a person who
-   * has never been a customer — odd on its own terms, and against Google's
-   * review policies besides. The enquiry is logged and nudged instead, which the
-   * node's own system line says.
+   * Worth being clear what that means, because the follow-up node covers several
+   * things and not all of them apply to every branch. An enquiry that goes quiet
+   * gets nudged — that is the promise the hero makes and it is the right
+   * behaviour. A review request is not: only someone who actually became a
+   * customer can review the visit, and inviting anyone else breaches Google's
+   * policies. Same node, different subset per branch.
    */
   paths: [
     'M 210 290 L 250 290',
     'M 390 290 C 460 290, 460 100, 510 100',
     'M 390 290 L 510 290',
     'M 322 334 C 322 420, 300 470, 341 500',
-    'M 780 100 C 832 100, 832 290, 862 290',
+    'M 780 100 C 834 100, 838 262, 862 266',
     'M 780 290 L 862 290',
+    'M 605 505 C 730 505, 802 400, 862 314',
   ],
   /* Each branch keeps its colour the whole way: out to its outcome and on to
      the follow-up, so the eye can trace one route through the fork. */
@@ -880,13 +881,14 @@ const WIDE: Layout = {
     BRANCH_TONES[2],
     BRANCH_TONES[0],
     BRANCH_TONES[1],
+    BRANCH_TONES[2],
   ],
-  seq: [0, 1, 2, 3, 4, 5],
+  seq: [0, 1, 2, 3, 4, 5, 6],
   nodes: {
     contact: [0],
     answer: [0.6],
     outcomes: [[1.4], [2.2], [3.0]],
-    follow: [3.8, 4.6],
+    follow: [3.8, 4.6, 5.4],
   },
   columnsAt: [112, 320, 645, 952],
   columnsY: 26,
