@@ -249,15 +249,22 @@ export const de: HalaCopy = {
   },
 
   languages: {
-    eyebrow: 'Sprachen',
-    heading: 'Es antwortet Ihren Kunden in deren Sprache.',
-    sub: 'Keine übersetzte Website — der Mitarbeiter selbst spricht alle drei. Dieselbe Nummer, dasselbe Gedächtnis, wer auch immer anruft.',
+    eyebrow: 'Sprache',
+    heading: 'Für Ihren Markt gebaut, in Ihrer Sprache.',
+    sub: 'Ihr Hala wird in einer Sprache eingerichtet und beherrscht sie richtig — kein englischer Bot mit vorgeschalteter Übersetzung.',
     items: [
-      { name: 'Englisch', native: 'English', line: 'Internationale Anrufer' },
-      { name: 'Deutsch', native: 'Deutsch', line: 'Förmliches Sie, wie im Geschäftsleben erwartet' },
-      { name: 'Arabisch', native: 'العربية', line: 'Hocharabisch, verstanden vom Golf bis Marokko' },
+      {
+        name: 'Vereinigtes Königreich',
+        native: 'English',
+        line: 'Natürliches britisches Englisch, UK-Formate',
+      },
+      {
+        name: 'Deutschland',
+        native: 'Deutsch',
+        line: 'Förmliches Sie, 24-Stunden-Zeiten, wie erwartet',
+      },
     ],
-    note: 'Die meisten KI-Telefondienste können nur Englisch. Ihrer muss das nicht.',
+    note: 'Die meisten KI-Telefondienste können nur Englisch. Ein deutsches Unternehmen bekommt einen englischen Bot — oder gar nichts.',
   },
 
   showcase: {
@@ -358,7 +365,7 @@ export const de: HalaCopy = {
       },
       {
         t: 'Wir bauen Ihren Mitarbeiter',
-        b: 'Stimme und Tonfall auf Ihr Unternehmen abgestimmt, auf Deutsch und Englisch, wenn Sie beides brauchen.',
+        b: 'Stimme und Tonfall auf Ihr Unternehmen abgestimmt, auf Deutsch oder Englisch.',
       },
       {
         t: 'Nummer verbinden',
@@ -411,7 +418,7 @@ export const de: HalaCopy = {
         overage: '0,15 € je Zusatzminute',
         features: [
           'Alles aus Professional',
-          'Beide Sprachen, Ihr Tonfall',
+          'Niedrigster Minutenpreis',
           'Mehrere Standorte, ein Konto',
         ],
       },

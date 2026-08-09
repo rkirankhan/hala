@@ -467,15 +467,22 @@ export const en: HalaCopy = {
   },
 
   languages: {
-    eyebrow: 'Languages',
-    heading: 'It answers your customer in their language.',
-    sub: 'Not a translated website — the employee itself speaks all three. The same number, the same memory, whoever calls.',
+    eyebrow: 'Language',
+    heading: 'Built for your market, in your language.',
+    sub: 'Your Hala is set up in one language and does it properly — not an English agent with a translation bolted on the front.',
     items: [
-      { name: 'English', native: 'English', line: 'UK and international callers' },
-      { name: 'German', native: 'Deutsch', line: 'Formal Sie, as German business expects' },
-      { name: 'Arabic', native: 'العربية', line: 'Modern Standard, understood Gulf to Morocco' },
+      {
+        name: 'United Kingdom',
+        native: 'English',
+        line: 'Natural British phrasing, UK dates, times and postcodes',
+      },
+      {
+        name: 'Germany',
+        native: 'Deutsch',
+        line: 'Formal Sie, 24-hour times, as German business expects',
+      },
     ],
-    note: 'Most AI answering services are English only. Yours does not have to be.',
+    note: 'Most AI answering services are English only — a German business gets an English bot, or nothing.',
   },
 
   showcase: {
@@ -561,7 +568,7 @@ export const en: HalaCopy = {
       },
       {
         t: 'We build your employee',
-        b: 'Voice and tone configured to your business, in English and German if you need both.',
+        b: 'Voice and tone configured to your business, in English or German.',
       },
       {
         t: 'Connect your number',
@@ -614,7 +621,7 @@ export const en: HalaCopy = {
         overage: '£0.15 / extra minute',
         features: [
           'Everything in Professional',
-          'Both languages, your tone',
+          'Lowest per-minute rate',
           'Multi-site, one account',
         ],
       },

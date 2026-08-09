@@ -62,9 +62,11 @@ a route in `HalaRoutes.tsx`.
       than a straight currency swap.
 - [ ] Integration names in `src/i18n/copy.ts` are candidates, not confirmed.
       Listing one you do not have is a claim. Verify or cut before launch.
-- [ ] The languages section claims the employee speaks Arabic. Confirm the
-      product does before launch — the Arabic *website* is unpublished, which is
-      a separate thing.
+- [ ] **One agent, one language.** The GoHighLevel build handles a single
+      language per deployment, so nothing on the site may claim an agent that
+      switches per caller. The languages section is written as "set up in your
+      market's language" for that reason. If the platform ever supports
+      switching, that section is where to say so.
 - [ ] German and Arabic copy both need a native speaker's pass, especially the
       headlines, where the English relies on rhythm that does not translate.
 - [ ] Arabic prices are still in pounds. If that page is aimed at Gulf buyers
