@@ -95,6 +95,23 @@ export function HalaPage() {
         @keyframes v4Fade  { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
         @keyframes v4Dash  { to { background-position: 200px 0; } }
 
+        /* One connector traces at a time. pathLength=1 normalises the dash
+           maths, so the same keyframes work on a 40-unit stub and a 500-unit
+           curve. Seven slots at 0.8s each. */
+        @keyframes v4Trace {
+          0%   { stroke-dashoffset: 1; opacity: 0; }
+          1%   { opacity: 1; }
+          12%  { stroke-dashoffset: 0; opacity: 1; }
+          14%  { stroke-dashoffset: 0; opacity: 0; }
+          100% { stroke-dashoffset: 0; opacity: 0; }
+        }
+        .v4-trace {
+          stroke-dasharray: 0.22 1;
+          stroke-dashoffset: 1;
+          opacity: 0;
+          animation: v4Trace 5.6s linear infinite;
+        }
+
         .v4-hero { grid-template-columns: minmax(0,1fr); gap: 48px; }
         @media (min-width: 1040px) { .v4-hero { grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 56px; } }
 

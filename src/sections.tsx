@@ -810,6 +810,15 @@ interface Layout {
   w: number;
   h: number;
   paths: string[];
+  /**
+   * Firing order for the trace animation, one slot per path.
+   *
+   * Not the same as the order the paths are declared in: the sequence follows a
+   * whole journey at a time — in to Hala, out to the first outcome, on to the
+   * follow-up, then back for the second — rather than lighting every branch and
+   * then every join. Watching one conversation travel end to end is the point.
+   */
+  seq: number[];
   contact: [number, number, number];
   answer: [number, number, number];
   badge: [number, number];
@@ -829,6 +838,7 @@ const WIDE: Layout = {
     'M 707 200 L 862 200',
     'M 697 330 C 790 330, 790 200, 862 200',
   ],
+  seq: [0, 1, 3, 5, 2, 4, 6],
   contact: [112, 200, 188],
   answer: [320, 200, 140],
   badge: [320, 96],
@@ -853,6 +863,7 @@ const TALL: Layout = {
     'M 70 790 L 158 790',
     'M 70 890 C 70 945, 330 935, 330 922',
   ],
+  seq: [0, 1, 2, 3, 4, 5, 6],
   contact: [330, 62, 360],
   answer: [330, 193, 360],
   badge: [330, 268],
@@ -992,18 +1003,32 @@ function FlowMap({
           width="100%" height="100%" aria-hidden
           style={{ position: 'absolute', inset: 0 }}
         >
-          {/* Connectors only. Pulses travelling the paths were dropped: the
-              diagram is read once and understood, and a slow loop in the corner
-              of the eye competes with the copy for the rest of the visit. */}
+          {/* Two layers per connector: the dashed route, always visible, and a
+              bright segment that traces it when its turn comes round. One
+              segment is lit at a time, so the eye follows a single journey
+              instead of seven simultaneous loops. */}
           {layout.paths.map((d, i) => (
             <path
-              key={i}
+              key={`base-${i}`}
               d={d}
               fill="none"
               stroke={MAP_STROKE}
               strokeWidth={1.8}
               strokeDasharray="5 5"
               strokeLinecap="round"
+            />
+          ))}
+          {layout.paths.map((d, i) => (
+            <path
+              key={`trace-${i}`}
+              className="v4-trace"
+              d={d}
+              pathLength={1}
+              fill="none"
+              stroke={C.accent}
+              strokeWidth={2.6}
+              strokeLinecap="round"
+              style={{ animationDelay: `${layout.seq[i] * 0.8}s` }}
             />
           ))}
         </svg>
