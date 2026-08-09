@@ -142,6 +142,49 @@ export const de: HalaCopy = {
     ],
   },
 
+  flow: {
+    eyebrow: 'Von Anfang bis Ende',
+    heading: 'Ein Gespräch. Vollständig erledigt.',
+    sub: 'Was tatsächlich passiert, wenn ein Kunde Kontakt aufnimmt — derselbe Weg, ob per Anruf, Nachricht oder Formular.',
+    stages: [
+      {
+        key: 'contact',
+        title: 'Der Kunde meldet sich',
+        body: 'Ein Anruf kurz vor Feierabend, eine Nachricht um Mitternacht, ein Formular am Sonntag.',
+        chips: ['Telefon', 'WhatsApp', 'Instagram', 'Website-Chat', 'SMS', 'E-Mail'],
+      },
+      {
+        key: 'understand',
+        title: 'Hala nimmt an und klärt das Anliegen',
+        body: 'Beim ersten Klingeln, in Ihrem Tonfall — und erkennt, wer schon einmal da war.',
+        chips: ['Erkennt Stammkunden', 'Antwortet aus Ihren eigenen Informationen'],
+      },
+      {
+        key: 'handle',
+        title: 'Es wird erledigt',
+        body: 'Was auch immer der Anlass war: Es ist abgeschlossen — nicht auf einem Zettel für später notiert.',
+        chips: [],
+      },
+      {
+        key: 'follow',
+        title: 'Und es wird nachgefasst',
+        body: 'Der Teil, für den nie jemand Zeit hat — jedes Mal erledigt.',
+        chips: [
+          'Bestätigung',
+          'Erinnerung vorab',
+          'Feedback danach',
+          'Unzufrieden? Ihr Team erfährt es zuerst',
+        ],
+      },
+    ],
+    branches: [
+      { label: 'Nimmt eine Bestellung auf', line: 'Bestätigt, an Küche oder Theke weitergeleitet, Bon gedruckt.' },
+      { label: 'Bucht einen Termin', line: 'Echte Zeiten aus Ihrem Kalender, direkt in Ihr Buch eingetragen.' },
+      { label: 'Beantwortet eine Frage', line: 'Öffnungszeiten, Preise oder Verfügbarkeit — mit Buchungslink in der Antwort.' },
+    ],
+    footnote: 'Ihr Team hört nur von den Fällen, die einen Menschen brauchen.',
+  },
+
   showcase: {
     eyebrow: 'Auf Ihre Branche zugeschnitten',
     heading: 'Ein Mitarbeiter. Jede Art von Unternehmen.',

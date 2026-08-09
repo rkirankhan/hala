@@ -10,6 +10,7 @@ import {
   ChannelOrbit,
   ClosingCTA,
   FeatureBands,
+  FlowSection,
   HowItWorks,
   IndustryShowcase,
   Pricing,
@@ -449,6 +450,7 @@ export function HalaPage() {
       </section>
 
       <StatBand />
+      <FlowSection />
       <FeatureBands />
       <IndustryShowcase />
       <HowItWorks />

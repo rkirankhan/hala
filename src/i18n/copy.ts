@@ -82,6 +82,27 @@ export interface HalaCopy {
     items: { title: string; body: string }[];
   };
 
+  /**
+   * The end-to-end journey: one entry point, three possible intents, one shared
+   * follow-up tail.
+   *
+   * This is the section that answers "what actually happens". The capability
+   * bands never quite do, because three bands read as three separate products
+   * rather than one connected system — and the connection is the product.
+   *
+   * The three branches are deliberately generic (order / booking / question).
+   * They are the same three for a restaurant, a clinic and a plumber; only the
+   * words inside a sector's example change, and those live in `showcase`.
+   */
+  flow: {
+    eyebrow: string;
+    heading: string;
+    sub: string;
+    stages: { key: string; title: string; body: string; chips: string[] }[];
+    branches: { label: string; line: string }[];
+    footnote: string;
+  };
+
   /** The one sector-specific section. Everything else stays neutral. */
   showcase: {
     eyebrow: string;
@@ -286,6 +307,49 @@ export const en: HalaCopy = {
         body: 'When a customer needs a person, your team picks up already knowing who is calling and why.',
       },
     ],
+  },
+
+  flow: {
+    eyebrow: 'End to end',
+    heading: 'One conversation. Handled to the end.',
+    sub: 'What actually happens when a customer gets in touch — the same path whether they call, message or fill in a form.',
+    stages: [
+      {
+        key: 'contact',
+        title: 'They get in touch',
+        body: 'A call at closing time, a message at midnight, a form on a Sunday.',
+        chips: ['Phone', 'WhatsApp', 'Instagram', 'Website chat', 'SMS', 'Email'],
+      },
+      {
+        key: 'understand',
+        title: 'Hala answers and works out what they need',
+        body: 'On the first ring, in your tone — and it knows the ones who have been in before.',
+        chips: ['Recognises returning customers', 'Answers from your own information'],
+      },
+      {
+        key: 'handle',
+        title: 'It gets handled',
+        body: 'Whatever they came for is finished — not written on a pad for someone to deal with later.',
+        chips: [],
+      },
+      {
+        key: 'follow',
+        title: 'And it follows up',
+        body: 'The part nobody ever has time for, done every single time.',
+        chips: [
+          'Confirmation',
+          'Reminder before',
+          'Feedback afterwards',
+          'Unhappy? Your team hears first',
+        ],
+      },
+    ],
+    branches: [
+      { label: 'Takes an order', line: 'Confirmed, sent through to the kitchen or counter, receipt printed.' },
+      { label: 'Books them in', line: 'Real times from your calendar, written straight into your diary.' },
+      { label: 'Answers a question', line: 'Hours, prices or availability — with a booking link in the reply.' },
+    ],
+    footnote: 'Your team only hears about the ones that need a person.',
   },
 
   showcase: {

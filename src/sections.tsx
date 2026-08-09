@@ -882,3 +882,157 @@ export function ChannelList() {
     </div>
   );
 }
+
+/* ── End-to-end flow ──────────────────────────────────────────────────── */
+
+/**
+ * The journey section: one entry point, three possible intents, one shared
+ * follow-up tail.
+ *
+ * Built as a vertical rail rather than the left-to-right diagram it is drawn
+ * from. Three reasons: a four-stage horizontal flow becomes unreadable on a
+ * phone, the stages carry very different amounts of content (one has three
+ * branches, another has four chips) which a row forces into ragged columns, and
+ * a vertical rail mirrors for Arabic with logical properties alone — no
+ * mirrored SVG coordinates to maintain.
+ *
+ * The branch labels are generic on purpose. Order, booking and question are the
+ * same three endings for a restaurant, a clinic and a plumber; only the sector's
+ * wording differs, and that lives in the industry showcase below.
+ */
+const FLOW_ICONS: Record<string, LucideIcon> = {
+  contact: Phone,
+  understand: Sparkles,
+  handle: Check,
+  follow: MessageCircle,
+};
+
+export function FlowSection() {
+  const c = useHalaCopy();
+
+  return (
+    <section
+      id="how"
+      style={{ ...wrap, padding: 'clamp(56px, 7vw, 100px) clamp(20px, 5vw, 48px)' }}
+    >
+      <div style={{ textAlign: 'center', marginBottom: 'clamp(32px, 4vw, 52px)' }}>
+        <span
+          style={{
+            fontFamily: mono, fontSize: 11, letterSpacing: '0.18em',
+            textTransform: 'uppercase', color: C.faint,
+          }}
+        >
+          {c.flow.eyebrow}
+        </span>
+        <h2
+          style={{
+            fontFamily: display, fontWeight: 600,
+            fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
+            lineHeight: 1.06, letterSpacing: tracking.heading,
+            margin: '18px auto 0', maxInlineSize: '18ch',
+          }}
+        >
+          {c.flow.heading}
+        </h2>
+        <p style={{ margin: '16px auto 0', fontSize: 16, color: C.muted, maxInlineSize: '52ch' }}>
+          {c.flow.sub}
+        </p>
+      </div>
+
+      <div style={{ maxInlineSize: 780, marginInline: 'auto' }}>
+        {c.flow.stages.map((stage, i) => {
+          const Icon = FLOW_ICONS[stage.key];
+          const last = i === c.flow.stages.length - 1;
+
+          return (
+            <div key={stage.key} style={{ display: 'flex', gap: 'clamp(14px, 2.4vw, 24px)' }}>
+              {/* Rail: node plus the line down to the next stage. */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <span
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                    width: 40, height: 40, borderRadius: 12, flexShrink: 0,
+                    background: C.accentSoft, border: `1px solid rgba(110,123,242,0.32)`,
+                    color: C.accent,
+                  }}
+                >
+                  {Icon && <Icon size={17} strokeWidth={2} />}
+                </span>
+                {!last && <span style={{ flex: 1, width: 1, background: C.line, minHeight: 24 }} />}
+              </div>
+
+              <div style={{ paddingBottom: last ? 0 : 'clamp(26px, 3.2vw, 40px)', minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
+                  <span style={{ fontFamily: mono, fontSize: 11, color: C.accent }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3
+                    style={{
+                      fontFamily: display, fontWeight: 600, fontSize: 'clamp(1.05rem, 1.9vw, 1.35rem)',
+                      letterSpacing: tracking.ui, margin: 0,
+                    }}
+                  >
+                    {stage.title}
+                  </h3>
+                </div>
+
+                <p style={{ margin: '10px 0 0', fontSize: 15, lineHeight: 1.6, color: C.muted }}>
+                  {stage.body}
+                </p>
+
+                {stage.chips.length > 0 && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7, marginTop: 14 }}>
+                    {stage.chips.map((chip) => (
+                      <span
+                        key={chip}
+                        style={{
+                          padding: '6px 11px', borderRadius: 8,
+                          background: 'rgba(255,255,255,0.05)', border: `1px solid ${C.line}`,
+                          fontSize: 12.5, color: 'rgba(255,255,255,0.82)',
+                        }}
+                      >
+                        {chip}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* The one stage that forks. */}
+                {stage.key === 'handle' && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 14 }}>
+                    {c.flow.branches.map((b) => (
+                      <div
+                        key={b.label}
+                        style={{
+                          display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: '4px 10px',
+                          padding: '12px 14px', borderRadius: 12,
+                          background: C.panel, border: `1px solid ${C.line}`,
+                          /* Marks the fork on the reading-start edge, so it
+                             moves to the right under RTL. */
+                          borderInlineStartWidth: 2,
+                          borderInlineStartColor: C.accent,
+                        }}
+                      >
+                        <span style={{ fontSize: 14, fontWeight: 600 }}>{b.label}</span>
+                        <span style={{ fontSize: 13.5, color: C.muted }}>{b.line}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <p
+        style={{
+          margin: 'clamp(28px, 3.4vw, 44px) auto 0', textAlign: 'center',
+          fontSize: 15.5, fontWeight: 500, color: '#C3CAFF', maxInlineSize: '44ch',
+        }}
+      >
+        {c.flow.footnote}
+      </p>
+    </section>
+  );
+}
