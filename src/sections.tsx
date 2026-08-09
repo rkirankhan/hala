@@ -784,50 +784,99 @@ export function ChannelList() {
  * The journey as a diagram: one entry, a fork into three outcomes, one shared
  * follow-up tail.
  *
- * Same construction as ChannelOrbit — an SVG for the connectors plus HTML tiles
+ * Two layouts of the same nodes rather than one squeezed. A five-node
+ * left-to-right diagram is illegible on a phone at any font size that fits, so
+ * narrow screens get a vertical version with the fork drawn down a left-hand
+ * trunk. Both are rendered and toggled in CSS, which avoids a resize listener
+ * and keeps the markup identical for both.
+ *
+ * Same construction as ChannelOrbit — SVG for the connectors, HTML tiles
  * positioned by percentage — because tiles as HTML keep the text selectable,
- * wrappable and translatable, which <text> nodes in SVG are not.
+ * wrappable and translatable, which SVG <text> is not.
  *
- * Shown only from 1000px up. Below that the vertical rail takes over: five nodes
- * across a phone screen is unreadable at any font size that fits.
- *
- * RTL: the canvas is mirrored with scaleX(-1) and each tile is counter-mirrored,
- * so the diagram reads right-to-left in Arabic while the words stay the right
- * way round. Centering with translate(-50%) is direction-agnostic, so the
- * positions need no adjustment.
+ * RTL: the canvas mirrors with scaleX(-1) and each tile counter-mirrors itself.
+ * That has to be inline rather than a stylesheet rule, because the tiles carry
+ * an inline transform for centering and CSS cannot override it.
  */
-const MAP_W = 1100;
-const MAP_H = 400;
+interface Layout {
+  w: number;
+  h: number;
+  paths: string[];
+  contact: [number, number, number];
+  answer: [number, number, number];
+  badge: [number, number];
+  outcomes: [number, number, number][];
+  follow: [number, number, number];
+}
 
-const MAP_PATHS = [
-  'M 160 200 L 232 200',
-  'M 372 200 C 470 200, 470 70, 543 70',
-  'M 372 200 L 533 200',
-  'M 372 200 C 470 200, 470 330, 543 330',
-  'M 697 70 C 790 70, 790 200, 862 200',
-  'M 707 200 L 862 200',
-  'M 697 330 C 790 330, 790 200, 862 200',
-];
+const WIDE: Layout = {
+  w: 1100,
+  h: 400,
+  paths: [
+    'M 160 200 L 232 200',
+    'M 372 200 C 470 200, 470 70, 543 70',
+    'M 372 200 L 533 200',
+    'M 372 200 C 470 200, 470 330, 543 330',
+    'M 697 70 C 790 70, 790 200, 862 200',
+    'M 707 200 L 862 200',
+    'M 697 330 C 790 330, 790 200, 862 200',
+  ],
+  contact: [90, 200, 140],
+  answer: [302, 200, 140],
+  badge: [302, 96],
+  outcomes: [
+    [620, 70, 172],
+    [620, 200, 172],
+    [620, 330, 172],
+  ],
+  follow: [952, 200, 168],
+};
+
+/** Phone layout: a vertical trunk on the reading-start side carries the fork. */
+const TALL: Layout = {
+  w: 600,
+  h: 1080,
+  paths: [
+    'M 330 108 L 330 148',
+    'M 330 238 C 330 288, 70 278, 70 330',
+    'M 70 330 L 70 890',
+    'M 70 410 L 158 410',
+    'M 70 600 L 158 600',
+    'M 70 790 L 158 790',
+    'M 70 890 C 70 945, 330 935, 330 922',
+  ],
+  contact: [330, 62, 360],
+  answer: [330, 193, 360],
+  badge: [330, 268],
+  outcomes: [
+    [350, 410, 380],
+    [350, 600, 380],
+    [350, 790, 380],
+  ],
+  follow: [330, 975, 360],
+};
 
 function MapTile({
-  x, y, width, icon: Icon, label, note, accent, rtl,
+  layout, x, y, width, icon: Icon, label, note, accent, rtl,
 }: {
-  x: number; y: number; width: number; icon: LucideIcon;
+  layout: Layout; x: number; y: number; width: number; icon: LucideIcon;
   label: string; note?: string; accent?: boolean; rtl: boolean;
 }) {
+  /* Geometry in percent and type in container query units, both against the
+     canvas — so the diagram holds its proportions whether it has the full page,
+     half of it, or a phone. Fixed pixels only worked at one size: tiles started
+     colliding the moment the canvas narrowed. */
   return (
     <div
       className="v4-map-tile"
       style={{
         position: 'absolute',
-        left: `${(x / MAP_W) * 100}%`,
-        top: `${(y / MAP_H) * 100}%`,
-        /* Counter-mirror inline, not in CSS: the stylesheet cannot override an
-           inline transform, and this element needs one for centering anyway. */
+        left: `${(x / layout.w) * 100}%`,
+        top: `${(y / layout.h) * 100}%`,
         transform: `translate(-50%, -50%)${rtl ? ' scaleX(-1)' : ''}`,
-        width,
-        padding: '13px 15px',
-        borderRadius: 14,
+        width: `${(width / layout.w) * 100}%`,
+        padding: 'clamp(8px, 2.6cqw, 13px) clamp(9px, 2.9cqw, 15px)',
+        borderRadius: 'clamp(9px, 2.6cqw, 14px)',
         background: accent ? 'rgba(110,123,242,0.14)' : 'rgba(20,20,24,0.96)',
         border: `1px solid ${accent ? 'rgba(110,123,242,0.42)' : C.line}`,
         boxShadow: '0 18px 40px -24px rgba(0,0,0,0.9)',
@@ -836,38 +885,65 @@ function MapTile({
       <span
         style={{
           display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-          width: 26, height: 26, borderRadius: 8, marginBottom: 9,
+          width: 'clamp(20px, 5cqw, 26px)', height: 'clamp(20px, 5cqw, 26px)',
+          borderRadius: 8, marginBottom: 'clamp(5px, 1.8cqw, 9px)',
           background: accent ? C.accent : 'rgba(255,255,255,0.07)',
           color: accent ? C.white : C.accent,
         }}
       >
-        <Icon size={14} strokeWidth={2} />
+        <Icon size={13} strokeWidth={2} />
       </span>
-      <div style={{ fontSize: 13.5, fontWeight: 600, lineHeight: 1.3 }}>{label}</div>
+      <div style={{ fontSize: 'clamp(11px, 2.7cqw, 13.5px)', fontWeight: 600, lineHeight: 1.3 }}>
+        {label}
+      </div>
       {note && (
-        <div style={{ fontSize: 11.5, lineHeight: 1.45, color: C.muted, marginTop: 5 }}>{note}</div>
+        <div
+          style={{
+            fontSize: 'clamp(9.5px, 2.3cqw, 11.5px)', lineHeight: 1.4,
+            color: C.muted, marginTop: 'clamp(3px, 1cqw, 5px)',
+          }}
+        >
+          {note}
+        </div>
       )}
     </div>
   );
 }
 
-function FlowMap({ outcomes }: { outcomes: { label: string; note: string }[] }) {
+function FlowMap({
+  outcomes, layout, className,
+}: {
+  outcomes: { label: string; note: string }[];
+  layout: Layout;
+  className: string;
+}) {
   const { flow } = useHalaCopy();
   const rtl = dirOf(useHalaLocale()) === 'rtl';
   const [a, b, cc] = outcomes;
+  const tiles = [
+    { pos: layout.contact, icon: Phone, label: flow.map.contact, accent: false },
+    { pos: layout.answer, icon: Sparkles, label: flow.map.answer, accent: true },
+  ];
+  const outIcons = [CalendarCheck, ShoppingBag, MessageCircle];
 
   return (
     <div
-      className="v4-map"
-      style={{ position: 'relative', width: '100%', maxWidth: MAP_W, margin: '0 auto' }}
+      className={className}
+      style={{ position: 'relative', width: '100%', maxWidth: layout.w, margin: '0 auto' }}
     >
-      <div className="v4-map-canvas" style={{ position: 'relative', aspectRatio: `${MAP_W} / ${MAP_H}` }}>
+      <div
+        className="v4-map-canvas"
+        style={{
+          position: 'relative', aspectRatio: `${layout.w} / ${layout.h}`,
+          containerType: 'inline-size',
+        }}
+      >
         <svg
-          viewBox={`0 0 ${MAP_W} ${MAP_H}`}
+          viewBox={`0 0 ${layout.w} ${layout.h}`}
           width="100%" height="100%" aria-hidden
           style={{ position: 'absolute', inset: 0 }}
         >
-          {MAP_PATHS.map((d, i) => (
+          {layout.paths.map((d, i) => (
             <g key={i}>
               <path d={d} fill="none" stroke={C.line} strokeWidth={1.4} strokeDasharray="3 7" />
               {/* A pulse per path, so the diagram shows traffic moving rather
@@ -883,25 +959,43 @@ function FlowMap({ outcomes }: { outcomes: { label: string; note: string }[] }) 
           ))}
         </svg>
 
-        <MapTile x={90} y={200} width={140} icon={Phone} label={flow.map.contact} rtl={rtl} />
-        <MapTile x={302} y={200} width={140} icon={Sparkles} label={flow.map.answer} accent rtl={rtl} />
-        <MapTile x={620} y={70} width={172} icon={CalendarCheck} label={a.label} note={a.note} rtl={rtl} />
-        <MapTile x={620} y={200} width={172} icon={ShoppingBag} label={b.label} note={b.note} rtl={rtl} />
-        <MapTile x={620} y={330} width={172} icon={MessageCircle} label={cc.label} note={cc.note} rtl={rtl} />
+        {tiles.map((t) => (
+          <MapTile
+            key={t.label}
+            layout={layout}
+            x={t.pos[0]} y={t.pos[1]} width={t.pos[2]}
+            icon={t.icon} label={t.label} accent={t.accent} rtl={rtl}
+          />
+        ))}
+
+        {[a, b, cc].map((o, i) => (
+          <MapTile
+            key={o.label}
+            layout={layout}
+            x={layout.outcomes[i][0]} y={layout.outcomes[i][1]} width={layout.outcomes[i][2]}
+            icon={outIcons[i]} label={o.label} note={o.note} rtl={rtl}
+          />
+        ))}
+
         <MapTile
-          x={952} y={200} width={168} icon={Check}
-          label={flow.map.follow} note={flow.map.followNote} accent rtl={rtl}
+          layout={layout}
+          x={layout.follow[0]} y={layout.follow[1]} width={layout.follow[2]}
+          icon={Check} label={flow.map.follow} note={flow.map.followNote} accent rtl={rtl}
         />
 
         {/* Badge on the qualifying step — the memory claim, made concrete. */}
         <div
           className="v4-map-tile"
           style={{
-            position: 'absolute', left: `${(302 / MAP_W) * 100}%`, top: `${(96 / MAP_H) * 100}%`,
-            transform: `translate(-50%, -50%)${rtl ? ' scaleX(-1)' : ''}`, whiteSpace: 'nowrap',
-            padding: '5px 10px', borderRadius: 99,
+            position: 'absolute',
+            left: `${(layout.badge[0] / layout.w) * 100}%`,
+            top: `${(layout.badge[1] / layout.h) * 100}%`,
+            transform: `translate(-50%, -50%)${rtl ? ' scaleX(-1)' : ''}`,
+            whiteSpace: 'nowrap',
+            padding: 'clamp(4px, 1.1cqw, 5px) clamp(8px, 2cqw, 10px)', borderRadius: 99,
             background: 'rgba(62,207,142,0.10)', border: '1px solid rgba(62,207,142,0.30)',
-            fontFamily: mono, fontSize: 10, letterSpacing: '0.06em', color: C.live,
+            fontFamily: mono, fontSize: 'clamp(8px, 1.9cqw, 10px)',
+            letterSpacing: '0.06em', color: C.live,
           }}
         >
           {flow.map.badge}
@@ -911,29 +1005,6 @@ function FlowMap({ outcomes }: { outcomes: { label: string; note: string }[] }) 
   );
 }
 
-/* ── End-to-end flow ──────────────────────────────────────────────────── */
-
-/**
- * The journey section: one entry point, three possible intents, one shared
- * follow-up tail.
- *
- * Built as a vertical rail rather than the left-to-right diagram it is drawn
- * from. Three reasons: a four-stage horizontal flow becomes unreadable on a
- * phone, the stages carry very different amounts of content (one has three
- * branches, another has four chips) which a row forces into ragged columns, and
- * a vertical rail mirrors for Arabic with logical properties alone — no
- * mirrored SVG coordinates to maintain.
- *
- * The branch labels are generic on purpose. Order, booking and question are the
- * same three endings for a restaurant, a clinic and a plumber; only the sector's
- * wording differs, and that lives in the industry showcase below.
- */
-const FLOW_ICONS: Record<string, LucideIcon> = {
-  contact: Phone,
-  understand: Sparkles,
-  handle: Check,
-  follow: MessageCircle,
-};
 
 export function FlowSection() {
   const c = useHalaCopy();
@@ -995,93 +1066,13 @@ export function FlowSection() {
         })}
       </div>
 
-      <FlowMap outcomes={industry.flow} />
+      <div className="v4-flow-cols">
+        <div style={{ minWidth: 0 }}>
+          <FlowMap outcomes={industry.flow} layout={WIDE} className="v4-map-wide" />
+          <FlowMap outcomes={industry.flow} layout={TALL} className="v4-map-tall" />
 
-      <div className="v4-map-list" style={{ maxInlineSize: 780, marginInline: 'auto' }}>
-        {c.flow.stages.map((stage, i) => {
-          const Icon = FLOW_ICONS[stage.key];
-          const last = i === c.flow.stages.length - 1;
+        </div>
 
-          return (
-            <div key={stage.key} style={{ display: 'flex', gap: 'clamp(14px, 2.4vw, 24px)' }}>
-              {/* Rail: node plus the line down to the next stage. */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <span
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                    width: 40, height: 40, borderRadius: 12, flexShrink: 0,
-                    background: C.accentSoft, border: `1px solid rgba(110,123,242,0.32)`,
-                    color: C.accent,
-                  }}
-                >
-                  {Icon && <Icon size={17} strokeWidth={2} />}
-                </span>
-                {!last && <span style={{ flex: 1, width: 1, background: C.line, minHeight: 24 }} />}
-              </div>
-
-              <div style={{ paddingBottom: last ? 0 : 'clamp(26px, 3.2vw, 40px)', minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
-                  <span style={{ fontFamily: mono, fontSize: 11, color: C.accent }}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <h3
-                    style={{
-                      fontFamily: display, fontWeight: 600, fontSize: 'clamp(1.05rem, 1.9vw, 1.35rem)',
-                      letterSpacing: tracking.ui, margin: 0,
-                    }}
-                  >
-                    {stage.title}
-                  </h3>
-                </div>
-
-                <p style={{ margin: '10px 0 0', fontSize: 15, lineHeight: 1.6, color: C.muted }}>
-                  {stage.body}
-                </p>
-
-                {stage.chips.length > 0 && (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7, marginTop: 14 }}>
-                    {stage.chips.map((chip) => (
-                      <span
-                        key={chip}
-                        style={{
-                          padding: '6px 11px', borderRadius: 8,
-                          background: 'rgba(255,255,255,0.05)', border: `1px solid ${C.line}`,
-                          fontSize: 12.5, color: 'rgba(255,255,255,0.82)',
-                        }}
-                      >
-                        {chip}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                {/* The one stage that forks. */}
-                {stage.key === 'handle' && (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 14 }}>
-                    {industry.flow.map((b) => (
-                      <div
-                        key={b.label}
-                        style={{
-                          display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: '4px 10px',
-                          padding: '12px 14px', borderRadius: 12,
-                          background: C.panel, border: `1px solid ${C.line}`,
-                          /* Marks the fork on the reading-start edge, so it
-                             moves to the right under RTL. */
-                          borderInlineStartWidth: 2,
-                          borderInlineStartColor: C.accent,
-                        }}
-                      >
-                        <span style={{ fontSize: 14, fontWeight: 600 }}>{b.label}</span>
-                        <span style={{ fontSize: 13.5, color: C.muted }}>{b.note}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
 
       <div
         style={{
@@ -1124,6 +1115,7 @@ export function FlowSection() {
           <p style={{ margin: 0, fontSize: 15.5, fontWeight: 500, color: '#C3CAFF' }}>
             {industry.outcome}
           </p>
+        </div>
         </div>
       </div>
 

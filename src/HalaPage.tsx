@@ -143,13 +143,25 @@ export function HalaPage() {
         .v4-plans { grid-template-columns: minmax(0,1fr); }
         @media (min-width: 900px) { .v4-plans { grid-template-columns: repeat(3, minmax(0,1fr)); align-items: start; } }
 
-        /* Five nodes across a phone is unreadable, so the diagram is desktop
-           only and the vertical rail covers everything below. */
-        .v4-map { display: none; }
-        .v4-map-list { display: block; }
-        @media (min-width: 1000px) {
-          .v4-map { display: block; }
-          .v4-map-list { display: none; }
+        /* Two layouts of the same diagram: horizontal where there is room,
+           vertical on phones. Squeezing the five-node horizontal version onto a
+           phone is illegible at any font size that fits. */
+        .v4-map-wide { display: none; }
+        .v4-map-tall { display: block; }
+        @media (min-width: 900px) {
+          .v4-map-wide { display: block; }
+          .v4-map-tall { display: none; }
+        }
+
+        /* Map and conversation side by side once there is room for both.
+           In a column the diagram switches to its vertical layout: the
+           horizontal one needs roughly 900px before the outcome tiles stop
+           colliding, and half a 1440px page is nowhere near that. */
+        .v4-flow-cols { display: grid; gap: 16px; align-items: start; grid-template-columns: minmax(0,1fr); }
+        @media (min-width: 1240px) {
+          .v4-flow-cols { grid-template-columns: minmax(0,0.95fr) minmax(0,1fr); gap: 28px; }
+          .v4-map-wide { display: none; }
+          .v4-map-tall { display: block; }
         }
 
         /* Mirror the diagram for Arabic. Each tile un-mirrors itself inline —
