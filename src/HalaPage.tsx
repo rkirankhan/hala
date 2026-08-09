@@ -5,7 +5,10 @@ import { useHalaMeta } from './useHalaMeta';
 import { Link } from 'react-router-dom';
 import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
 import { LanguageMenu } from './LanguageMenu';
+import { INDUSTRY_ICONS } from './sections';
+import { useIndustry } from './industry';
 import {
+  CHANNEL_ICONS,
   ChannelList,
   ChannelOrbit,
   ClosingCTA,
@@ -45,12 +48,6 @@ import {
  */
 
 
-/** Where the two cards break out of the device frame — layout, not copy. */
-const CARD_POS = [
-  { top: '84%', start: '2%', rot: -7 },
-  { top: '93%', start: '48%', rot: 5 },
-];
-
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
     <span
@@ -70,6 +67,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 export function HalaPage() {
   const [asked, setAsked] = useState(false);
   const c = useHalaCopy();
+  const { key: industryKey, setKey: setIndustry, industry, items: industries } = useIndustry();
   const locale = useHalaLocale();
   const dir = dirOf(locale);
   useHalaMeta(c, locale);
@@ -378,6 +376,34 @@ export function HalaPage() {
 
           {/* Device mockup */}
           <div style={{ position: 'relative', animation: 'v4Float 7s ease-in-out infinite' }}>
+            {/* Sector chips. Shares its selection with the flow map, so choosing
+                here changes the diagram further down too. */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7, marginBottom: 14 }}>
+              {industries.map((i) => {
+                const on = i.key === industryKey;
+                const Icon = INDUSTRY_ICONS[i.key];
+                return (
+                  <button
+                    key={i.key}
+                    onClick={() => setIndustry(i.key)}
+                    aria-pressed={on}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 7,
+                      padding: '7px 11px', borderRadius: 99, cursor: 'pointer',
+                      font: 'inherit', fontFamily: sans, fontSize: 12.5,
+                      background: on ? 'rgba(110,123,242,0.18)' : 'rgba(255,255,255,0.04)',
+                      border: `1px solid ${on ? C.accent : C.line}`,
+                      color: on ? '#C3CAFF' : C.muted,
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {Icon && <Icon size={13} strokeWidth={2} />}
+                    {i.label}
+                  </button>
+                );
+              })}
+            </div>
+
             <div
               style={{
                 background: C.panel, border: `1px solid ${C.line}`,
@@ -401,11 +427,30 @@ export function HalaPage() {
                   {c.hero.callLabel}
                 </span>
                 <span style={{ flex: 1 }} />
-                <span style={{ fontFamily: mono, fontSize: 10.5, color: C.faint }}>00:24</span>
+                {/* The same six channels the flow map opens with. The panel used
+                    to say "call in progress", which sold a phone product when
+                    the argument is that every channel lands in one place. */}
+                <span style={{ display: 'flex', gap: 5 }}>
+                  {CHANNEL_ICONS.map(({ icon: Ch, colour }, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                        width: 19, height: 19, borderRadius: 5,
+                        background: `${colour}1F`, color: colour,
+                      }}
+                    >
+                      <Ch size={10} strokeWidth={2} />
+                    </span>
+                  ))}
+                </span>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: '18px 2px 6px' }}>
-                {c.hero.messages.map((m, i) => (
+                {[
+                  { who: 'guest', t: industry.line },
+                  { who: 'agent', t: industry.reply },
+                ].map((m, i) => (
                   <div key={i} style={{ display: 'flex', justifyContent: m.who === 'agent' ? 'flex-end' : 'flex-start' }}>
                     <span
                       style={{
@@ -420,7 +465,7 @@ export function HalaPage() {
                     </span>
                   </div>
                 ))}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 4, height: 28, paddingLeft: 4 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4, height: 28, paddingInlineStart: 4 }}>
                   {[0, 1, 2, 3, 4, 5].map((b) => (
                     <span
                       key={b}
@@ -431,35 +476,30 @@ export function HalaPage() {
                     />
                   ))}
                 </div>
+
+                {/* Mirrors the system line on each outcome in the flow map: the
+                    conversation is not the deliverable, what it left in your
+                    tools is. */}
+                <div
+                  style={{
+                    marginTop: 6, paddingTop: 12,
+                    borderTop: `1px solid ${C.line}`,
+                    fontFamily: mono, fontSize: 10.5, letterSpacing: '0.04em',
+                    color: C.live,
+                  }}
+                >
+                  {industry.flow[0].system}
+                </div>
               </div>
             </div>
 
-            {/* Cards breaking out of the frame */}
-            {c.hero.cards.map((card, i) => (
-              <div
-                key={card.label}
-                style={{
-                  position: 'absolute', top: CARD_POS[i].top, insetInlineStart: CARD_POS[i].start,
-                  transform: `rotate(${CARD_POS[i].rot}deg)`,
-                  background: 'rgba(30,30,36,0.94)', backdropFilter: 'blur(8px)',
-                  border: `1px solid ${C.line}`, borderRadius: 12,
-                  padding: '11px 14px', minWidth: 168,
-                  boxShadow: '0 24px 50px -20px rgba(0,0,0,0.85)',
-                }}
-              >
-                <div style={{ fontFamily: mono, fontSize: 9, letterSpacing: '0.13em', textTransform: 'uppercase', color: C.faint }}>
-                  {card.label}
-                </div>
-                <div style={{ fontSize: 12.5, color: C.live, marginTop: 5, fontWeight: 500 }}>{card.value}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
 
-      <StatBand />
       <FlowSection />
+      <StatBand />
 
       {/* ── 3. Why ──
           Was an oversized gradient word with tilted cards scattered around it.

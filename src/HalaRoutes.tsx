@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { HalaPage } from './HalaPage';
 import { LegalPage } from './LegalPage';
 import { COPY, HalaLocaleProvider, LOCALES, type LegalSet } from './i18n';
+import { IndustryProvider } from './industry';
 
 /**
  * Serves the root of hala.khaashub.com.
@@ -34,7 +35,9 @@ export default function HalaRoutes() {
             {...(code === 'en' ? { index: true } : { path: code })}
             element={
               <HalaLocaleProvider value={code}>
-                <HalaPage />
+                <IndustryProvider>
+                  <HalaPage />
+                </IndustryProvider>
               </HalaLocaleProvider>
             }
           />

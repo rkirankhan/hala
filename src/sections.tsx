@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import {
   ArrowRight,
   CalendarCheck,
   Check,
   Facebook,
   Globe,
-  Home,
   Instagram,
   Mail,
   MessageCircle,
@@ -14,12 +12,12 @@ import {
   ShoppingBag,
   Sparkles,
   UtensilsCrossed,
-  Wrench,
   X,
   type LucideIcon,
 } from 'lucide-react';
 import { C, display, mono, sans, tracking, wrap } from './tokens';
 import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
+import { useIndustry } from './industry';
 
 /**
  * The sections added after reviewing the reference site end to end.
@@ -318,12 +316,10 @@ export function FeatureBands() {
  *
  * Adding an industry is a copy change in src/i18n plus one line here.
  */
-const INDUSTRY_ICONS: Record<string, LucideIcon> = {
+export const INDUSTRY_ICONS: Record<string, LucideIcon> = {
   restaurants: UtensilsCrossed,
-  clinics: Sparkles,
-  property: Home,
+  takeaways: ShoppingBag,
   salons: Scissors,
-  trades: Wrench,
 };
 
 /* ── Four steps ───────────────────────────────────────────────────────── */
@@ -980,7 +976,7 @@ const TALL: Layout = {
  * touch" is the claim that the whole diagram rests on, and one telephone made it
  * look like a phone product. Generic line icons, not brand marks.
  */
-const CHANNEL_ICONS: { icon: LucideIcon; colour: string }[] = [
+export const CHANNEL_ICONS: { icon: LucideIcon; colour: string }[] = [
   { icon: Phone, colour: '#6E7BF2' },
   { icon: MessageCircle, colour: '#25D366' },
   { icon: Instagram, colour: '#E1306C' },
@@ -1280,8 +1276,7 @@ function FlowMap({
 
 export function FlowSection() {
   const c = useHalaCopy();
-  const [key, setKey] = useState(c.showcase.items[0].key);
-  const industry = c.showcase.items.find((i) => i.key === key) ?? c.showcase.items[0];
+  const { key, setKey, industry } = useIndustry();
   const pad = 'clamp(18px, 2.2vw, 26px)';
 
   return (
