@@ -215,9 +215,6 @@ export interface HalaCopy {
     heading: string;
     headingSub: string;
     body: string;
-    askCta: string;
-    /** Placeholder shown until the button is wired to the live agent. */
-    askNote: string;
     items: { q: string; a: string }[];
   };
 
@@ -628,12 +625,9 @@ export const en: HalaCopy = {
   },
 
   faq: {
-    heading: 'Got questions?',
-    headingSub: 'Ask Hala yourself.',
-    body: 'The same employee that answers your customers can answer you. No form, no waiting.',
-    askCta: 'Ask Hala',
-    askNote:
-      'In production this opens the live agent. Wire it to the existing GoHighLevel chat widget, or to the voice agent for a spoken answer.',
+    heading: 'Questions we get',
+    headingSub: 'before every demo.',
+    body: 'The things owners want to know before they hand their calls to an AI.',
     items: [
       {
         q: 'Will it sound like a robot to my customers?',

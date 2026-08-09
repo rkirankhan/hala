@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { ArrowRight, Phone, Sparkles } from 'lucide-react';
+import { ArrowRight, Phone } from 'lucide-react';
 import { C, display, mono, sans, tracking, wrap } from './tokens';
 import { useHalaMeta } from './useHalaMeta';
 import { Link } from 'react-router-dom';
@@ -66,7 +65,6 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 
 export function HalaPage() {
-  const [asked, setAsked] = useState(false);
   const c = useHalaCopy();
   const { key: industryKey, setKey: setIndustry, industry, items: industries } = useIndustry();
   const locale = useHalaLocale();
@@ -162,8 +160,6 @@ export function HalaPage() {
         .v4-caps { grid-template-columns: minmax(0,1fr); }
         @media (min-width: 760px) { .v4-caps { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 
-        .v4-intents { grid-template-columns: repeat(2, minmax(0,1fr)); }
-        @media (min-width: 900px) { .v4-intents { grid-template-columns: repeat(3, minmax(0,1fr)); } }
         @media (max-width: 640px) { .v4-step-arrow { display: none; } }
 
         .v4-steps { grid-template-columns: minmax(0,1fr); }
@@ -191,10 +187,10 @@ export function HalaPage() {
            transform the tiles need for centering. */
         [dir='rtl'] .v4-map-canvas { transform: scaleX(-1); }
 
+        /* The alternatives take the wider column: they carry nine lines to the
+           answer's four, and the answer earns its weight from contrast, not size. */
         .v4-versus { grid-template-columns: minmax(0,1fr); }
-        @media (min-width: 900px) { .v4-versus { grid-template-columns: repeat(3, minmax(0,1fr)); } }
-        .v4-versus-yes { grid-template-columns: minmax(0,1fr); }
-        @media (min-width: 760px) { .v4-versus-yes { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px 28px; } }
+        @media (min-width: 940px) { .v4-versus { grid-template-columns: 1.25fr 1fr; } }
 
         /* Category label beside the chips once there is room; stacked below it
            on narrow, where a fixed label column would squeeze the chips. */
@@ -335,7 +331,7 @@ export function HalaPage() {
               style={{
                 fontFamily: display, fontWeight: 700,
                 fontSize: 'clamp(2.5rem, 5.6vw, 4.4rem)',
-                lineHeight: 1.06, letterSpacing: tracking.display,
+                lineHeight: 1.14, letterSpacing: tracking.display,
                 margin: '26px 0 0', maxInlineSize: '13ch',
               }}
             >
@@ -524,7 +520,7 @@ export function HalaPage() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-            lineHeight: 1.06, letterSpacing: tracking.heading,
+            lineHeight: 1.14, letterSpacing: tracking.heading,
             margin: '18px 0 clamp(36px, 4.5vw, 60px)', maxInlineSize: '17ch',
           }}
         >
@@ -589,7 +585,7 @@ export function HalaPage() {
             style={{
               fontFamily: display, fontWeight: 600,
               fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-              lineHeight: 1.06, letterSpacing: tracking.heading,
+              lineHeight: 1.14, letterSpacing: tracking.heading,
               margin: '18px auto 0', maxInlineSize: '18ch',
             }}
           >
@@ -617,7 +613,7 @@ export function HalaPage() {
               style={{
                 fontFamily: display, fontWeight: 600,
                 fontSize: 'clamp(1.9rem, 4vw, 2.9rem)',
-                lineHeight: 1.05, letterSpacing: tracking.heading, margin: 0,
+                lineHeight: 1.14, letterSpacing: tracking.heading, margin: 0,
               }}
             >
               {c.faq.heading}
@@ -627,29 +623,6 @@ export function HalaPage() {
               {c.faq.body}
             </p>
 
-            <button
-              onClick={() => setAsked(true)}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 9,
-                margin: '26px 0 0', padding: '14px 24px', borderRadius: 10,
-                background: C.accent, color: C.white, border: 'none',
-                fontWeight: 600, fontSize: 15, cursor: 'pointer', font: 'inherit',
-                fontFamily: sans,
-              }}
-            >
-              <Sparkles size={16} strokeWidth={2.2} /> {c.faq.askCta}
-            </button>
-
-            {asked && (
-              <p
-                style={{
-                  margin: '16px 0 0', fontSize: 13, color: C.faint,
-                  maxInlineSize: '38ch', animation: 'v4Fade 400ms ease-out both',
-                }}
-              >
-                {c.faq.askNote}
-              </p>
-            )}
           </div>
 
           {/* Thread */}

@@ -56,7 +56,7 @@ export function StatBand() {
           fontFamily: display,
           fontWeight: 600,
           fontSize: 'clamp(2.2rem, 5.4vw, 4rem)',
-          lineHeight: 1.08,
+          lineHeight: 1.14,
           letterSpacing: tracking.display,
           margin: 0,
           maxInlineSize: '16ch',
@@ -83,32 +83,6 @@ export function StatBand() {
 }
 
 /* ── Tinted feature bands ─────────────────────────────────────────────── */
-
-function Bubble({ side, text, tone }: { side: 'in' | 'out'; text: string; tone: string }) {
-  const out = side === 'out';
-  return (
-    <div style={{ display: 'flex', justifyContent: out ? 'flex-end' : 'flex-start' }}>
-      <span
-        style={{
-          maxWidth: '82%',
-          padding: '9px 13px',
-          borderRadius: 13,
-          /* Logical, not physical: the tail must sit on the reading-end side
-             for outbound and the start side for inbound, which swaps under RTL. */
-          borderEndEndRadius: out ? 4 : 13,
-          borderEndStartRadius: out ? 13 : 4,
-          fontSize: 13,
-          lineHeight: 1.5,
-          background: out ? `${tone}1E` : 'rgba(255,255,255,0.06)',
-          border: `1px solid ${out ? `${tone}44` : 'transparent'}`,
-          color: out ? tone : 'rgba(255,255,255,0.86)',
-        }}
-      >
-        {text}
-      </span>
-    </div>
-  );
-}
 
 function Meta({ children }: { children: React.ReactNode }) {
   return (
@@ -155,7 +129,7 @@ export function FeatureBands() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(1.7rem, 3.6vw, 2.5rem)',
-            lineHeight: 1.08, letterSpacing: tracking.heading,
+            lineHeight: 1.14, letterSpacing: tracking.heading,
             margin: 0, maxInlineSize: '22ch', marginInline: 'auto',
           }}
         >
@@ -251,7 +225,7 @@ export function HowItWorks() {
         style={{
           fontFamily: display, fontWeight: 600,
           fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-          lineHeight: 1.06, letterSpacing: tracking.heading,
+          lineHeight: 1.14, letterSpacing: tracking.heading,
           margin: '0 0 clamp(28px, 3.4vw, 44px)', maxInlineSize: '16ch',
         }}
       >
@@ -302,7 +276,7 @@ export function Pricing() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-            lineHeight: 1.06, letterSpacing: tracking.heading, margin: 0,
+            lineHeight: 1.14, letterSpacing: tracking.heading, margin: 0,
           }}
         >
           {c.pricing.heading}
@@ -405,7 +379,7 @@ export function ProofSlot() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
-            lineHeight: 1.1, letterSpacing: tracking.heading,
+            lineHeight: 1.14, letterSpacing: tracking.heading,
             margin: '16px auto 0', maxInlineSize: '24ch', color: C.muted,
           }}
         >
@@ -441,7 +415,7 @@ export function ClosingCTA() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(2rem, 4.6vw, 3.4rem)',
-            lineHeight: 1.08, letterSpacing: tracking.display,
+            lineHeight: 1.14, letterSpacing: tracking.display,
             margin: 0, maxInlineSize: '18ch', marginInline: 'auto',
           }}
         >
@@ -1193,7 +1167,6 @@ function FlowMap({
 export function FlowSection() {
   const c = useHalaCopy();
   const { key, setKey, industry } = useIndustry();
-  const pad = 'clamp(18px, 2.2vw, 26px)';
 
   return (
     <section
@@ -1213,7 +1186,7 @@ export function FlowSection() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-            lineHeight: 1.06, letterSpacing: tracking.heading,
+            lineHeight: 1.14, letterSpacing: tracking.heading,
             margin: '18px auto 0', maxInlineSize: '18ch',
           }}
         >
@@ -1224,7 +1197,15 @@ export function FlowSection() {
         </p>
       </div>
 
-      <div className="v4-intents" style={{ display: 'grid', gap: 10, marginBottom: 'clamp(20px, 2.6vw, 30px)' }}>
+      {/* A quick way to change the map without scrolling past it to the cards.
+          Both write to the same selection, so whichever you use the other
+          follows — see IndustryProvider. */}
+      <div
+        style={{
+          display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 8,
+          marginBottom: 'clamp(20px, 2.6vw, 30px)',
+        }}
+      >
         {c.showcase.items.map((i) => {
           const on = i.key === key;
           const Icon = INDUSTRY_ICONS[i.key];
@@ -1234,16 +1215,16 @@ export function FlowSection() {
               onClick={() => setKey(i.key)}
               aria-pressed={on}
               style={{
-                display: 'flex', alignItems: 'center', gap: 10,
-                padding: '13px 15px', borderRadius: 12, cursor: 'pointer',
-                textAlign: 'start', font: 'inherit', fontFamily: sans,
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                padding: '10px 16px', borderRadius: 999, cursor: 'pointer',
+                font: 'inherit', fontFamily: sans, fontSize: 13.5, fontWeight: 500,
                 background: on ? 'rgba(110,123,242,0.16)' : C.panel,
-                border: `1px solid ${on ? C.accent : C.line}`,
+                border: `1px solid ${on ? 'rgba(110,123,242,0.55)' : C.line}`,
                 color: on ? '#C3CAFF' : C.white,
               }}
             >
-              {Icon && <Icon size={16} strokeWidth={2} style={{ flexShrink: 0 }} />}
-              <span style={{ fontSize: 13.5, fontWeight: 500 }}>{i.label}</span>
+              {Icon && <Icon size={15} strokeWidth={2} style={{ flexShrink: 0 }} />}
+              {i.label}
             </button>
           );
         })}
@@ -1252,50 +1233,6 @@ export function FlowSection() {
       <FlowMap outcomes={industry.flow} layout={WIDE} className="v4-map-wide" />
       <FlowMap outcomes={industry.flow} layout={TALL} className="v4-map-tall" />
 
-
-      <div
-        style={{
-          marginTop: 'clamp(20px, 2.6vw, 30px)',
-          background: C.panel, border: `1px solid ${C.line}`,
-          borderRadius: 18, overflow: 'hidden',
-        }}
-      >
-        <div
-          style={{
-            padding: pad, borderBottom: `1px solid ${C.line}`,
-            display: 'flex', flexDirection: 'column', gap: 12,
-          }}
-        >
-          <Bubble side="in" text={industry.line} tone={C.accent} />
-          <Bubble side="out" text={industry.reply} tone={C.accent} />
-        </div>
-
-        <div style={{ padding: pad, borderBottom: `1px solid ${C.line}` }}>
-          <Meta>{c.showcase.handlesLabel}</Meta>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
-            {industry.handles.map((h) => (
-              <span
-                key={h}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 8,
-                  padding: '9px 13px', borderRadius: 10,
-                  background: C.inset, border: `1px solid ${C.line}`,
-                  fontSize: 13, color: 'rgba(255,255,255,0.88)',
-                }}
-              >
-                <Check size={13} strokeWidth={2.6} style={{ color: C.accent, flexShrink: 0 }} />
-                {h}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ padding: pad, background: 'rgba(110,123,242,0.10)' }}>
-          <p style={{ margin: 0, fontSize: 15.5, fontWeight: 500, color: '#C3CAFF' }}>
-            {industry.outcome}
-          </p>
-        </div>
-      </div>
 
       <p
         style={{
@@ -1337,7 +1274,7 @@ export function Versus() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(1.9rem, 4.2vw, 3.1rem)',
-            lineHeight: 1.06, letterSpacing: tracking.heading,
+            lineHeight: 1.14, letterSpacing: tracking.heading,
             margin: '18px auto 0', maxInlineSize: '20ch',
           }}
         >
@@ -1345,51 +1282,85 @@ export function Versus() {
         </h2>
       </div>
 
-      <div className="v4-versus" style={{ display: 'grid', gap: 12 }}>
-        {c.versus.options.map((o) => (
-          <div
-            key={o.title}
-            style={{
-              background: C.panel, border: `1px solid ${C.line}`,
-              borderRadius: 16, padding: 'clamp(20px, 2.2vw, 26px)',
-            }}
-          >
-            <div style={{ fontFamily: display, fontWeight: 600, fontSize: 16.5, letterSpacing: tracking.ui }}>
-              {o.title}
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginTop: 14 }}>
-              {o.points.map((pt) => (
-                <span key={pt} style={{ display: 'flex', gap: 9, alignItems: 'flex-start' }}>
-                  <X size={13} strokeWidth={2.6} style={{ marginTop: 3, flexShrink: 0, color: C.faint }} />
-                  <span style={{ fontSize: 13.5, lineHeight: 1.55, color: C.muted }}>{pt}</span>
+      {/* Three dim boxes and a bright one below them read as four options of
+          equal weight. Stacking the alternatives into a single muted column
+          beside the answer makes it a comparison instead of a list: a wall of
+          things that go wrong on one side, one lit panel on the other. */}
+      <div className="v4-versus" style={{ display: 'grid', gap: 'clamp(12px, 1.4vw, 18px)', alignItems: 'stretch' }}>
+        <div
+          style={{
+            background: C.panel, border: `1px solid ${C.line}`,
+            borderRadius: 18, overflow: 'hidden',
+          }}
+        >
+          {c.versus.options.map((o, i) => (
+            <div
+              key={o.title}
+              style={{
+                padding: 'clamp(18px, 2vw, 24px) clamp(20px, 2.2vw, 26px)',
+                borderTop: i === 0 ? 'none' : `1px solid ${C.line}`,
+                display: 'grid', gap: 10,
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 10,
+                  fontFamily: display, fontWeight: 600, fontSize: 16.5,
+                  letterSpacing: tracking.ui, color: C.muted,
+                }}
+              >
+                {/* The number keeps the three readable as one enumerated
+                    argument — "three bad answers" — now that they share a box. */}
+                <span
+                  style={{
+                    fontFamily: mono, fontSize: 11, color: C.faint,
+                    border: `1px solid ${C.line}`, borderRadius: 6,
+                    padding: '2px 7px', flexShrink: 0,
+                  }}
+                >
+                  {String(i + 1).padStart(2, '0')}
                 </span>
-              ))}
+                {o.title}
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 22px' }}>
+                {o.points.map((pt) => (
+                  <span key={pt} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', maxInlineSize: '34ch' }}>
+                    <X size={13} strokeWidth={2.6} style={{ marginTop: 3, flexShrink: 0, color: C.faint }} />
+                    <span style={{ fontSize: 13.5, lineHeight: 1.55, color: C.faint }}>{pt}</span>
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-      <div
-        style={{
-          marginTop: 12, borderRadius: 18,
-          padding: 'clamp(22px, 2.6vw, 30px)',
-          background: 'rgba(110,123,242,0.10)',
-          border: `1px solid ${C.accent}`,
-          boxShadow: '0 40px 90px -60px rgba(110,123,242,0.75)',
-        }}
-      >
-        <div style={{ fontFamily: display, fontWeight: 600, fontSize: 19, letterSpacing: tracking.ui }}>
-          {c.versus.answer.title}
-        </div>
-        <div className="v4-versus-yes" style={{ display: 'grid', gap: 10, marginTop: 16 }}>
-          {c.versus.answer.points.map((pt) => (
-            <span key={pt} style={{ display: 'flex', gap: 9, alignItems: 'flex-start' }}>
-              <Check size={14} strokeWidth={2.6} style={{ marginTop: 3, flexShrink: 0, color: C.accent }} />
-              <span style={{ fontSize: 14, lineHeight: 1.55, color: 'rgba(255,255,255,0.88)' }}>{pt}</span>
-            </span>
           ))}
         </div>
+
+        <div
+          style={{
+            display: 'flex', flexDirection: 'column', justifyContent: 'center',
+            borderRadius: 18,
+            padding: 'clamp(24px, 2.8vw, 34px)',
+            background: 'rgba(110,123,242,0.10)',
+            border: `1px solid ${C.accent}`,
+            boxShadow: '0 40px 90px -60px rgba(110,123,242,0.75)',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <HalaMark size={22} />
+            <div style={{ fontFamily: display, fontWeight: 600, fontSize: 20, letterSpacing: tracking.ui }}>
+              {c.versus.answer.title}
+            </div>
+          </div>
+          <div style={{ display: 'grid', gap: 12, marginTop: 18 }}>
+            {c.versus.answer.points.map((pt) => (
+              <span key={pt} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                <Check size={14} strokeWidth={2.6} style={{ marginTop: 3, flexShrink: 0, color: C.accent }} />
+                <span style={{ fontSize: 14.5, lineHeight: 1.55, color: 'rgba(255,255,255,0.9)' }}>{pt}</span>
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
+
     </section>
   );
 }
@@ -1457,7 +1428,7 @@ export function Integrations() {
           style={{
             fontFamily: display, fontWeight: 600,
             fontSize: 'clamp(1.7rem, 3.6vw, 2.5rem)',
-            lineHeight: 1.08, letterSpacing: tracking.heading,
+            lineHeight: 1.14, letterSpacing: tracking.heading,
             margin: '18px auto 0', maxInlineSize: '22ch',
           }}
         >
@@ -1576,7 +1547,7 @@ export function Languages() {
             style={{
               fontFamily: display, fontWeight: 600,
               fontSize: 'clamp(1.7rem, 3.6vw, 2.5rem)',
-              lineHeight: 1.08, letterSpacing: tracking.heading,
+              lineHeight: 1.14, letterSpacing: tracking.heading,
               margin: '18px auto 0', maxInlineSize: '20ch',
             }}
           >

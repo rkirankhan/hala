@@ -401,12 +401,9 @@ export const de: HalaCopy = {
   },
 
   faq: {
-    heading: 'Noch Fragen?',
-    headingSub: 'Fragen Sie Hala selbst.',
-    body: 'Hala beantwortet Ihre Fragen genauso wie die Ihrer Kunden. Kein Formular, kein Warten.',
-    askCta: 'Hala fragen',
-    askNote:
-      'In der Live-Version öffnet dies den echten Agenten. Anzubinden an das bestehende GoHighLevel-Chat-Widget oder an den Sprach-Agenten für eine gesprochene Antwort.',
+    heading: 'Fragen, die uns',
+    headingSub: 'vor jedem Termin erreichen.',
+    body: 'Was Inhaber wissen wollen, bevor sie ihre Anrufe einer KI übergeben.',
     items: [
       {
         q: 'Klingt Hala für meine Kunden wie ein Roboter?',
