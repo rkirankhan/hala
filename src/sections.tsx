@@ -826,6 +826,9 @@ interface Layout {
    * it, so it lights once per branch.
    */
   nodes: { contact: number[]; answer: number[]; outcomes: number[][]; follow: number[] };
+  /** x positions for the stage headings, wide layout only. */
+  columnsAt?: number[];
+  columnsY?: number;
   contact: [number, number, number];
   answer: [number, number, number];
   badge: [number, number];
@@ -861,6 +864,8 @@ const WIDE: Layout = {
     outcomes: [[1.4], [2.2], [3.0]],
     follow: [3.8, 4.6],
   },
+  columnsAt: [112, 320, 645, 952],
+  columnsY: 26,
   contact: [112, 290, 188],
   answer: [320, 290, 140],
   badge: [320, 178],
@@ -932,11 +937,11 @@ const CHANNEL_ICONS: { icon: LucideIcon; colour: string }[] = [
 
 function MapTile({
   layout, x, y, width, icon: Icon, label, note, system, accent, rtl, channels,
-  flashes = [],
+  flashes = [], tone,
 }: {
   layout: Layout; x: number; y: number; width: number; icon: LucideIcon;
   label: string; note?: string; system?: string; accent?: boolean; rtl: boolean;
-  channels?: boolean; flashes?: number[];
+  channels?: boolean; flashes?: number[]; tone?: string;
 }) {
   /* Geometry in percent and type in container query units, both against the
      canvas — so the diagram holds its proportions whether it has the full page,
@@ -953,9 +958,15 @@ function MapTile({
         width: `${(width / layout.w) * 100}%`,
         padding: 'clamp(8px, 2.6cqw, 13px) clamp(9px, 2.9cqw, 15px)',
         borderRadius: 'clamp(9px, 2.6cqw, 14px)',
-        background: accent ? 'rgba(110,123,242,0.14)' : 'rgba(20,20,24,0.96)',
-        border: `1px solid ${accent ? 'rgba(110,123,242,0.42)' : C.line}`,
-        boxShadow: '0 18px 40px -24px rgba(0,0,0,0.9)',
+        background: accent
+          ? 'rgba(110,123,242,0.14)'
+          : tone
+            ? `linear-gradient(150deg, ${tone}1A 0%, rgba(20,20,24,0.96) 70%)`
+            : 'rgba(20,20,24,0.96)',
+        border: `1px solid ${accent ? 'rgba(110,123,242,0.42)' : tone ? `${tone}3D` : C.line}`,
+        boxShadow: tone
+          ? `0 24px 50px -30px ${tone}66`
+          : '0 18px 40px -24px rgba(0,0,0,0.9)',
       }}
     >
       {/* One overlay per flash, rather than animating the tile itself: the tile
@@ -1058,6 +1069,11 @@ function FlowMap({
     },
   ];
   const outIcons = [CalendarCheck, ShoppingBag, MessageCircle];
+  /* One colour per branch, taken from the feature bands so the page keeps a
+     single palette. Five identical dark tiles made the fork look like a list;
+     tinting them says "these are three different endings" before a word is
+     read. */
+  const outTones = ['#6E7BF2', '#F59E0B', '#25D366'];
 
   return (
     <div
@@ -1106,6 +1122,27 @@ function FlowMap({
           ))}
         </svg>
 
+        {layout.columnsAt?.map((cx, i) => (
+          <div
+            key={i}
+            className="v4-map-tile"
+            style={{
+              position: 'absolute',
+              left: `${(cx / layout.w) * 100}%`,
+              top: `${((layout.columnsY ?? 26) / layout.h) * 100}%`,
+              transform: `translate(-50%, -50%)${rtl ? ' scaleX(-1)' : ''}`,
+              whiteSpace: 'nowrap',
+              fontFamily: mono,
+              fontSize: 'clamp(8px, 1.05cqw, 10.5px)',
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              color: C.faint,
+            }}
+          >
+            {flow.map.columns[i]}
+          </div>
+        ))}
+
         {tiles.map((t) => (
           <MapTile
             key={t.label}
@@ -1122,7 +1159,7 @@ function FlowMap({
             layout={layout}
             x={layout.outcomes[i][0]} y={layout.outcomes[i][1]} width={layout.outcomes[i][2]}
             icon={outIcons[i]} label={o.label} note={o.note} system={o.system}
-            flashes={layout.nodes.outcomes[i]} rtl={rtl}
+            tone={outTones[i]} flashes={layout.nodes.outcomes[i]} rtl={rtl}
           />
         ))}
 
@@ -1471,7 +1508,7 @@ export function Languages() {
               key={l.name}
               style={{
                 background: 'rgba(8,8,10,0.5)', border: `1px solid ${C.line}`,
-                borderRadius: 14, padding: '18px 20px',
+                borderRadius: 14, padding: '20px', textAlign: 'center',
               }}
             >
               <div

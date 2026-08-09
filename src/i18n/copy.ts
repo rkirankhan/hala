@@ -102,6 +102,8 @@ export interface HalaCopy {
     branches: { label: string; line: string }[];
     /** Short labels for the diagram. Node tiles cannot carry a full sentence. */
     map: {
+      /** Stage headings above the diagram's columns. Wide layout only. */
+      columns: string[];
       contact: string;
       /** Reinforces the icon row on the entry node for anyone not reading it. */
       contactNote: string;
@@ -401,6 +403,7 @@ export const en: HalaCopy = {
       { label: 'Answers a question', line: 'Hours, prices or availability — with a booking link in the reply.' },
     ],
     map: {
+      columns: ['Any channel', 'Answered & understood', 'Handled', 'Followed up'],
       contact: 'Customer gets in touch',
       contactNote: 'Phone, WhatsApp, Instagram, web chat, email',
       answer: 'Hala answers',

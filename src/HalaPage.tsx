@@ -204,8 +204,16 @@ export function HalaPage() {
         @media (min-width: 700px) { .v4-integrations { grid-template-columns: repeat(3, minmax(0,1fr)); } }
         @media (min-width: 1040px) { .v4-integrations { grid-template-columns: repeat(6, minmax(0,1fr)); } }
 
+        /* auto-fit with a capped track and centred justification, so the row
+           sits in the middle of the box whether there are two markets or three
+           — the count changed once already and will again. */
         .v4-langs { grid-template-columns: minmax(0,1fr); }
-        @media (min-width: 760px) { .v4-langs { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+        @media (min-width: 720px) {
+          .v4-langs {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 270px));
+            justify-content: center;
+          }
+        }
 
         .v4-navlinks { display: none; }
         @media (min-width: 820px) { .v4-navlinks { display: flex; } }

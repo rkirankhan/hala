@@ -183,6 +183,7 @@ export const de: HalaCopy = {
       { label: 'Beantwortet eine Frage', line: 'Öffnungszeiten, Preise oder Verfügbarkeit — mit Buchungslink in der Antwort.' },
     ],
     map: {
+      columns: ['Jeder Kanal', 'Angenommen & verstanden', 'Erledigt', 'Nachgefasst'],
       contact: 'Kunde meldet sich',
       contactNote: 'Telefon, WhatsApp, Instagram, Web-Chat, E-Mail',
       answer: 'Hala nimmt an',
