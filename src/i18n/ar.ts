@@ -361,9 +361,10 @@ export const ar: HalaCopy = {
     plans: [
       {
         name: 'Essential',
-        price: '249',
-        setup: '1,195',
-        mins: '500 دقيقة',
+        price: '199',
+        setup: '299',
+        mins: '2,500 دقيقة',
+        overage: '0.20 جنيه للدقيقة الإضافية',
         features: [
           'الرد على كل مكالمة، على مدار الساعة',
           'المواعيد إلى تقويمك',
@@ -372,16 +373,18 @@ export const ar: HalaCopy = {
       },
       {
         name: 'Professional',
-        price: '459',
-        setup: '2,195',
-        mins: '1,200 دقيقة',
+        price: '349',
+        setup: '499',
+        mins: '5,000 دقيقة',
+        overage: '0.18 جنيه للدقيقة الإضافية',
         features: ['كل ما في Essential', 'تأهيل الاستفسارات وتوجيهها', 'تحويل المكالمة مع سياقها'],
       },
       {
         name: 'Premium',
-        price: '795',
-        setup: '3,750',
-        mins: '3,000 دقيقة',
+        price: '549',
+        setup: '799',
+        mins: '10,000 دقيقة',
+        overage: '0.15 جنيه للدقيقة الإضافية',
         features: ['كل ما في Professional', 'اللغتان بأسلوبك', 'عدة فروع، حساب واحد'],
       },
     ],

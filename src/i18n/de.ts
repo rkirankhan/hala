@@ -373,7 +373,7 @@ export const de: HalaCopy = {
 
   pricing: {
     heading: 'Keine Überraschungen. Keine versteckten Kosten.',
-    sub: 'Einmalige Einrichtung, danach eine monatliche Gebühr inklusive Ihrer Minuten. Die Preise sind vorgeschlagen und noch nicht final.',
+    sub: 'Eine einmalige Einrichtungsgebühr, danach ein Monatsplan inklusive Ihrer KI-Minuten. Wird mehr verbraucht, gilt ein fester Minutenpreis — keine Überraschungen auf der Rechnung.',
     currency: '€',
     perMonth: ' /Monat',
     setupSuffix: 'Einrichtung',
@@ -381,9 +381,10 @@ export const de: HalaCopy = {
     plans: [
       {
         name: 'Essential',
-        price: '249',
-        setup: '1.195',
-        mins: '500 Minuten',
+        price: '199',
+        setup: '299',
+        mins: '2.500 Minuten',
+        overage: '0,20 € je Zusatzminute',
         features: [
           'Jeder Anruf beantwortet, rund um die Uhr',
           'Termine in Ihren Kalender',
@@ -392,9 +393,10 @@ export const de: HalaCopy = {
       },
       {
         name: 'Professional',
-        price: '459',
-        setup: '2.195',
-        mins: '1.200 Minuten',
+        price: '349',
+        setup: '499',
+        mins: '5.000 Minuten',
+        overage: '0,18 € je Zusatzminute',
         features: [
           'Alles aus Essential',
           'Anfragen qualifiziert und weitergeleitet',
@@ -403,9 +405,10 @@ export const de: HalaCopy = {
       },
       {
         name: 'Premium',
-        price: '795',
-        setup: '3.750',
-        mins: '3.000 Minuten',
+        price: '549',
+        setup: '799',
+        mins: '10.000 Minuten',
+        overage: '0,15 € je Zusatzminute',
         features: [
           'Alles aus Professional',
           'Beide Sprachen, Ihr Tonfall',

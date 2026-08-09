@@ -446,6 +446,9 @@ export function Pricing() {
                 + {c.pricing.currency}
                 {p.setup} {c.pricing.setupSuffix} · {p.mins}
               </div>
+              <div style={{ fontFamily: mono, fontSize: 11, marginTop: 7, color: C.faint }}>
+                {p.overage}
+              </div>
             </div>
 
             <div

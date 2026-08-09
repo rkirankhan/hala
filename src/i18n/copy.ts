@@ -179,7 +179,12 @@ export interface HalaCopy {
     perMonth: string;
     setupSuffix: string;
     mostChosen: string;
-    plans: { name: string; price: string; setup: string; mins: string; features: string[] }[];
+    plans: {
+      name: string; price: string; setup: string; mins: string;
+      /** Per-minute rate once the included minutes run out. */
+      overage: string;
+      features: string[];
+    }[];
   };
 
   proof: {
@@ -571,7 +576,7 @@ export const en: HalaCopy = {
 
   pricing: {
     heading: 'No surprises. No hidden fees.',
-    sub: 'One setup, then a monthly fee with your minutes included. Pricing is proposed and still to be confirmed.',
+    sub: 'One setup fee, then a monthly plan with your AI minutes included. Go over and the extra minutes are charged at a flat rate — no surprise bills.',
     currency: '£',
     perMonth: ' /month',
     setupSuffix: 'setup',
@@ -579,9 +584,10 @@ export const en: HalaCopy = {
     plans: [
       {
         name: 'Essential',
-        price: '249',
-        setup: '1,195',
-        mins: '500 minutes',
+        price: '199',
+        setup: '299',
+        mins: '2,500 minutes',
+        overage: '£0.20 / extra minute',
         features: [
           'Every call answered, 24/7',
           'Bookings to your calendar',
@@ -590,9 +596,10 @@ export const en: HalaCopy = {
       },
       {
         name: 'Professional',
-        price: '459',
-        setup: '2,195',
-        mins: '1,200 minutes',
+        price: '349',
+        setup: '499',
+        mins: '5,000 minutes',
+        overage: '£0.18 / extra minute',
         features: [
           'Everything in Essential',
           'Enquiries qualified and routed',
@@ -601,9 +608,10 @@ export const en: HalaCopy = {
       },
       {
         name: 'Premium',
-        price: '795',
-        setup: '3,750',
-        mins: '3,000 minutes',
+        price: '549',
+        setup: '799',
+        mins: '10,000 minutes',
+        overage: '£0.15 / extra minute',
         features: [
           'Everything in Professional',
           'Both languages, your tone',

@@ -56,8 +56,15 @@ a route in `HalaRoutes.tsx`.
 
 - [ ] `index.html` is set to `noindex, nofollow`. Flip it to `index, follow` when
       the launch copy is final.
-- [ ] Pricing is proposed, not confirmed — see `src/i18n/copy.ts`. German prices
-      are the pound figures carried across as a placeholder.
+- [ ] Pricing now matches the margin model: 299/199, 499/349, 799/549, with
+      2,500 / 5,000 / 10,000 included minutes and overage at 0.20 / 0.18 / 0.15.
+      German quotes the same figures in euros — confirm that is intended rather
+      than a straight currency swap.
+- [ ] Integration names in `src/i18n/copy.ts` are candidates, not confirmed.
+      Listing one you do not have is a claim. Verify or cut before launch.
+- [ ] The languages section claims the employee speaks Arabic. Confirm the
+      product does before launch — the Arabic *website* is unpublished, which is
+      a separate thing.
 - [ ] German and Arabic copy both need a native speaker's pass, especially the
       headlines, where the English relies on rhythm that does not translate.
 - [ ] Arabic prices are still in pounds. If that page is aimed at Gulf buyers
