@@ -811,14 +811,17 @@ interface Layout {
   h: number;
   paths: string[];
   /**
-   * Firing order for the trace animation, one slot per path.
-   *
-   * Not the same as the order the paths are declared in: the sequence follows a
-   * whole journey at a time — in to Hala, out to the first outcome, on to the
-   * follow-up, then back for the second — rather than lighting every branch and
-   * then every join. Watching one conversation travel end to end is the point.
+   * Firing order for the trace animation, one slot per path. Slots are 0.8s.
+   * Repeats are allowed — the vertical layout runs two path segments in one
+   * slot, since its trunk is drawn in two pieces but reads as one movement.
    */
   seq: number[];
+  /**
+   * When each node flashes, in seconds, timed to land as its incoming trace
+   * arrives. The follow-up node takes an array because all three branches feed
+   * it, so it lights once per branch.
+   */
+  nodes: { contact: number[]; answer: number[]; outcomes: number[][]; follow: number[] };
   contact: [number, number, number];
   answer: [number, number, number];
   badge: [number, number];
@@ -838,7 +841,13 @@ const WIDE: Layout = {
     'M 707 200 L 862 200',
     'M 697 330 C 790 330, 790 200, 862 200',
   ],
-  seq: [0, 1, 3, 5, 2, 4, 6],
+  seq: [0, 1, 2, 3, 4, 5, 6],
+  nodes: {
+    contact: [0],
+    answer: [0.6],
+    outcomes: [[1.4], [2.2], [3.0]],
+    follow: [3.8, 4.6, 5.4],
+  },
   contact: [112, 200, 188],
   answer: [320, 200, 140],
   badge: [320, 96],
@@ -863,7 +872,13 @@ const TALL: Layout = {
     'M 70 790 L 158 790',
     'M 70 890 C 70 945, 330 935, 330 922',
   ],
-  seq: [0, 1, 2, 3, 4, 5, 6],
+  seq: [0, 1, 1, 2, 3, 4, 5],
+  nodes: {
+    contact: [0],
+    answer: [0.6],
+    outcomes: [[2.2], [3.0], [3.8]],
+    follow: [4.6],
+  },
   contact: [330, 62, 360],
   answer: [330, 193, 360],
   badge: [330, 268],
@@ -892,10 +907,11 @@ const CHANNEL_ICONS: { icon: LucideIcon; colour: string }[] = [
 ];
 
 function MapTile({
-  layout, x, y, width, icon: Icon, label, note, accent, rtl, channels,
+  layout, x, y, width, icon: Icon, label, note, accent, rtl, channels, flashes = [],
 }: {
   layout: Layout; x: number; y: number; width: number; icon: LucideIcon;
   label: string; note?: string; accent?: boolean; rtl: boolean; channels?: boolean;
+  flashes?: number[];
 }) {
   /* Geometry in percent and type in container query units, both against the
      canvas — so the diagram holds its proportions whether it has the full page,
@@ -917,6 +933,17 @@ function MapTile({
         boxShadow: '0 18px 40px -24px rgba(0,0,0,0.9)',
       }}
     >
+      {/* One overlay per flash, rather than animating the tile itself: the tile
+          sets border and box-shadow inline, which a stylesheet cannot override,
+          and the follow-up node needs to light three times per cycle. */}
+      {flashes.map((delay, i) => (
+        <span
+          key={i}
+          aria-hidden
+          className="v4-flash"
+          style={{ borderRadius: 'inherit', animationDelay: `${delay}s` }}
+        />
+      ))}
       {channels ? (
         <span
           style={{
@@ -981,8 +1008,12 @@ function FlowMap({
     {
       pos: layout.contact, icon: Phone, label: flow.map.contact,
       note: flow.map.contactNote, accent: false, channels: true,
+      flashes: layout.nodes.contact,
     },
-    { pos: layout.answer, icon: Sparkles, label: flow.map.answer, accent: true },
+    {
+      pos: layout.answer, icon: Sparkles, label: flow.map.answer, accent: true,
+      flashes: layout.nodes.answer,
+    },
   ];
   const outIcons = [CalendarCheck, ShoppingBag, MessageCircle];
 
@@ -1039,7 +1070,7 @@ function FlowMap({
             layout={layout}
             x={t.pos[0]} y={t.pos[1]} width={t.pos[2]}
             icon={t.icon} label={t.label} note={t.note} accent={t.accent}
-            channels={t.channels} rtl={rtl}
+            channels={t.channels} flashes={t.flashes} rtl={rtl}
           />
         ))}
 
@@ -1048,14 +1079,16 @@ function FlowMap({
             key={o.label}
             layout={layout}
             x={layout.outcomes[i][0]} y={layout.outcomes[i][1]} width={layout.outcomes[i][2]}
-            icon={outIcons[i]} label={o.label} note={o.note} rtl={rtl}
+            icon={outIcons[i]} label={o.label} note={o.note}
+            flashes={layout.nodes.outcomes[i]} rtl={rtl}
           />
         ))}
 
         <MapTile
           layout={layout}
           x={layout.follow[0]} y={layout.follow[1]} width={layout.follow[2]}
-          icon={Check} label={flow.map.follow} note={flow.map.followNote} accent rtl={rtl}
+          icon={Check} label={flow.map.follow} note={flow.map.followNote} accent
+          flashes={layout.nodes.follow} rtl={rtl}
         />
 
         {/* Badge on the qualifying step — the memory claim, made concrete. */}

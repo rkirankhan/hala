@@ -105,6 +105,23 @@ export function HalaPage() {
           14%  { stroke-dashoffset: 0; opacity: 0; }
           100% { stroke-dashoffset: 0; opacity: 0; }
         }
+        /* Node flash: an overlay ring that lights as the trace arrives, then
+           fades. Same 5.6s cycle as the connectors, so the two stay in step. */
+        @keyframes v4Flash {
+          0%   { opacity: 0.85; transform: scale(1); }
+          9%   { opacity: 0; transform: scale(1.02); }
+          100% { opacity: 0; transform: scale(1); }
+        }
+        .v4-flash {
+          position: absolute;
+          inset: -1px;
+          pointer-events: none;
+          opacity: 0;
+          border: 1px solid rgba(110,123,242,0.9);
+          box-shadow: 0 0 20px -2px rgba(110,123,242,0.55);
+          animation: v4Flash 5.6s linear infinite;
+        }
+
         .v4-trace {
           stroke-dasharray: 0.22 1;
           stroke-dashoffset: 1;
@@ -417,6 +434,10 @@ export function HalaPage() {
         </div>
       </section>
 
+
+      <StatBand />
+      <FlowSection />
+
       {/* ── 3. Why ──
           Was an oversized gradient word with tilted cards scattered around it.
           That was the most literal borrowing on the page, so it is now a
@@ -479,9 +500,6 @@ export function HalaPage() {
           ))}
         </div>
       </section>
-
-      <StatBand />
-      <FlowSection />
       <FeatureBands />
       <HowItWorks />
 
