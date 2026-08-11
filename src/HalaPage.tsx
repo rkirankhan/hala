@@ -170,7 +170,10 @@ export function HalaPage() {
         @media (min-width: 900px) { .v4-verticals { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 
         .v4-plans { grid-template-columns: minmax(0,1fr); }
-        @media (min-width: 900px) { .v4-plans { grid-template-columns: repeat(3, minmax(0,1fr)); align-items: start; } }
+        /* Stretch, not start: the three tiers no longer carry three features
+           each, and ragged card bottoms read as a layout fault rather than as
+           one tier having less to say. */
+        @media (min-width: 900px) { .v4-plans { grid-template-columns: repeat(3, minmax(0,1fr)); align-items: stretch; } }
 
         /* Two layouts of the same diagram: horizontal where there is room,
            vertical on phones. Squeezing the five-node horizontal version onto a

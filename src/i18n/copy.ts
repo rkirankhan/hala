@@ -189,7 +189,10 @@ export interface HalaCopy {
     setupSuffix: string;
     mostChosen: string;
     plans: {
-      name: string; price: string; setup: string; mins: string;
+      name: string;
+      /** One line under the name: who the tier is for, not what it costs. */
+      line: string;
+      price: string; setup: string; mins: string;
       /** Per-minute rate once the included minutes run out. */
       overage: string;
       features: string[];
@@ -570,39 +573,51 @@ export const en: HalaCopy = {
     mostChosen: 'Most chosen',
     plans: [
       {
-        name: 'Essential',
+        name: 'Reception',
+        line: 'Nobody reaches a voicemail again.',
         price: '199',
         setup: '299',
         mins: '2,500 minutes',
         overage: '£0.20 / extra minute',
         features: [
-          'Every call answered, 24/7',
-          'Bookings to your calendar',
-          'Answers from your own information',
+          'Every call answered on the first ring, 24/7',
+          'Phone, WhatsApp, Instagram, Messenger, web chat, SMS and email',
+          'Questions answered from your own hours, services and prices',
+          'Enquiries qualified before they reach your team',
+          'Warm handover to a person, with the context already gathered',
+          'Every escalation logged to your CRM',
         ],
       },
       {
-        name: 'Professional',
+        name: 'Full Service',
+        line: 'The conversation is finished, not passed on.',
         price: '349',
         setup: '499',
         mins: '5,000 minutes',
         overage: '£0.18 / extra minute',
         features: [
-          'Everything in Essential',
-          'Enquiries qualified and routed',
-          'Warm transfer with context',
+          'Everything in Reception',
+          'Booking built for your trade — tables, appointments or orders',
+          'Written straight into the calendar and systems you already run',
+          'Confirmation and reminder by SMS, so fewer people forget',
+          'Follow-up after the visit, every time',
+          'Returning customers recognised, not asked twice',
         ],
       },
       {
-        name: 'Premium',
+        name: 'Growth Partner',
+        line: 'The work nobody has time for, done every day.',
         price: '549',
         setup: '799',
         mins: '10,000 minutes',
         overage: '£0.15 / extra minute',
         features: [
-          'Everything in Professional',
-          'Lowest per-minute rate',
+          'Everything in Full Service',
+          'A review request to every customer — and unhappy ones raised with your team first',
+          'Lead scoring, so the enquiries worth calling back come to the top',
+          'Your own dashboard: calls answered, bookings made, what they were worth',
           'Multi-site, one account',
+          'Custom system integrations on request',
         ],
       },
     ],

@@ -321,6 +321,18 @@ export function Pricing() {
               )}
             </div>
 
+            {/* The tier names no longer describe themselves — "Full Service"
+                says less than "Professional" pretended to — so each carries a
+                line saying what changes at that step. */}
+            <p
+              style={{
+                margin: '-4px 0 0', fontSize: 14.5, lineHeight: 1.45,
+                color: p.hero ? '#C3CAFF' : C.white, maxInlineSize: '26ch',
+              }}
+            >
+              {p.line}
+            </p>
+
             <div>
               <span style={{ fontFamily: display, fontWeight: 600, fontSize: 'clamp(2rem,3.2vw,2.6rem)', letterSpacing: tracking.display }}>
                 {c.pricing.currency}
