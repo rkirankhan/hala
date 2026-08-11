@@ -338,6 +338,14 @@ export const ar: HalaCopy = {
     setupSuffix: 'رسوم الإعداد',
     mostChosen: 'الأكثر اختياراً',
     cta: 'استفسر عن هذه الباقة',
+    enquire: {
+      title: 'كيف تحب أن تبدأ؟',
+      emailLabel: 'أرسل بريداً إلكترونياً',
+      emailNote: 'حدّثنا عن عملك. نردّ في يوم العمل نفسه.',
+      callLabel: 'احجز مكالمة',
+      callNote: 'خمس عشرة دقيقة، في الوقت الذي تختاره.',
+      close: 'إغلاق',
+    },
     plans: [
       {
         name: 'الاستقبال',

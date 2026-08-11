@@ -351,6 +351,14 @@ export const de: HalaCopy = {
     setupSuffix: 'Einrichtung',
     mostChosen: 'Am häufigsten gewählt',
     cta: 'Zu diesem Paket anfragen',
+    enquire: {
+      title: 'Wie möchten Sie starten?',
+      emailLabel: 'E-Mail schreiben',
+      emailNote: 'Erzählen Sie uns von Ihrem Betrieb. Wir antworten am selben Werktag.',
+      callLabel: 'Termin vereinbaren',
+      callNote: 'Fünfzehn Minuten, zu einer Zeit, die Ihnen passt.',
+      close: 'Schließen',
+    },
     plans: [
       {
         name: 'Empfang',

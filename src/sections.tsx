@@ -23,6 +23,7 @@ import {
   X,
   type LucideIcon,
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { C, display, mono, sans, tracking, wrap } from './tokens';
 import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
@@ -263,10 +264,149 @@ export function HowItWorks() {
  * longer be the one dark card in a light row. */
 
 /** Which plan is highlighted is a commercial decision, not a translated one. */
+/**
+ * The choice behind a pricing tier's button.
+ *
+ * "Enquire" used to go straight to the calendar, which suits someone ready to
+ * talk and nobody else — plenty of owners would rather write at eleven at night
+ * than commit to a slot. Two doors, and the email carries the tier in its
+ * subject so the reply can start from the right place.
+ */
+function EnquireDialog({ plan, onClose }: { plan: string; onClose: () => void }) {
+  const c = useHalaCopy();
+  const q = c.pricing.enquire;
+
+  /* Escape closes it. A dialog you can only leave by hitting a small X is the
+     kind of thing that gets closed by leaving the site. */
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  const options = [
+    {
+      key: 'email',
+      icon: Mail,
+      label: q.emailLabel,
+      note: q.emailNote,
+      href: `mailto:info@khaashub.com?subject=${encodeURIComponent(`Hala — ${plan}`)}`,
+    },
+    {
+      key: 'call',
+      icon: CalendarClock,
+      label: q.callLabel,
+      note: q.callNote,
+      to: c.booking.slug,
+    },
+  ];
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 200,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: 20,
+        background: 'rgba(6,6,8,0.72)', backdropFilter: 'blur(6px)',
+        animation: 'v4Fade 180ms ease-out both',
+      }}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={q.title}
+        /* The backdrop closes on click; the card must not pass its own clicks up. */
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          position: 'relative', width: '100%', maxWidth: 460,
+          background: C.panel, border: `1px solid ${C.line}`,
+          borderRadius: 20, padding: 'clamp(24px, 3vw, 32px)',
+          fontFamily: sans,
+        }}
+      >
+        <button
+          onClick={onClose}
+          aria-label={q.close}
+          style={{
+            position: 'absolute', insetInlineEnd: 14, top: 14,
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            width: 30, height: 30, borderRadius: 8, cursor: 'pointer',
+            background: 'transparent', border: 'none', color: C.faint,
+          }}
+        >
+          <X size={16} strokeWidth={2.2} />
+        </button>
+
+        <div
+          style={{
+            fontFamily: mono, fontSize: 10.5, letterSpacing: '0.16em',
+            textTransform: 'uppercase', color: C.accent,
+          }}
+        >
+          {plan}
+        </div>
+        <h3
+          style={{
+            fontFamily: display, fontWeight: 600, fontSize: 20,
+            letterSpacing: tracking.ui, margin: '10px 0 0',
+          }}
+        >
+          {q.title}
+        </h3>
+
+        <div style={{ display: 'grid', gap: 10, marginTop: 22 }}>
+          {options.map(({ key, icon: Icon, label, note, href, to }) => {
+            const body = (
+              <>
+                <span
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                    width: 36, height: 36, borderRadius: 10, flexShrink: 0,
+                    background: 'rgba(110,123,242,0.14)', color: C.accent,
+                  }}
+                >
+                  <Icon size={16} strokeWidth={2} />
+                </span>
+                <span style={{ minWidth: 0 }}>
+                  <span style={{ display: 'block', fontSize: 15, fontWeight: 600 }}>{label}</span>
+                  <span style={{ display: 'block', fontSize: 13, lineHeight: 1.5, color: C.muted, marginTop: 3 }}>
+                    {note}
+                  </span>
+                </span>
+                <ArrowRight size={15} strokeWidth={2.2} style={{ marginInlineStart: 'auto', flexShrink: 0, color: C.faint }} />
+              </>
+            );
+            const style = {
+              display: 'flex', alignItems: 'center', gap: 13,
+              padding: '14px 16px', borderRadius: 13,
+              background: C.inset, border: `1px solid ${C.line}`,
+              color: C.white, textDecoration: 'none', textAlign: 'start' as const,
+            };
+
+            return to ? (
+              <Link key={key} to={to} style={style}>
+                {body}
+              </Link>
+            ) : (
+              <a key={key} href={href} style={style}>
+                {body}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const HERO_PLAN = 1;
 
 export function Pricing() {
   const c = useHalaCopy();
+  const [enquiring, setEnquiring] = useState<string | null>(null);
   const PLANS = c.pricing.plans.map((p, i) => ({ ...p, hero: i === HERO_PLAN }));
 
   return (
@@ -367,23 +507,26 @@ export function Pricing() {
                 sit on one line however far the feature lists run. Solid on the
                 chosen tier, outlined on the others — three equally loud
                 buttons would undo the work the highlight does. */}
-            <Link
-              to={c.booking.slug}
+            <button
+              onClick={() => setEnquiring(p.name)}
               style={{
                 marginTop: 'auto',
+                font: 'inherit', fontFamily: sans, cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                 padding: '13px 18px', borderRadius: 10,
                 background: p.hero ? C.accent : 'transparent',
                 border: `1px solid ${p.hero ? C.accent : C.line}`,
                 color: p.hero ? C.white : 'rgba(255,255,255,0.88)',
-                fontWeight: 600, fontSize: 14.5, textDecoration: 'none',
+                fontWeight: 600, fontSize: 14.5,
               }}
             >
               {c.pricing.cta} <ArrowRight size={15} strokeWidth={2.4} />
-            </Link>
+            </button>
           </div>
         ))}
       </div>
+
+      {enquiring && <EnquireDialog plan={enquiring} onClose={() => setEnquiring(null)} />}
     </section>
   );
 }

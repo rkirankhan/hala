@@ -196,6 +196,15 @@ export interface HalaCopy {
     setupSuffix: string;
     mostChosen: string;
     cta: string;
+    /** The choice offered when the tier's button is pressed. */
+    enquire: {
+      title: string;
+      emailLabel: string;
+      emailNote: string;
+      callLabel: string;
+      callNote: string;
+      close: string;
+    };
     plans: {
       name: string;
       /** One line under the name: who the tier is for, not what it costs. */
@@ -586,6 +595,14 @@ export const en: HalaCopy = {
     setupSuffix: 'setup',
     mostChosen: 'Most chosen',
     cta: 'Enquire about this plan',
+    enquire: {
+      title: 'How would you like to start?',
+      emailLabel: 'Send an email',
+      emailNote: 'Tell us about your business. We reply the same working day.',
+      callLabel: 'Schedule a call',
+      callNote: 'Fifteen minutes, at a time you pick.',
+      close: 'Close',
+    },
     plans: [
       {
         name: 'Reception',
