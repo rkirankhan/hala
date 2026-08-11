@@ -613,7 +613,7 @@ export const en: HalaCopy = {
         overage: '£0.15 / extra minute',
         features: [
           'Everything in Full Service',
-          'A review request to every customer — and unhappy ones raised with your team first',
+          'Review requests to every customer — you hear the unhappy ones that evening, not on Google',
           'Lead scoring, so the enquiries worth calling back come to the top',
           'Your own dashboard: calls answered, bookings made, what they were worth',
           'Multi-site, one account',

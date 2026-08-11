@@ -386,7 +386,7 @@ export const de: HalaCopy = {
         overage: '0,15 € je Zusatzminute',
         features: [
           'Alles aus Vollservice',
-          'Bewertungsanfrage an jeden Kunden — unzufriedene zuerst an Ihr Team',
+          'Bewertungsanfrage an jeden Kunden — von unzufriedenen erfahren Sie noch am selben Abend, nicht später bei Google',
           'Lead-Scoring: die Anfragen, die einen Rückruf lohnen, stehen oben',
           'Eigenes Dashboard: beantwortete Anrufe, gebuchte Termine, deren Wert',
           'Mehrere Standorte, ein Konto',
