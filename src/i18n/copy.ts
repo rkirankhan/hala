@@ -139,6 +139,8 @@ export interface HalaCopy {
     title: string;
     body: string;
     planLabel: string;
+    /** Shown when nobody arrived from a specific tier. */
+    planAny: string;
     optional: string;
     name: string;
     email: string;
@@ -507,6 +509,7 @@ export const en: HalaCopy = {
     title: 'Tell us about your business',
     body: 'A few lines is plenty. We read every one and reply the same working day.',
     planLabel: 'Plan',
+    planAny: 'Not sure yet',
     optional: 'optional',
     name: 'Your name',
     email: 'Email',

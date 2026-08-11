@@ -65,9 +65,13 @@ export function ContactPage() {
   const home = locale === 'en' ? '/' : `/${locale}`;
 
   const [params] = useSearchParams();
-  /* The tier the visitor was reading when they clicked, carried through so the
-     reply can start from the right plan instead of asking which one. */
-  const plan = params.get('plan') ?? '';
+  const plans = c.pricing.plans.map((p) => p.name);
+  /* The tier the visitor was reading seeds the field rather than fixing it —
+     the pricing table is where most people change their mind. Matched against
+     the known names so a hand-edited query string cannot put arbitrary text in
+     a select that has no such option. */
+  const fromUrl = params.get('plan') ?? '';
+  const [plan, setPlan] = useState(plans.includes(fromUrl) ? fromUrl : '');
 
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
@@ -181,25 +185,28 @@ export function ContactPage() {
           </div>
         ) : (
           <form onSubmit={onSubmit} noValidate style={{ display: 'grid', gap: 16, marginTop: 28 }}>
-            {plan && (
-              <div
+            <Field label={t.planLabel}>
+              <select
+                value={plan}
+                onChange={(e) => setPlan(e.target.value)}
                 style={{
-                  display: 'flex', alignItems: 'center', gap: 10,
-                  padding: '11px 14px', borderRadius: 10,
-                  background: 'rgba(110,123,242,0.10)', border: `1px solid ${C.accent}`,
+                  ...inputStyle,
+                  /* Without this the native option list renders light on every
+                     platform, whatever the field it drops out of looks like. */
+                  colorScheme: 'dark',
+                  ...(plan
+                    ? { background: 'rgba(110,123,242,0.10)', borderColor: C.accent, color: '#C3CAFF', fontWeight: 600 }
+                    : null),
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: mono, fontSize: 10, letterSpacing: '0.16em',
-                    textTransform: 'uppercase', color: C.faint,
-                  }}
-                >
-                  {t.planLabel}
-                </span>
-                <span style={{ fontSize: 14, fontWeight: 600, color: '#C3CAFF' }}>{plan}</span>
-              </div>
-            )}
+                <option value="">{t.planAny}</option>
+                {plans.map((name) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+            </Field>
 
             <Field label={t.name}>
               <input name="name" autoComplete="name" style={inputStyle} />

@@ -240,6 +240,7 @@ export const de: HalaCopy = {
     title: 'Erzählen Sie uns von Ihrem Betrieb',
     body: 'Ein paar Zeilen genügen. Wir lesen jede Nachricht und antworten am selben Werktag.',
     planLabel: 'Paket',
+    planAny: 'Noch unentschieden',
     optional: 'optional',
     name: 'Ihr Name',
     email: 'E-Mail',
