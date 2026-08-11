@@ -1,5 +1,5 @@
 import { ArrowRight, Phone } from 'lucide-react';
-import { C, display, mono, sans, tracking, wrap } from './tokens';
+import { BOOKING_URL, C, display, mono, sans, tracking, wrap } from './tokens';
 import { useHalaMeta } from './useHalaMeta';
 import { Link } from 'react-router-dom';
 import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
@@ -250,7 +250,7 @@ export function HalaPage() {
           </span>
           <LanguageMenu />
           <a
-            href="#book"
+            href={BOOKING_URL}
             style={{
               padding: '10px 18px', borderRadius: 9, background: C.accent,
               color: C.white, fontSize: 14, fontWeight: 600, whiteSpace: 'nowrap',
@@ -364,15 +364,18 @@ export function HalaPage() {
             </p>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, margin: '32px 0 0' }}>
-              <span
+              {/* Was a span — it looked like the page's primary call to action
+                  and did nothing when clicked. */}
+              <a
+                href={BOOKING_URL}
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 9,
                   padding: '15px 26px', borderRadius: 10, background: C.accent,
-                  color: C.white, fontWeight: 600, fontSize: 15,
+                  color: C.white, fontWeight: 600, fontSize: 15, textDecoration: 'none',
                 }}
               >
                 {c.hero.ctaPrimary} <ArrowRight size={16} strokeWidth={2.4} />
-              </span>
+              </a>
               <span
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 9,

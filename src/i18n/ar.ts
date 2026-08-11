@@ -331,6 +331,7 @@ export const ar: HalaCopy = {
     perMonth: ' /شهرياً',
     setupSuffix: 'رسوم الإعداد',
     mostChosen: 'الأكثر اختياراً',
+    cta: 'استفسر عن هذه الباقة',
     plans: [
       {
         name: 'الاستقبال',
@@ -425,7 +426,7 @@ export const ar: HalaCopy = {
   closing: {
     heading: 'ابدأ مع Hala اليوم.',
     body: 'خمس عشرة دقيقة. نتصل برقمك والوكيل يعمل، واسأله ما شئت.',
-    cta: 'احجز عرضاً توضيحياً',
+    cta: 'جرّب Hala',
   },
 
   footer: {

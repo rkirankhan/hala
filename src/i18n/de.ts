@@ -344,6 +344,7 @@ export const de: HalaCopy = {
     perMonth: ' /Monat',
     setupSuffix: 'Einrichtung',
     mostChosen: 'Am häufigsten gewählt',
+    cta: 'Zu diesem Paket anfragen',
     plans: [
       {
         name: 'Empfang',
@@ -438,7 +439,7 @@ export const de: HalaCopy = {
   closing: {
     heading: 'Starten Sie noch heute mit Hala.',
     body: 'Fünfzehn Minuten. Wir rufen Ihre Nummer an, Hala ist live, und Sie fragen sie, was Sie wollen.',
-    cta: 'Demo vereinbaren',
+    cta: 'Hala testen',
   },
 
   footer: {

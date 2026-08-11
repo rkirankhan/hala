@@ -188,6 +188,7 @@ export interface HalaCopy {
     perMonth: string;
     setupSuffix: string;
     mostChosen: string;
+    cta: string;
     plans: {
       name: string;
       /** One line under the name: who the tier is for, not what it costs. */
@@ -571,6 +572,7 @@ export const en: HalaCopy = {
     perMonth: ' /month',
     setupSuffix: 'setup',
     mostChosen: 'Most chosen',
+    cta: 'Enquire about this plan',
     plans: [
       {
         name: 'Reception',
@@ -665,7 +667,7 @@ export const en: HalaCopy = {
   closing: {
     heading: 'Get started with Hala today.',
     body: 'Fifteen minutes. We ring your number with Hala live and you throw whatever you like at it.',
-    cta: 'Book a demo',
+    cta: 'Test Hala',
   },
 
   footer: {

@@ -69,3 +69,14 @@ export const wrap = {
   margin: '0 auto',
   padding: '0 clamp(20px, 5vw, 48px)',
 } as const;
+
+/**
+ * Booking runs through the agency site's existing calendar rather than a second
+ * one built here: khaashub.com/call already embeds the GoHighLevel widget and
+ * is the page the team knows how to change.
+ *
+ * That page has no German URL — the agency site stores language in
+ * localStorage rather than in the path — so a visitor from /de currently lands
+ * on English copy. Worth a German booking page before the German launch.
+ */
+export const BOOKING_URL = 'https://khaashub.com/call';

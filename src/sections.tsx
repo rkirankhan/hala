@@ -23,7 +23,7 @@ import {
   X,
   type LucideIcon,
 } from 'lucide-react';
-import { C, display, mono, sans, tracking, wrap } from './tokens';
+import { BOOKING_URL, C, display, mono, sans, tracking, wrap } from './tokens';
 import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
 import { useIndustry } from './industry';
 import { HalaMark } from './HalaMark';
@@ -361,6 +361,25 @@ export function Pricing() {
                 </span>
               ))}
             </div>
+
+            {/* Pinned to the bottom by the auto margin, so the three buttons
+                sit on one line however far the feature lists run. Solid on the
+                chosen tier, outlined on the others — three equally loud
+                buttons would undo the work the highlight does. */}
+            <a
+              href={BOOKING_URL}
+              style={{
+                marginTop: 'auto',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                padding: '13px 18px', borderRadius: 10,
+                background: p.hero ? C.accent : 'transparent',
+                border: `1px solid ${p.hero ? C.accent : C.line}`,
+                color: p.hero ? C.white : 'rgba(255,255,255,0.88)',
+                fontWeight: 600, fontSize: 14.5, textDecoration: 'none',
+              }}
+            >
+              {c.pricing.cta} <ArrowRight size={15} strokeWidth={2.4} />
+            </a>
           </div>
         ))}
       </div>
@@ -436,7 +455,7 @@ export function ClosingCTA() {
           {c.closing.body}
         </p>
         <a
-          href="#book"
+          href={BOOKING_URL}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 9,
             margin: '28px 0 0', padding: '16px 30px', borderRadius: 10,
