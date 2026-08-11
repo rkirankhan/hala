@@ -87,3 +87,16 @@ export const wrap = {
  */
 export const BOOKING_EMBED =
   'https://api.khaashub.com/widget/bookings/khaas-hub-free-strategy-call';
+
+/**
+ * Where enquiries go. The agency site posts to this same GoHighLevel inbound
+ * webhook, so leads land in the CRM the team already works from — no second
+ * inbox to remember, no new credentials.
+ *
+ * Every payload carries `source: 'hala'` and the plan the visitor was reading,
+ * because a Hala enquiry needs a different reply from an agency one. If the two
+ * funnels ever need separate automations, make a second webhook in GoHighLevel
+ * and change this line.
+ */
+export const ENQUIRY_WEBHOOK =
+  'https://services.leadconnectorhq.com/hooks/1mbcu7rJEYHMYexor1GD/webhook-trigger/a803c5ce-d02f-41cf-b4e7-e7bf0d11a348';

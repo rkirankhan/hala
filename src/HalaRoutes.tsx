@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { HalaPage } from './HalaPage';
 import { LegalPage } from './LegalPage';
 import { BookingPage } from './BookingPage';
+import { ContactPage } from './ContactPage';
 import { COPY, HalaLocaleProvider, LOCALES, type LegalSet } from './i18n';
 import { IndustryProvider } from './industry';
 
@@ -39,6 +40,14 @@ export default function HalaRoutes() {
                 <IndustryProvider>
                   <HalaPage />
                 </IndustryProvider>
+              </HalaLocaleProvider>
+            }
+          />
+          <Route
+            path={rel(COPY[code].contact.slug)}
+            element={
+              <HalaLocaleProvider value={code}>
+                <ContactPage />
               </HalaLocaleProvider>
             }
           />

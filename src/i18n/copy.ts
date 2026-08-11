@@ -133,6 +133,29 @@ export interface HalaCopy {
     answer: { title: string; points: string[] };
   };
 
+  /** The enquiry form. Posts to ENQUIRY_WEBHOOK; `slug` is a route. */
+  contact: {
+    slug: string;
+    title: string;
+    body: string;
+    planLabel: string;
+    optional: string;
+    name: string;
+    email: string;
+    phone: string;
+    business: string;
+    message: string;
+    submit: string;
+    sending: string;
+    successTitle: string;
+    successBody: string;
+    errName: string;
+    errEmail: string;
+    errMessage: string;
+    errGeneric: string;
+    orBook: string;
+  };
+
   /** The booking page. `slug` is a route, so it is per-language like the legal ones. */
   booking: {
     slug: string;
@@ -204,8 +227,6 @@ export interface HalaCopy {
       callLabel: string;
       callNote: string;
       close: string;
-      /** Kept ASCII-only: see the note in EnquireDialog. */
-      emailSubject: string;
     };
     plans: {
       name: string;
@@ -481,6 +502,28 @@ export const en: HalaCopy = {
     },
   },
 
+  contact: {
+    slug: '/contact',
+    title: 'Tell us about your business',
+    body: 'A few lines is plenty. We read every one and reply the same working day.',
+    planLabel: 'Plan',
+    optional: 'optional',
+    name: 'Your name',
+    email: 'Email',
+    phone: 'Phone',
+    business: 'Business name',
+    message: 'What would you like Hala to handle?',
+    submit: 'Send enquiry',
+    sending: 'Sending…',
+    successTitle: 'Thanks — that reached us.',
+    successBody: 'We reply the same working day, usually sooner. If it is urgent, call +44 7356 037295.',
+    errName: 'Please tell us your name.',
+    errEmail: 'That email address does not look right.',
+    errMessage: 'A sentence or two is plenty — we just need something to reply to.',
+    errGeneric: 'That did not send. Try again, or email info@khaashub.com directly.',
+    orBook: 'Would rather talk? Book a call instead.',
+  },
+
   booking: {
     slug: '/book',
     title: 'Book a demo',
@@ -599,12 +642,11 @@ export const en: HalaCopy = {
     cta: 'Enquire about this plan',
     enquire: {
       title: 'How would you like to start?',
-      emailLabel: 'Send an email',
+      emailLabel: 'Send a message',
       emailNote: 'Tell us about your business. We reply the same working day.',
       callLabel: 'Schedule a call',
       callNote: 'Fifteen minutes, at a time you pick.',
       close: 'Close',
-      emailSubject: 'Hala enquiry',
     },
     plans: [
       {

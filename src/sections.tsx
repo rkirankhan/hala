@@ -292,11 +292,11 @@ function EnquireDialog({ plan, onClose }: { plan: string; onClose: () => void })
       icon: Mail,
       label: q.emailLabel,
       note: q.emailNote,
-      /* ASCII only. The subject was "Hala — <plan>", and an em dash in a mailto
-         has to survive UTF-8 percent-decoding by whatever client opens it —
-         Outlook drops the whole subject rather than mangle it. A colon and a
-         space are safe everywhere. */
-      href: `mailto:info@khaashub.com?subject=${encodeURIComponent(`${q.emailSubject}: ${plan}`)}`,
+      /* Was a mailto:, which needs the visitor's machine to have a mail client
+         configured and pointed at an inbox they read — often false, and it
+         fails silently when it is. The form posts either way, and carries the
+         tier so the reply can start from the right plan. */
+      to: `${c.contact.slug}?plan=${encodeURIComponent(plan)}`,
     },
     {
       key: 'call',
@@ -362,7 +362,7 @@ function EnquireDialog({ plan, onClose }: { plan: string; onClose: () => void })
         </h3>
 
         <div style={{ display: 'grid', gap: 10, marginTop: 22 }}>
-          {options.map(({ key, icon: Icon, label, note, href, to }) => {
+          {options.map(({ key, icon: Icon, label, note, to }) => {
             const body = (
               <>
                 <span
@@ -390,14 +390,10 @@ function EnquireDialog({ plan, onClose }: { plan: string; onClose: () => void })
               color: C.white, textDecoration: 'none', textAlign: 'start' as const,
             };
 
-            return to ? (
+            return (
               <Link key={key} to={to} style={style}>
                 {body}
               </Link>
-            ) : (
-              <a key={key} href={href} style={style}>
-                {body}
-              </a>
             );
           })}
         </div>

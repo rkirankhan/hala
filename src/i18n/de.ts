@@ -235,6 +235,28 @@ export const de: HalaCopy = {
     },
   },
 
+  contact: {
+    slug: '/de/kontakt',
+    title: 'Erzählen Sie uns von Ihrem Betrieb',
+    body: 'Ein paar Zeilen genügen. Wir lesen jede Nachricht und antworten am selben Werktag.',
+    planLabel: 'Paket',
+    optional: 'optional',
+    name: 'Ihr Name',
+    email: 'E-Mail',
+    phone: 'Telefon',
+    business: 'Name des Betriebs',
+    message: 'Was soll Hala für Sie übernehmen?',
+    submit: 'Anfrage senden',
+    sending: 'Wird gesendet …',
+    successTitle: 'Danke — das ist bei uns angekommen.',
+    successBody: 'Wir antworten am selben Werktag, meist früher. Wenn es eilt: +44 7356 037295.',
+    errName: 'Bitte nennen Sie uns Ihren Namen.',
+    errEmail: 'Diese E-Mail-Adresse sieht nicht richtig aus.',
+    errMessage: 'Ein, zwei Sätze reichen — wir brauchen nur etwas, worauf wir antworten können.',
+    errGeneric: 'Das ließ sich nicht senden. Bitte erneut versuchen oder direkt an info@khaashub.com schreiben.',
+    orBook: 'Lieber sprechen? Vereinbaren Sie einen Termin.',
+  },
+
   booking: {
     slug: '/de/termin',
     title: 'Demo vereinbaren',
@@ -353,12 +375,11 @@ export const de: HalaCopy = {
     cta: 'Zu diesem Paket anfragen',
     enquire: {
       title: 'Wie möchten Sie starten?',
-      emailLabel: 'E-Mail schreiben',
+      emailLabel: 'Nachricht senden',
       emailNote: 'Erzählen Sie uns von Ihrem Betrieb. Wir antworten am selben Werktag.',
       callLabel: 'Termin vereinbaren',
       callNote: 'Fünfzehn Minuten, zu einer Zeit, die Ihnen passt.',
       close: 'Schließen',
-      emailSubject: 'Hala Anfrage',
     },
     plans: [
       {
