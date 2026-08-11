@@ -1,0 +1,106 @@
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
+import { BOOKING_EMBED, C, display, mono, sans, tracking, wrap } from './tokens';
+import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
+import { useLegalMeta } from './useHalaMeta';
+import { HalaMark } from './HalaMark';
+
+/**
+ * The booking page — one job, the calendar.
+ *
+ * The widget was embedded in the closing section of the landing page first,
+ * where it was 900px of someone else's interface sitting between the last
+ * argument and the footer. On its own page it can have the room it needs, and
+ * the landing page ends on a sentence instead of a form.
+ *
+ * Same shell as the legal pages: back to Hala, nothing else to click. Someone
+ * who got here came to book, and a full nav is an invitation to wander off.
+ */
+export function BookingPage() {
+  const c = useHalaCopy();
+  const locale = useHalaLocale();
+  const home = locale === 'en' ? '/' : `/${locale}`;
+
+  useLegalMeta(c.booking.title, locale);
+
+  return (
+    <div
+      dir={dirOf(locale)}
+      style={{ background: C.black, color: C.white, fontFamily: sans, minHeight: '100vh' }}
+    >
+      <div
+        style={{
+          position: 'sticky', top: 0, zIndex: 50,
+          background: 'rgba(8,8,10,0.72)', backdropFilter: 'blur(16px)',
+          borderBottom: `1px solid ${C.line}`,
+        }}
+      >
+        <div style={{ ...wrap, display: 'flex', alignItems: 'center', gap: 24, height: 68 }}>
+          <Link
+            to={home}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 9,
+              color: C.muted, textDecoration: 'none', fontSize: 14.5,
+            }}
+          >
+            <ArrowLeft size={16} strokeWidth={2} />
+            {c.legal.backLabel}
+          </Link>
+        </div>
+      </div>
+
+      <main style={{ ...wrap, maxWidth: 980, padding: 'clamp(40px, 5.5vw, 72px) clamp(20px, 5vw, 48px) 96px' }}>
+        <div style={{ textAlign: 'center' }}>
+          <span
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 10,
+              fontFamily: mono, fontSize: 11, letterSpacing: '0.18em',
+              textTransform: 'uppercase', color: C.faint,
+            }}
+          >
+            <HalaMark size={18} title="" /> Hala
+          </span>
+
+          <h1
+            style={{
+              fontFamily: display, fontWeight: 600,
+              fontSize: 'clamp(2rem, 4.4vw, 3rem)',
+              lineHeight: 1.14, letterSpacing: tracking.heading,
+              margin: '16px 0 0',
+            }}
+          >
+            {c.booking.title}
+          </h1>
+
+          <p
+            style={{
+              margin: '16px auto 0', fontSize: 16, lineHeight: 1.6,
+              color: C.muted, maxInlineSize: '52ch',
+            }}
+          >
+            {c.booking.body}
+          </p>
+        </div>
+
+        {/* The widget renders light, so it sits on a white card rather than
+            fighting the page behind it. 900px because at 700 the calendar
+            scrolled inside its own frame, which reads as broken. */}
+        <div
+          style={{
+            margin: 'clamp(28px, 3.4vw, 44px) 0 0',
+            borderRadius: 18,
+            overflow: 'hidden',
+            background: C.white,
+            border: `1px solid ${C.line}`,
+          }}
+        >
+          <iframe
+            src={BOOKING_EMBED}
+            title={c.booking.title}
+            style={{ width: '100%', minHeight: 900, border: 0, display: 'block' }}
+          />
+        </div>
+      </main>
+    </div>
+  );
+}

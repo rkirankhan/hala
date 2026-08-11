@@ -249,8 +249,8 @@ export function HalaPage() {
             ))}
           </span>
           <LanguageMenu />
-          <a
-            href="#book"
+          <Link
+            to={c.booking.slug}
             style={{
               padding: '10px 18px', borderRadius: 9, background: C.accent,
               color: C.white, fontSize: 14, fontWeight: 600, whiteSpace: 'nowrap',
@@ -258,7 +258,7 @@ export function HalaPage() {
             }}
           >
             {c.nav.cta}
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -366,8 +366,8 @@ export function HalaPage() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, margin: '32px 0 0' }}>
               {/* Was a span — it looked like the page's primary call to action
                   and did nothing when clicked. */}
-              <a
-                href="#book"
+              <Link
+                to={c.booking.slug}
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 9,
                   padding: '15px 26px', borderRadius: 10, background: C.accent,
@@ -375,7 +375,7 @@ export function HalaPage() {
                 }}
               >
                 {c.hero.ctaPrimary} <ArrowRight size={16} strokeWidth={2.4} />
-              </a>
+              </Link>
               <span
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 9,

@@ -133,6 +133,13 @@ export interface HalaCopy {
     answer: { title: string; points: string[] };
   };
 
+  /** The booking page. `slug` is a route, so it is per-language like the legal ones. */
+  booking: {
+    slug: string;
+    title: string;
+    body: string;
+  };
+
   /** Named systems. "The calendar you already use" reads as no integration. */
   integrations: {
     eyebrow: string;
@@ -461,6 +468,12 @@ export const en: HalaCopy = {
         'Hands to your team the moment someone needs a person',
       ],
     },
+  },
+
+  booking: {
+    slug: '/book',
+    title: 'Book a demo',
+    body: 'Fifteen minutes. We ring your number with Hala live and you throw whatever you like at it — awkward questions, an accent, someone talking over it.',
   },
 
   integrations: {
