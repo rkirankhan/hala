@@ -292,7 +292,11 @@ function EnquireDialog({ plan, onClose }: { plan: string; onClose: () => void })
       icon: Mail,
       label: q.emailLabel,
       note: q.emailNote,
-      href: `mailto:info@khaashub.com?subject=${encodeURIComponent(`Hala — ${plan}`)}`,
+      /* ASCII only. The subject was "Hala — <plan>", and an em dash in a mailto
+         has to survive UTF-8 percent-decoding by whatever client opens it —
+         Outlook drops the whole subject rather than mangle it. A colon and a
+         space are safe everywhere. */
+      href: `mailto:info@khaashub.com?subject=${encodeURIComponent(`${q.emailSubject}: ${plan}`)}`,
     },
     {
       key: 'call',

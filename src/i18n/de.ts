@@ -358,6 +358,7 @@ export const de: HalaCopy = {
       callLabel: 'Termin vereinbaren',
       callNote: 'Fünfzehn Minuten, zu einer Zeit, die Ihnen passt.',
       close: 'Schließen',
+      emailSubject: 'Hala Anfrage',
     },
     plans: [
       {

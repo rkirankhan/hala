@@ -204,6 +204,8 @@ export interface HalaCopy {
       callLabel: string;
       callNote: string;
       close: string;
+      /** Kept ASCII-only: see the note in EnquireDialog. */
+      emailSubject: string;
     };
     plans: {
       name: string;
@@ -602,6 +604,7 @@ export const en: HalaCopy = {
       callLabel: 'Schedule a call',
       callNote: 'Fifteen minutes, at a time you pick.',
       close: 'Close',
+      emailSubject: 'Hala enquiry',
     },
     plans: [
       {

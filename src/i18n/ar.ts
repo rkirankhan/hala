@@ -345,6 +345,7 @@ export const ar: HalaCopy = {
       callLabel: 'احجز مكالمة',
       callNote: 'خمس عشرة دقيقة، في الوقت الذي تختاره.',
       close: 'إغلاق',
+      emailSubject: 'Hala',
     },
     plans: [
       {
