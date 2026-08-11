@@ -237,7 +237,6 @@ export const ar: HalaCopy = {
     groups: [
       { key: 'calendars', label: 'التقويمات', items: [{ key: 'gcal', name: 'Google Calendar' }, { key: 'outlook', name: 'Outlook' }, { key: 'calendly', name: 'Calendly' }] },
       { key: 'food', label: 'المطاعم والتوصيل', items: [{ key: 'opentable', name: 'OpenTable' }, { key: 'sevenrooms', name: 'SevenRooms' }, { key: 'resdiary', name: 'ResDiary' }] },
-      { key: 'beauty', label: 'الصالونات والعيادات', items: [{ key: 'fresha', name: 'Fresha' }, { key: 'treatwell', name: 'Treatwell' }, { key: 'phorest', name: 'Phorest' }] },
       { key: 'crm', label: 'إدارة العملاء', items: [{ key: 'ghl', name: 'GoHighLevel' }, { key: 'hubspot', name: 'HubSpot' }, { key: 'pipedrive', name: 'Pipedrive' }] },
       { key: 'messaging', label: 'المراسلة', items: [{ key: 'whatsapp', name: 'WhatsApp Business' }, { key: 'instagram', name: 'Instagram' }, { key: 'messenger', name: 'Messenger' }] },
     ],

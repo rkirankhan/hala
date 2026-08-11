@@ -60,8 +60,12 @@ a route in `HalaRoutes.tsx`.
       2,500 / 5,000 / 10,000 included minutes and overage at 0.20 / 0.18 / 0.15.
       German quotes the same figures in euros — confirm that is intended rather
       than a straight currency swap.
-- [ ] Integration names in `src/i18n/copy.ts` are candidates, not confirmed.
-      Listing one you do not have is a claim. Verify or cut before launch.
+- [x] Integration names in `src/i18n/copy.ts` are reachable: each has a real API
+      or native connection, some behind a partner application. Fresha, Treatwell
+      and Phorest were cut — those salon systems are closed to third-party
+      integration with no route in for an agency, so a client on one of them
+      moves to our calendar rather than being integrated with. Anything added
+      here later needs the same test: can we actually build it?
 - [ ] **One agent, one language.** The GoHighLevel build handles a single
       language per deployment, so nothing on the site may claim an agent that
       switches per caller. The languages section is written as "set up in your

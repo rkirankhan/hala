@@ -7,7 +7,6 @@ import {
   Check,
   Facebook,
   Globe,
-  Heart,
   Instagram,
   Mail,
   MessageCircle,
@@ -1408,9 +1407,6 @@ const TOOL_ICONS: Record<string, LucideIcon> = {
   opentable: UtensilsCrossed,
   sevenrooms: Utensils,
   resdiary: BookOpen,
-  fresha: Sparkles,
-  treatwell: Heart,
-  phorest: Scissors,
   ghl: Workflow,
   hubspot: Users,
   pipedrive: TrendingUp,
@@ -1422,7 +1418,6 @@ const TOOL_ICONS: Record<string, LucideIcon> = {
 const INTEGRATION_ICONS: Record<string, LucideIcon> = {
   calendars: CalendarCheck,
   food: UtensilsCrossed,
-  beauty: Scissors,
   crm: Users,
   messaging: MessageCircle,
 };
