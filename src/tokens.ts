@@ -71,12 +71,19 @@ export const wrap = {
 } as const;
 
 /**
- * Booking runs through the agency site's existing calendar rather than a second
- * one built here: khaashub.com/call already embeds the GoHighLevel widget and
- * is the page the team knows how to change.
+ * The GoHighLevel booking widget, embedded rather than linked. Same calendar
+ * the agency site at khaashub.com/call uses — one place for the team to change
+ * availability, one set of notifications — but a visitor who has just read the
+ * pricing books without leaving the page they were persuaded on.
  *
- * That page has no German URL — the agency site stores language in
- * localStorage rather than in the path — so a visitor from /de currently lands
- * on English copy. Worth a German booking page before the German launch.
+ * A plain lazy iframe: the widget sizes itself and needs no embed script, which
+ * is how the agency site loads it too.
+ *
+ * PLACEHOLDER. This is still the agency's "Khaas Hub — Free Strategy Call",
+ * so the widget introduces itself with the wrong brand and the wrong pitch
+ * ("what's holding your business back online") to someone who has just read a
+ * page about an AI receptionist. A dedicated Hala calendar is being set up;
+ * swap the URL here and nothing else needs to change.
  */
-export const BOOKING_URL = 'https://khaashub.com/call';
+export const BOOKING_EMBED =
+  'https://api.khaashub.com/widget/bookings/khaas-hub-free-strategy-call';

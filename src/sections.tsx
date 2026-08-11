@@ -23,7 +23,7 @@ import {
   X,
   type LucideIcon,
 } from 'lucide-react';
-import { BOOKING_URL, C, display, mono, sans, tracking, wrap } from './tokens';
+import { BOOKING_EMBED, C, display, mono, sans, tracking, wrap } from './tokens';
 import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
 import { useIndustry } from './industry';
 import { HalaMark } from './HalaMark';
@@ -367,7 +367,7 @@ export function Pricing() {
                 chosen tier, outlined on the others — three equally loud
                 buttons would undo the work the highlight does. */}
             <a
-              href={BOOKING_URL}
+              href="#book"
               style={{
                 marginTop: 'auto',
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
@@ -454,17 +454,27 @@ export function ClosingCTA() {
         <p style={{ margin: '18px auto 0', fontSize: 16, color: 'rgba(255,255,255,0.72)', maxInlineSize: '44ch' }}>
           {c.closing.body}
         </p>
-        <a
-          href={BOOKING_URL}
+        {/* The calendar itself, not a button pointing at it — this section was
+            the destination, so its own button had nowhere left to go. The
+            widget renders light, so it sits on a white card rather than
+            fighting the gradient behind it. */}
+        <div
           style={{
-            display: 'inline-flex', alignItems: 'center', gap: 9,
-            margin: '28px 0 0', padding: '16px 30px', borderRadius: 10,
-            background: C.white, color: '#0B0B0D', fontWeight: 600, fontSize: 15.5,
-            textDecoration: 'none',
+            margin: 'clamp(28px, 3.4vw, 40px) auto 0',
+            maxWidth: 940,
+            borderRadius: 18,
+            overflow: 'hidden',
+            background: C.white,
+            border: '1px solid rgba(255,255,255,0.14)',
           }}
         >
-          {c.closing.cta} <ArrowRight size={16} strokeWidth={2.4} />
-        </a>
+          <iframe
+            src={BOOKING_EMBED}
+            title={c.closing.cta}
+            loading="lazy"
+            style={{ width: '100%', minHeight: 900, border: 0, display: 'block' }}
+          />
+        </div>
       </div>
     </section>
   );
