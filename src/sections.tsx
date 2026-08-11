@@ -455,17 +455,11 @@ export function ClosingCTA() {
         <p style={{ margin: '18px auto 0', fontSize: 16, color: 'rgba(255,255,255,0.72)', maxInlineSize: '44ch' }}>
           {c.closing.body}
         </p>
-        <Link
-          to={c.booking.slug}
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: 9,
-            margin: '28px 0 0', padding: '16px 30px', borderRadius: 10,
-            background: C.white, color: '#0B0B0D', fontWeight: 600, fontSize: 15.5,
-            textDecoration: 'none',
-          }}
-        >
-          {c.closing.cta} <ArrowRight size={16} strokeWidth={2.4} />
-        </Link>
+        {/* No button here for now. "Test Hala" promises a conversation with the
+            agent, and the only thing behind it today is a calendar — so it went
+            rather than get relabelled into a third "Book a demo". The copy
+            (c.closing.cta) is still in all three locale files, ready for
+            whenever the live agent is wired up. */}
       </div>
     </section>
   );
