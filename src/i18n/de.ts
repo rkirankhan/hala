@@ -348,7 +348,7 @@ export const de: HalaCopy = {
       {
         name: 'Empfang',
         line: 'Niemand landet mehr auf der Mailbox.',
-        price: '199',
+        price: '249',
         setup: '299',
         mins: '2.500 Minuten',
         overage: '0,20 € je Zusatzminute',
@@ -364,7 +364,7 @@ export const de: HalaCopy = {
       {
         name: 'Vollservice',
         line: 'Das Gespräch wird zu Ende gebracht, nicht weitergereicht.',
-        price: '349',
+        price: '449',
         setup: '499',
         mins: '5.000 Minuten',
         overage: '0,18 € je Zusatzminute',
@@ -380,7 +380,7 @@ export const de: HalaCopy = {
       {
         name: 'Wachstumspartner',
         line: 'Die Arbeit, für die sonst nie Zeit bleibt — täglich erledigt.',
-        price: '549',
+        price: '749',
         setup: '799',
         mins: '10.000 Minuten',
         overage: '0,15 € je Zusatzminute',

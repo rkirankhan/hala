@@ -56,10 +56,19 @@ a route in `HalaRoutes.tsx`.
 
 - [ ] `index.html` is set to `noindex, nofollow`. Flip it to `index, follow` when
       the launch copy is final.
-- [ ] Pricing now matches the margin model: 299/199, 499/349, 799/549, with
-      2,500 / 5,000 / 10,000 included minutes and overage at 0.20 / 0.18 / 0.15.
-      German quotes the same figures in euros — confirm that is intended rather
-      than a straight currency swap.
+- [ ] Pricing is 249/299, 449/499, 749/799 (monthly/setup), with 2,500 / 5,000
+      / 10,000 included minutes and overage at 0.20 / 0.18 / 0.15. The monthly
+      figures were raised from 199/349/549 when the tiers stopped being minute
+      allowances and became a capability ladder; setup fees were left alone,
+      being the number people flinch at when signing. Check the top tier
+      against the margin model — the dashboard and custom integrations cost
+      delivery time, not just API minutes.
+- [ ] **List high, discount deliberately.** There are no case studies yet, so
+      early deals will need a founding rate (30–40% off for twelve months, in
+      exchange for a testimonial and permission to quote numbers). Discounting
+      from a high anchor is free; raising prices later is not.
+- [ ] German quotes the same figures in euros — confirm that is intended
+      rather than a straight currency swap.
 - [x] Integration names in `src/i18n/copy.ts` are reachable: each has a real API
       or native connection, some behind a partner application. Fresha, Treatwell
       and Phorest were cut — those salon systems are closed to third-party

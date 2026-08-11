@@ -575,7 +575,7 @@ export const en: HalaCopy = {
       {
         name: 'Reception',
         line: 'Nobody reaches a voicemail again.',
-        price: '199',
+        price: '249',
         setup: '299',
         mins: '2,500 minutes',
         overage: '£0.20 / extra minute',
@@ -591,7 +591,7 @@ export const en: HalaCopy = {
       {
         name: 'Full Service',
         line: 'The conversation is finished, not passed on.',
-        price: '349',
+        price: '449',
         setup: '499',
         mins: '5,000 minutes',
         overage: '£0.18 / extra minute',
@@ -607,7 +607,7 @@ export const en: HalaCopy = {
       {
         name: 'Growth Partner',
         line: 'The work nobody has time for, done every day.',
-        price: '549',
+        price: '749',
         setup: '799',
         mins: '10,000 minutes',
         overage: '£0.15 / extra minute',
