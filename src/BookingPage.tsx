@@ -82,16 +82,23 @@ export function BookingPage() {
           </p>
         </div>
 
-        {/* The widget renders light, so it sits on a white card rather than
-            fighting the page behind it. 900px because at 700 the calendar
-            scrolled inside its own frame, which reads as broken. */}
+        {/* GoHighLevel serves this widget light and honours no theme parameter,
+            and it is cross-origin, so no stylesheet of ours can reach inside it.
+            Inverting and rotating the hue back is the only lever left: white
+            becomes near-black, the blues stay blue. Not as good as a calendar
+            that was designed dark — if GoHighLevel ever exposes an appearance
+            setting, use that and delete this.
+
+            900px because at 700 the calendar scrolled inside its own frame,
+            which reads as broken. */}
         <div
           style={{
             margin: 'clamp(28px, 3.4vw, 44px) 0 0',
             borderRadius: 18,
             overflow: 'hidden',
-            background: C.white,
             border: `1px solid ${C.line}`,
+            background: C.white,
+            filter: 'invert(1) hue-rotate(180deg)',
           }}
         >
           <iframe
