@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
 import { LanguageMenu } from './LanguageMenu';
 import { HalaMark } from './HalaMark';
+import { Splash } from './Splash';
 import { INDUSTRY_ICONS } from './sections';
 import { useIndustry } from './industry';
 import {
@@ -76,6 +77,8 @@ export function HalaPage() {
       dir={dir}
       style={{ background: C.black, color: C.white, fontFamily: sans, minHeight: '100vh' }}
     >
+      <Splash />
+
       <style>{`
         /* The step arrow is a glyph, not an icon, so it does not mirror on its
            own. Everything else on the page uses logical properties and flips
