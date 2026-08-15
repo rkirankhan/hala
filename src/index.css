@@ -46,3 +46,15 @@ svg {
     scroll-behavior: auto !important;
   }
 }
+
+/* The loading state for embedded third-party frames. The mark is already a
+   ring with a gap in it, so spinning it reads as a spinner without needing a
+   second spinner drawn next to the logo.
+
+   Defined here rather than in a component's <style> block because the booking
+   page is a separate route from the landing page and has no such block. */
+@keyframes halaSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}

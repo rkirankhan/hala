@@ -163,6 +163,8 @@ export interface HalaCopy {
     slug: string;
     title: string;
     body: string;
+    /** Shown while the third-party calendar frame loads. */
+    loading: string;
   };
 
   /** Named systems. "The calendar you already use" reads as no integration. */
@@ -531,6 +533,7 @@ export const en: HalaCopy = {
     slug: '/book',
     title: 'Book a demo',
     body: 'Fifteen minutes. We ring your number with Hala live and you throw whatever you like at it — awkward questions, an accent, someone talking over it.',
+    loading: 'Loading the calendar',
   },
 
   integrations: {

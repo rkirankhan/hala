@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { BOOKING_EMBED, C, display, mono, sans, tracking, wrap } from './tokens';
@@ -18,6 +19,7 @@ import { HalaMark } from './HalaMark';
  */
 export function BookingPage() {
   const c = useHalaCopy();
+  const [ready, setReady] = useState(false);
   const locale = useHalaLocale();
   const home = locale === 'en' ? '/' : `/${locale}`;
 
@@ -89,24 +91,73 @@ export function BookingPage() {
             that was designed dark — if GoHighLevel ever exposes an appearance
             setting, use that and delete this.
 
+            The filter is on the iframe rather than the wrapper so the loading
+            overlay above it keeps its own colours — inside a filtered element
+            the accent would inverted too.
+
             900px because at 700 the calendar scrolled inside its own frame,
             which reads as broken. */}
         <div
+          aria-busy={!ready}
           style={{
+            position: 'relative',
             margin: 'clamp(28px, 3.4vw, 44px) 0 0',
             borderRadius: 18,
             overflow: 'hidden',
             border: `1px solid ${C.line}`,
-            background: C.white,
-            filter: 'invert(1) hue-rotate(180deg)',
+            background: C.panel,
+            minHeight: 900,
           }}
         >
           <iframe
             src={BOOKING_EMBED}
             title={c.booking.title}
-            style={{ width: '100%', minHeight: 900, border: 0, display: 'block' }}
+            onLoad={() => setReady(true)}
+            style={{
+              width: '100%', minHeight: 900, border: 0, display: 'block',
+              filter: 'invert(1) hue-rotate(180deg)',
+              /* Fade in rather than appear: the widget paints white for a frame
+                 or two before its own styles land, and a white flash on a black
+                 page is more jarring than the wait it replaces. */
+              opacity: ready ? 1 : 0,
+              transition: 'opacity 300ms ease-out',
+            }}
           />
+
+          {/* The mark is a ring with a gap, so spinning it is the whole
+              spinner. Kept mounted until the frame reports back, then faded
+              rather than cut, so a fast connection does not flash it. */}
+          <div
+            aria-hidden={ready}
+            style={{
+              position: 'absolute', inset: 0,
+              display: 'flex', flexDirection: 'column',
+              alignItems: 'center', justifyContent: 'center', gap: 18,
+              background: C.panel,
+              opacity: ready ? 0 : 1,
+              pointerEvents: ready ? 'none' : 'auto',
+              transition: 'opacity 300ms ease-out',
+            }}
+          >
+            <span
+              style={{
+                display: 'inline-flex',
+                animation: 'halaSpin 1.1s linear infinite',
+              }}
+            >
+              <HalaMark size={40} title="" />
+            </span>
+            <span
+              style={{
+                fontFamily: mono, fontSize: 10.5, letterSpacing: '0.18em',
+                textTransform: 'uppercase', color: C.faint,
+              }}
+            >
+              {c.booking.loading}
+            </span>
+          </div>
         </div>
+
       </main>
     </div>
   );

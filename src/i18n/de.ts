@@ -262,6 +262,7 @@ export const de: HalaCopy = {
     slug: '/de/termin',
     title: 'Demo vereinbaren',
     body: 'Fünfzehn Minuten. Wir rufen Ihre Nummer an, Hala ist live, und Sie fragen sie, was Sie wollen — knifflige Fragen, Dialekt, jemand der dazwischenredet.',
+    loading: 'Kalender wird geladen',
   },
 
   integrations: {
