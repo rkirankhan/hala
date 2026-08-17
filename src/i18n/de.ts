@@ -48,7 +48,7 @@ export const de: HalaCopy = {
     h1Accent: 'Kunden',
     sub: 'Jeder Anruf, jede Nachricht und jede Anfrage wird zur Chance. Hala antwortet beim ersten Klingeln, bucht Kunden ein und fasst bei denen nach, die sich nicht mehr melden — damit Ihrem Team kein Kunde entgeht.',
     ctaPrimary: 'Demo vereinbaren',
-    ctaSecondary: 'Live anhören',
+    ctaSecondary: 'Demo ansehen',
     callLabel: 'Antwortet gerade',
     messages: [
       { who: 'guest', t: 'Hallo — haben Sie am Donnerstagnachmittag noch etwas frei?' },

@@ -1,0 +1,37 @@
+/* Hala brand render base — fonts + tokens, mirrors src/tokens.ts */
+@font-face { font-family: 'Plus Jakarta Sans'; font-weight: 400; src: url('node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-weight: 500; src: url('node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-weight: 600; src: url('node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-weight: 700; src: url('node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-weight: 800; src: url('node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-800-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 500; src: url('node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 600; src: url('node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2') format('woff2'); }
+
+:root {
+  --black: #08080A;
+  --panel: #141418;
+  --inset: #1C1C21;
+  --line: rgba(255,255,255,0.10);
+  --white: #FFFFFF;
+  --muted: #A8A8A8;
+  --faint: #707070;
+  --accent: #6E7BF2;
+  --accent-soft: rgba(110,123,242,0.14);
+  --live: #3ECF8E;
+  --display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --tr-display: -0.025em;
+  --tr-heading: -0.02em;
+  --tr-ui: -0.01em;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--black); color: var(--white); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+body.transparent { background: transparent; }
+
+.mark { display: block; flex-shrink: 0; }
+.eyebrow { font-family: var(--mono); font-size: 22px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--faint); }
+.accent { color: var(--accent); }
+.muted { color: var(--muted); }

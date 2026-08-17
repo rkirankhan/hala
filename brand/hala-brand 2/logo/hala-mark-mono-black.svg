@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Hala">
+  <title>Hala</title>
+  <!-- Single-colour mark for print, embroidery, watermarks and anywhere a
+       two-colour mark cannot go. Near-black cut — use on light backgrounds. -->
+  <circle cx="32" cy="32" r="20" fill="none" stroke="#08080A" stroke-width="6"
+          stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/>
+  <circle cx="17.9" cy="46.1" r="6.5" fill="#08080A"/>
+</svg>

@@ -100,3 +100,14 @@ export const BOOKING_EMBED =
  */
 export const ENQUIRY_WEBHOOK =
   'https://services.leadconnectorhq.com/hooks/1mbcu7rJEYHMYexor1GD/webhook-trigger/a803c5ce-d02f-41cf-b4e7-e7bf0d11a348';
+
+/**
+ * The explainer film, on YouTube.
+ *
+ * Served from youtube-nocookie.com, and only mounted once someone opens the
+ * dialog — so no request reaches Google until a visitor asks for the video.
+ * That is the two-click pattern German privacy guidance expects, and it keeps
+ * the landing page free of a third-party player it does not need. The Google
+ * Fonts transfer noted in the README is a separate and still-open problem.
+ */
+export const VIDEO_ID = 'n8nwUpPSqiw';

@@ -1,4 +1,5 @@
-import { ArrowRight, Phone } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, Play } from 'lucide-react';
 import { C, display, mono, sans, tracking, wrap } from './tokens';
 import { useHalaMeta } from './useHalaMeta';
 import { Link } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { dirOf, useHalaCopy, useHalaLocale } from './i18n';
 import { LanguageMenu } from './LanguageMenu';
 import { HalaMark } from './HalaMark';
 import { Splash } from './Splash';
+import { VideoDialog } from './VideoDialog';
 import { INDUSTRY_ICONS } from './sections';
 import { useIndustry } from './industry';
 import {
@@ -67,6 +69,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 
 export function HalaPage() {
   const c = useHalaCopy();
+  const [watching, setWatching] = useState(false);
   const { key: industryKey, setKey: setIndustry, industry, items: industries } = useIndustry();
   const locale = useHalaLocale();
   const dir = dirOf(locale);
@@ -78,6 +81,7 @@ export function HalaPage() {
       style={{ background: C.black, color: C.white, fontFamily: sans, minHeight: '100vh' }}
     >
       <Splash />
+      {watching && <VideoDialog title={c.hero.ctaSecondary} onClose={() => setWatching(false)} />}
 
       <style>{`
         /* The step arrow is a glyph, not an icon, so it does not mirror on its
@@ -379,16 +383,20 @@ export function HalaPage() {
               >
                 {c.hero.ctaPrimary} <ArrowRight size={16} strokeWidth={2.4} />
               </Link>
-              <span
+              {/* Another span that looked like a button and did nothing. It now
+                  opens the film, which is what it was promising all along. */}
+              <button
+                onClick={() => setWatching(true)}
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 9,
                   padding: '15px 24px', borderRadius: 10,
                   background: 'rgba(255,255,255,0.07)', border: `1px solid ${C.line}`,
-                  fontWeight: 500, fontSize: 15,
+                  color: C.white, font: 'inherit', fontFamily: sans,
+                  fontWeight: 500, fontSize: 15, cursor: 'pointer',
                 }}
               >
-                <Phone size={15} strokeWidth={2.2} /> {c.hero.ctaSecondary}
-              </span>
+                <Play size={15} strokeWidth={2.2} fill="currentColor" /> {c.hero.ctaSecondary}
+              </button>
             </div>
           </div>
 

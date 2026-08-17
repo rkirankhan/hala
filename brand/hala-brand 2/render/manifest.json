@@ -1,0 +1,17 @@
+[
+  {"file":"lockup.html","width":720,"height":220,"scale":2,"transparent":true,"out":"../logo/hala-lockup-white.png"},
+  {"file":"lockup-light.html","width":720,"height":220,"scale":2,"transparent":true,"out":"../logo/hala-lockup-black.png"},
+  {"file":"lockup-byline.html","width":880,"height":260,"scale":2,"transparent":true,"out":"../logo/hala-lockup-byline-white.png"},
+  {"file":"avatar-dark.html","width":1024,"height":1024,"out":"../logo/hala-avatar-dark-1024.png"},
+  {"file":"avatar-light.html","width":1024,"height":1024,"out":"../logo/hala-avatar-light-1024.png"},
+  {"file":"post-headline.html","width":1080,"height":1080,"out":"../templates/post-headline-1080.png"},
+  {"file":"post-stat.html","width":1080,"height":1080,"out":"../templates/post-stat-1080.png"},
+  {"file":"post-chat.html","width":1080,"height":1080,"out":"../templates/post-chat-1080.png"},
+  {"file":"post-feature.html","width":1080,"height":1080,"out":"../templates/post-feature-1080.png"},
+  {"file":"story-headline.html","width":1080,"height":1920,"out":"../templates/story-headline-1080x1920.png"},
+  {"file":"story-chat.html","width":1080,"height":1920,"out":"../templates/story-chat-1080x1920.png"},
+  {"file":"linkedin-post.html","width":1200,"height":627,"out":"../templates/linkedin-post-1200x627.png"},
+  {"file":"banner-linkedin.html","width":1584,"height":396,"out":"../banners/linkedin-banner-1584x396.png"},
+  {"file":"banner-facebook.html","width":1640,"height":624,"out":"../banners/facebook-cover-1640x624.png"},
+  {"file":"banner-youtube.html","width":2560,"height":1440,"out":"../banners/youtube-channel-art-2560x1440.png"}
+]

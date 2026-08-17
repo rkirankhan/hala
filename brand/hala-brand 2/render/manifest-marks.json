@@ -1,0 +1,9 @@
+[
+  {"file":"../logo/hala-mark-color.svg","width":512,"height":512,"transparent":true,"out":"../logo/hala-mark-color-512.png"},
+  {"file":"../logo/hala-mark-color.svg","width":128,"height":128,"transparent":true,"out":"../logo/hala-mark-color-128.png"},
+  {"file":"../logo/hala-mark-small.svg","width":64,"height":64,"transparent":true,"out":"../logo/hala-mark-small-64.png"},
+  {"file":"../logo/hala-mark-small.svg","width":32,"height":32,"transparent":true,"out":"../logo/hala-mark-small-32.png"},
+  {"file":"../logo/hala-mark-mono-white.svg","width":512,"height":512,"transparent":true,"out":"../logo/hala-mark-mono-white-512.png"},
+  {"file":"../logo/hala-mark-mono-black.svg","width":512,"height":512,"transparent":true,"out":"../logo/hala-mark-mono-black-512.png"},
+  {"file":"banner-linkedin.html","width":1584,"height":396,"out":"../banners/linkedin-banner-1584x396.png"}
+]

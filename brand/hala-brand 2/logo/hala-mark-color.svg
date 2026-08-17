@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Hala">
+  <title>Hala</title>
+  <!-- The Hala mark. An open ring — هالة means halo — with a dot resting where
+       the ring opens. The 90° gap is centred at the bottom so both ends land at
+       the 4 and 8 o'clock positions where a headset's earcups sit. Do not
+       "correct" the gap into a tidy speech-bubble opening.
+       Use this weight at 24px and larger; use hala-mark-small.svg below that. -->
+  <circle cx="32" cy="32" r="20" fill="none" stroke="#6E7BF2" stroke-width="6"
+          stroke-linecap="round" stroke-dasharray="94 31" transform="rotate(135 32 32)"/>
+  <circle cx="17.9" cy="46.1" r="6.5" fill="#3ECF8E"/>
+</svg>
