@@ -102,17 +102,23 @@ export const ENQUIRY_WEBHOOK =
   'https://services.leadconnectorhq.com/hooks/1mbcu7rJEYHMYexor1GD/webhook-trigger/a803c5ce-d02f-41cf-b4e7-e7bf0d11a348';
 
 /**
- * The explainer film, on YouTube — landscape for desktop, and the vertical
- * Short for phones. Same story, cut for the shape of the screen: a 16:9 film
- * on a phone is a letterboxed strip with the page dimmed behind it.
+ * The explainer film, served from this site rather than embedded from YouTube.
  *
- * Served from youtube-nocookie.com, and only mounted once someone opens the
- * dialog — so no request reaches Google until a visitor asks for the video.
- * That is the two-click pattern German privacy guidance expects, and it keeps
- * the landing page free of a third-party player it does not need. The Google
- * Fonts transfer noted in the README is a separate and still-open problem.
+ * The YouTube player insists on its own furniture — a title bar, the channel
+ * name, share and watch-later buttons, its logo — and none of it can be turned
+ * off by parameter any more; modestbranding was deprecated and now does
+ * nothing. On a page this deliberate that chrome reads as somebody else's
+ * website showing through ours.
+ *
+ * Serving the file directly gives the browser's own player, nothing else on
+ * screen, and no request to Google at all — which also retires the two-click
+ * consent problem an embedded player creates for the German page.
+ *
+ * Landscape for desktop, vertical for phones: the same story cut for the shape
+ * of the screen, because 16:9 on a 375px display is a letterboxed strip. Both
+ * files already ship for social publishing, so this adds no new assets.
  */
 export const VIDEO = {
-  wide: { id: 'n8nwUpPSqiw', ratio: '16 / 9' },
-  tall: { id: 'CcOTD_2ligQ', ratio: '9 / 16' },
+  wide: { src: '/social/hala-explainer-v2-16x9.mp4', ratio: '16 / 9' },
+  tall: { src: '/social/hala-explainer-v2-9x16.mp4', ratio: '9 / 16' },
 } as const;

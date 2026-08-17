@@ -9,9 +9,8 @@ import { C, VIDEO, sans } from './tokens';
  * the call to action down the fold on every visit, for the minority who watch
  * it. In a dialog it costs nothing until someone asks.
  *
- * It also means nothing is requested from Google until that click, which is
- * what German privacy guidance expects of an embedded player and why the
- * component mounts the iframe rather than hiding one.
+ * The file is not fetched until the element mounts, so the landing page carries
+ * none of its weight for the people who never press play.
  */
 export function VideoDialog({ title, onClose }: { title: string; onClose: () => void }) {
   /* Chosen once, when the dialog opens. Reacting to a rotation mid-play would
@@ -87,13 +86,17 @@ export function VideoDialog({ title, onClose }: { title: string; onClose: () => 
             boxShadow: '0 60px 120px -40px rgba(0,0,0,0.9)',
           }}
         >
-          <iframe
-            src={`https://www.youtube-nocookie.com/embed/${cut.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+          <video
+            src={cut.src}
             title={title}
-            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-            allowFullScreen
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
-          />
+            /* Autoplay with sound is allowed here because opening the dialog is
+               itself a user gesture. Where a browser refuses it anyway, the
+               controls are already on screen to press. */
+            autoPlay
+            controls
+            playsInline
+            preload="auto"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }}          />
         </div>
       </div>
     </div>
