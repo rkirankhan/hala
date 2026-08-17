@@ -102,7 +102,9 @@ export const ENQUIRY_WEBHOOK =
   'https://services.leadconnectorhq.com/hooks/1mbcu7rJEYHMYexor1GD/webhook-trigger/a803c5ce-d02f-41cf-b4e7-e7bf0d11a348';
 
 /**
- * The explainer film, on YouTube.
+ * The explainer film, on YouTube — landscape for desktop, and the vertical
+ * Short for phones. Same story, cut for the shape of the screen: a 16:9 film
+ * on a phone is a letterboxed strip with the page dimmed behind it.
  *
  * Served from youtube-nocookie.com, and only mounted once someone opens the
  * dialog — so no request reaches Google until a visitor asks for the video.
@@ -110,4 +112,7 @@ export const ENQUIRY_WEBHOOK =
  * the landing page free of a third-party player it does not need. The Google
  * Fonts transfer noted in the README is a separate and still-open problem.
  */
-export const VIDEO_ID = 'n8nwUpPSqiw';
+export const VIDEO = {
+  wide: { id: 'n8nwUpPSqiw', ratio: '16 / 9' },
+  tall: { id: 'CcOTD_2ligQ', ratio: '9 / 16' },
+} as const;

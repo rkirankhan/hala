@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
-import { C, VIDEO_ID, sans } from './tokens';
+import { C, VIDEO, sans } from './tokens';
 
 /**
  * The explainer film, in a dialog over the page.
@@ -14,6 +14,13 @@ import { C, VIDEO_ID, sans } from './tokens';
  * component mounts the iframe rather than hiding one.
  */
 export function VideoDialog({ title, onClose }: { title: string; onClose: () => void }) {
+  /* Chosen once, when the dialog opens. Reacting to a rotation mid-play would
+     swap the src and restart the video from zero, which is worse than a ratio
+     that no longer quite fits. */
+  const [cut] = useState(() =>
+    window.matchMedia('(max-width: 760px)').matches ? VIDEO.tall : VIDEO.wide,
+  );
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -47,7 +54,12 @@ export function VideoDialog({ title, onClose }: { title: string; onClose: () => 
         aria-modal="true"
         aria-label={title}
         onClick={(e) => e.stopPropagation()}
-        style={{ position: 'relative', width: '100%', maxWidth: 1000, fontFamily: sans }}
+        style={{
+          position: 'relative', width: '100%', fontFamily: sans,
+          /* The vertical cut is bounded by height, not width, or it runs off
+             the bottom of a phone the moment the address bar is showing. */
+          maxWidth: cut === VIDEO.tall ? 'min(100%, calc(76vh * 9 / 16))' : 1000,
+        }}
       >
         <button
           onClick={onClose}
@@ -63,11 +75,11 @@ export function VideoDialog({ title, onClose }: { title: string; onClose: () => 
           <X size={17} strokeWidth={2.2} />
         </button>
 
-        {/* 16:9, so the frame matches the film rather than letterboxing it. */}
+        {/* The frame takes the film's own shape rather than letterboxing it. */}
         <div
           style={{
             position: 'relative',
-            aspectRatio: '16 / 9',
+            aspectRatio: cut.ratio,
             borderRadius: 16,
             overflow: 'hidden',
             background: '#000',
@@ -76,7 +88,7 @@ export function VideoDialog({ title, onClose }: { title: string; onClose: () => 
           }}
         >
           <iframe
-            src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+            src={`https://www.youtube-nocookie.com/embed/${cut.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
             title={title}
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             allowFullScreen
